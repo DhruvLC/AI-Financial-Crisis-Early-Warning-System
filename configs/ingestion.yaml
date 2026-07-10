@@ -1,0 +1,98 @@
+# ── Data ingestion configuration ─────────────────────────────────────────
+# Secrets are read from environment variables, NOT stored here.
+#   export ALPHAVANTAGE_API_KEY=...
+#   export FRED_API_KEY=...            (optional; CSV fallback works without it)
+#   ~/.kaggle/kaggle.json              (for kaggle sources)
+#   SEC requires a descriptive User-Agent (email) — set below.
+
+storage:
+  raw_dir: "data/raw"
+  interim_dir: "data/interim"
+  metadata_layer: "raw"        # where .meta.json sidecars are written
+
+http:
+  timeout_seconds: 30
+  max_retries: 3
+  backoff_seconds: 2           # exponential: backoff * 2**attempt
+
+logging:
+  level: "INFO"
+  file: "logs/ingestion.log"
+
+validation:
+  # Global fraction of null cells allowed before validation fails.
+  # Individual sources may override via `max_missing_pct` under their config.
+  max_missing_pct: 0.5
+
+sources:
+
+  kaggle_bankruptcy:
+    enabled: true
+    dataset: "fedesoriano/company-bankruptcy-prediction"
+    target_col: "Bankrupt?"
+
+  sec_edgar:
+    enabled: true
+    user_agent: "FinCrisisEWS research contact@example.com"   # REQUIRED by SEC
+    # CIKs to pull company-facts for (zero-padded to 10 digits handled in code).
+    ciks: ["0000320193", "0000789019", "0000051143"]          # Apple, Microsoft, IBM
+    # XBRL concepts to extract from company facts (us-gaap taxonomy).
+    concepts: ["Assets", "Liabilities", "Revenues", "NetIncomeLoss",
+               "CashAndCashEquivalentsAtCarryingValue"]
+
+  fred:
+    enabled: true
+    series:
+      GDP: "GDP"
+      CPI: "CPIAUCSL"
+      FedFundsRate: "FEDFUNDS"
+      Treasury10Y: "DGS10"
+      Unemployment: "UNRATE"
+      MoneySupplyM2: "M2SL"
+    start: "2000-01-01"
+    # Series differ in frequency (daily yields vs quarterly GDP); an outer join
+    # on date is legitimately sparse, so allow a high missing ratio here.
+    max_missing_pct: 0.95
+
+  yahoo_finance:
+    enabled: true
+    tickers: ["AAPL", "MSFT", "IBM", "JPM", "XOM"]
+    start: "2015-01-01"
+    interval: "1d"
+
+  alpha_vantage:
+    enabled: false             # needs ALPHAVANTAGE_API_KEY; off by default
+    symbols: ["AAPL", "MSFT"]
+    function: "TIME_SERIES_DAILY"
+
+  kaggle_news:
+    enabled: false
+    dataset: "aaron7sun/stocknews"
+
+  kaggle_stock:
+    enabled: false
+    dataset: "borismarjanovic/price-volume-data-for-all-us-stocks-etfs"
+
+  world_bank:
+    enabled: true
+    countries: ["US", "GB", "JP", "DE", "IN"]
+    indicators:
+      GDP: "NY.GDP.MKTP.CD"
+      Population: "SP.POP.TOTL"
+      TradePctGDP: "NE.TRD.GNFS.ZS"
+    start: 2000
+    end: 2023
+
+  imf:
+    enabled: true
+    # SDMX: dataset IFS, indicator, frequency, area
+    dataflow: "IFS"
+    indicator: "ENDA_XDC_USD_RATE"   # exchange rate, domestic currency per USD
+    frequency: "A"
+    areas: ["US", "GB", "JP"]
+
+  oecd:
+    enabled: true
+    dataflow: "MEI_CLI"              # composite leading / business confidence
+    subject: "BSCICP03"             # business confidence indicator
+    areas: ["USA", "GBR", "JPN"]

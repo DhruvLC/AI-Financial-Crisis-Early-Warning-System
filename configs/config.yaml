@@ -1,0 +1,44 @@
+# ── AI Financial Crisis Early Warning System ── configuration ──────────────
+
+data:
+  # Kaggle "slug" for the Company Bankruptcy Prediction dataset.
+  # Auto-download uses the Kaggle API (needs ~/.kaggle/kaggle.json — see README).
+  kaggle_dataset: "fedesoriano/company-bankruptcy-prediction"
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  # The label column as it appears in that CSV (note the leading space).
+  target_col: "Bankrupt?"
+
+split:
+  test_size: 0.15
+  val_size: 0.15
+  random_state: 42
+  # Set true + provide a date_col to switch to a time-based split (diagram stage 3).
+  time_based: false
+  date_col: null
+
+features:
+  scale: true          # standardize numeric features
+  drop_low_variance: true
+  variance_threshold: 0.0
+
+models:
+  random_forest:
+    n_estimators: 400
+    max_depth: null
+    class_weight: "balanced"
+  xgboost:
+    n_estimators: 600
+    max_depth: 6
+    learning_rate: 0.05
+    subsample: 0.9
+    colsample_bytree: 0.9
+    # scale_pos_weight is computed at runtime from class imbalance.
+
+explainability:
+  shap_max_samples: 500   # cap rows fed to SHAP for speed
+
+output:
+  models_dir: "models"
+  reports_dir: "reports"
+  risk_score_scale: 100   # map predicted probability → 0..100
