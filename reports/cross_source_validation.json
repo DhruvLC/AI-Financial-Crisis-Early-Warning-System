@@ -1,0 +1,165 @@
+{
+  "validated_at": "2026-07-11T13:55:17.729971+00:00",
+  "is_valid": true,
+  "summary": {
+    "n_sources": 8,
+    "n_present": 3,
+    "n_fail": 0,
+    "n_warn": 7
+  },
+  "cross_checks": [
+    {
+      "check": "entity_overlap",
+      "level": "warn",
+      "message": "no shared entity_id across ['sec_edgar', 'world_bank'] \u2014 sources cover disjoint entity universes",
+      "details": {
+        "sources": [
+          "sec_edgar",
+          "world_bank"
+        ],
+        "sizes": {
+          "sec_edgar": 3,
+          "world_bank": 5
+        },
+        "n_common": 0
+      }
+    },
+    {
+      "check": "corpus",
+      "level": "pass",
+      "message": "3 source(s) validated as a corpus",
+      "details": {
+        "sources": [
+          "fred",
+          "sec_edgar",
+          "world_bank"
+        ]
+      }
+    }
+  ],
+  "sources": [
+    {
+      "source": "alpha_vantage",
+      "present": false,
+      "n_rows": 0,
+      "n_cols": 0,
+      "interim_path": null,
+      "status": "warn",
+      "checks": [
+        {
+          "check": "coverage",
+          "level": "warn",
+          "message": "no interim data present"
+        }
+      ]
+    },
+    {
+      "source": "fred",
+      "present": true,
+      "n_rows": 7010,
+      "n_cols": 7,
+      "interim_path": "data/interim/fred.parquet",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "summary",
+          "level": "pass",
+          "message": "all checks passed"
+        }
+      ]
+    },
+    {
+      "source": "imf",
+      "present": false,
+      "n_rows": 0,
+      "n_cols": 0,
+      "interim_path": null,
+      "status": "warn",
+      "checks": [
+        {
+          "check": "coverage",
+          "level": "warn",
+          "message": "source not present (last run: failed)"
+        }
+      ]
+    },
+    {
+      "source": "kaggle_bankruptcy",
+      "present": false,
+      "n_rows": 0,
+      "n_cols": 0,
+      "interim_path": null,
+      "status": "warn",
+      "checks": [
+        {
+          "check": "coverage",
+          "level": "warn",
+          "message": "no interim data present"
+        }
+      ]
+    },
+    {
+      "source": "oecd",
+      "present": false,
+      "n_rows": 0,
+      "n_cols": 0,
+      "interim_path": null,
+      "status": "warn",
+      "checks": [
+        {
+          "check": "coverage",
+          "level": "warn",
+          "message": "source not present (last run: failed)"
+        }
+      ]
+    },
+    {
+      "source": "sec_edgar",
+      "present": true,
+      "n_rows": 2613,
+      "n_cols": 11,
+      "interim_path": "data/interim/sec_edgar.parquet",
+      "status": "warn",
+      "checks": [
+        {
+          "check": "key_uniqueness",
+          "level": "warn",
+          "message": "1698 duplicate rows on key ['cik', 'concept', 'date']",
+          "details": {
+            "duplicate_rows": 1698
+          }
+        }
+      ]
+    },
+    {
+      "source": "world_bank",
+      "present": true,
+      "n_rows": 120,
+      "n_cols": 6,
+      "interim_path": "data/interim/world_bank.parquet",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "summary",
+          "level": "pass",
+          "message": "all checks passed"
+        }
+      ]
+    },
+    {
+      "source": "yahoo_finance",
+      "present": false,
+      "n_rows": 0,
+      "n_cols": 0,
+      "interim_path": null,
+      "status": "warn",
+      "checks": [
+        {
+          "check": "coverage",
+          "level": "warn",
+          "message": "no interim data present"
+        }
+      ]
+    }
+  ]
+}

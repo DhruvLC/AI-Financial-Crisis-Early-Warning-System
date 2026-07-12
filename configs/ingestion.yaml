@@ -24,6 +24,47 @@ validation:
   # Individual sources may override via `max_missing_pct` under their config.
   max_missing_pct: 0.5
 
+# ── Post-ingestion cross-source validation ────────────────────────────────
+# Runs AFTER a full ingestion pass over everything in data/interim/ (see
+# `python src/run_data_validation.py`). Complements the per-source validator
+# above by checking the corpus as a whole: coverage, schema contracts, sanity
+# ranges, freshness, file integrity, statistical anomalies and cross-source
+# entity consistency. Expected per-source contracts live in
+# `ingestion/cross_validation.py::SCHEMA_REGISTRY`; the keys below tune it.
+data_validation:
+  min_rows: 1                # generic row floor for sources with no registry entry
+  freshness_days: null       # default staleness cap (null = don't check unless
+                             #   a source sets its own in the registry)
+  max_outlier_pct: 0.20      # >20% of a column beyond the 3×IQR fence -> warn
+  check_integrity: true      # recompute interim checksum vs the metadata sidecar
+  fail_fast: false           # true -> raise on any fatal finding
+  report_path: "reports/cross_source_validation.json"
+  # Per-source overrides merged over SCHEMA_REGISTRY, e.g.:
+  # sources:
+  #   yahoo_finance:
+  #     freshness_days: 7
+  #     min_rows: 100
+
+  # ── Deep per-dataset validation (src/validation, run_validation.py) ──────
+  # Used by the Data Validation module that scores each interim dataset on
+  # schema/missing/duplicate/outlier/financial/time-series checks.
+  reports_dir: "reports/validation"
+  column_missing_warn_pct: 0.30    # per-column null fraction -> warning
+  column_missing_error_pct: 0.90   # required column this empty -> error
+  future_date_grace_days: 2        # allow small clock skew before "future date"
+  outliers:
+    zscore_threshold: 3.0
+    iqr_multiplier: 1.5
+    column_flag_pct: 0.10          # >10% of a column flagged -> warn
+    isolation_forest: true         # multivariate; auto-skips if sklearn absent
+    contamination: "auto"
+  quality_weights:                 # must be >= 0; re-normalised at runtime
+    schema: 0.20
+    completeness: 0.25
+    uniqueness: 0.15
+    validity: 0.25
+    timeliness: 0.15
+
 sources:
 
   kaggle_bankruptcy:
@@ -85,11 +126,12 @@ sources:
 
   imf:
     enabled: true
-    # SDMX: dataset IFS, indicator, frequency, area
-    dataflow: "IFS"
-    indicator: "ENDA_XDC_USD_RATE"   # exchange rate, domestic currency per USD
-    frequency: "A"
-    areas: ["US", "GB", "JP"]
+    # DataMapper API: indicator code + ISO-3 areas.
+    # NGDPD = GDP at current prices (USD, billions). Browse indicator codes at
+    # https://www.imf.org/external/datamapper/api/v1/indicators
+    indicator: "NGDPD"
+    areas: ["USA", "GBR", "JPN"]
+    start: 2000
 
   oecd:
     enabled: true

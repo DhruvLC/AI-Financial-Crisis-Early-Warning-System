@@ -7,6 +7,12 @@ with per-source failure isolation.
 """
 from .base import BaseIngestor, IngestionResult
 from .validation import DataValidator, ValidationReport
+from .cross_validation import (
+    CrossSourceValidator,
+    CrossSourceReport,
+    CrossSourceValidationError,
+    validate_corpus,
+)
 from .metadata import MetadataWriter
 
 __all__ = [
@@ -14,5 +20,9 @@ __all__ = [
     "IngestionResult",
     "DataValidator",
     "ValidationReport",
+    "CrossSourceValidator",
+    "CrossSourceReport",
+    "CrossSourceValidationError",
+    "validate_corpus",
     "MetadataWriter",
 ]

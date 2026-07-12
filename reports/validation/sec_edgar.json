@@ -1,0 +1,188 @@
+{
+  "source": "sec_edgar",
+  "present": true,
+  "interim_path": "data/interim/sec_edgar.parquet",
+  "n_rows": 2613,
+  "n_cols": 11,
+  "load_error": null,
+  "is_valid": true,
+  "n_errors": 0,
+  "n_warnings": 4,
+  "quality": {
+    "score": 84.38,
+    "grade": "B",
+    "components": {
+      "schema": 1.0,
+      "completeness": 0.9967,
+      "uniqueness": 1.0,
+      "timeliness": 0.0,
+      "validity": 0.9785
+    }
+  },
+  "checks": [
+    {
+      "check": "schema",
+      "status": "info",
+      "skip_reason": null,
+      "metrics": {
+        "n_required": 5,
+        "n_missing_required": 0,
+        "n_unexpected": 0,
+        "n_dtype_mismatch": 0,
+        "schema_score": 1.0
+      },
+      "findings": [
+        {
+          "code": "schema_ok",
+          "level": "info",
+          "message": "schema matches contract"
+        }
+      ]
+    },
+    {
+      "check": "missing_values",
+      "status": "info",
+      "skip_reason": null,
+      "metrics": {
+        "overall_missing_pct": 0.0033,
+        "columns_with_missing": 2,
+        "missing_by_col": {
+          "fy": {
+            "count": 47,
+            "pct": 0.018
+          },
+          "fp": {
+            "count": 47,
+            "pct": 0.018
+          }
+        },
+        "completeness_score": 0.9967
+      },
+      "findings": [
+        {
+          "code": "some_missing",
+          "level": "info",
+          "message": "0.33% of cells missing"
+        }
+      ]
+    },
+    {
+      "check": "duplicates",
+      "status": "warn",
+      "skip_reason": null,
+      "metrics": {
+        "duplicate_rows": 0,
+        "duplicate_row_pct": 0.0,
+        "duplicate_timestamps": 2389,
+        "uniqueness_score": 1.0
+      },
+      "findings": [
+        {
+          "code": "duplicate_entity_timestamps",
+          "level": "warn",
+          "message": "2389 duplicate (entity, date) record(s) on ['entity_id', 'date']",
+          "details": {
+            "key": [
+              "entity_id",
+              "date"
+            ],
+            "count": 2389
+          }
+        }
+      ]
+    },
+    {
+      "check": "outliers",
+      "status": "warn",
+      "skip_reason": null,
+      "metrics": {
+        "iqr_outlier_pct_by_col": {
+          "value": 0.0861,
+          "fy": 0.0
+        },
+        "zscore_outlier_pct_by_col": {
+          "value": 0.0138,
+          "fy": 0.0
+        },
+        "isolation_forest_outlier_pct": 0.4026,
+        "mean_iqr_outlier_pct": 0.043
+      },
+      "findings": [
+        {
+          "code": "isolation_forest_outliers",
+          "level": "warn",
+          "message": "Isolation Forest flags 40.26% of rows as anomalous",
+          "details": {
+            "pct": 0.4026,
+            "n_rows": 2566
+          }
+        }
+      ]
+    },
+    {
+      "check": "financial",
+      "status": "info",
+      "skip_reason": null,
+      "metrics": {
+        "invalid_financial_rows": 0,
+        "invalid_financial_pct": 0.0,
+        "validity_score": 1.0
+      },
+      "findings": [
+        {
+          "code": "financials_ok",
+          "level": "info",
+          "message": "financial sanity checks passed"
+        }
+      ]
+    },
+    {
+      "check": "time_series",
+      "status": "warn",
+      "skip_reason": null,
+      "metrics": {
+        "n_series": 3,
+        "unordered_series": 3,
+        "duplicate_timestamps": 2389,
+        "series_with_gaps": 2,
+        "unparseable_timestamps": 0,
+        "timeliness_score": 0.0
+      },
+      "findings": [
+        {
+          "code": "not_chronological",
+          "level": "warn",
+          "message": "3/3 series not in chronological order (as stored)",
+          "details": {
+            "n_unordered": 3
+          }
+        },
+        {
+          "code": "duplicate_timestamps",
+          "level": "warn",
+          "message": "2389 duplicate timestamp(s) within series",
+          "details": {
+            "count": 2389
+          }
+        },
+        {
+          "code": "time_gaps",
+          "level": "info",
+          "message": "2 series contain large time gaps (> 3x typical cadence)",
+          "details": {
+            "examples": [
+              {
+                "entity": "0000051143",
+                "n_gaps": 1
+              },
+              {
+                "entity": "0000320193",
+                "n_gaps": 1
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

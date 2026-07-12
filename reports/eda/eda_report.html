@@ -1,0 +1,445 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>EDA Report — Financial Crisis EWS</title>
+<style>
+body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:1100px;margin:2rem auto;padding:0 1rem;color:#1a1a1a;line-height:1.5}
+h1,h2,h3{color:#12314f}h1{border-bottom:3px solid #2c7fb8;padding-bottom:.3rem}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem}th,td{border:1px solid #ddd;padding:.45rem;text-align:left;vertical-align:top}th{background:#12314f;color:#fff}tr:nth-child(even){background:#f6f8fa}
+.sev-critical{color:#c0392b;font-weight:700}.sev-warning{color:#d35400;font-weight:700}.sev-info{color:#2471a3}
+.card{background:#eef4fb;border-left:5px solid #2c7fb8;padding:.8rem 1rem;margin:1rem 0;border-radius:4px}
+img{max-width:100%;height:auto;border:1px solid #ddd;border-radius:4px;margin:.5rem 0}
+pre{background:#0f1b2b;color:#d6e2f0;padding:1rem;overflow:auto;border-radius:6px;font-size:.8rem}code{font-size:.85rem}
+</style></head><body>
+<h1>Exploratory Data Analysis Report</h1>
+<p><em>Generated: 2026-07-12T14:44:53.294100+00:00</em></p>
+<h2>Dataset</h2><ul>
+<li>Source split: <code>train</code></li>
+<li>Shape: 4773 rows × 96 cols</li>
+<li>Target: <code>Bankrupt?</code></li>
+<li>Analyzers run: 10 (0 skipped)</li>
+<li>Figures: 11</li></ul>
+<h2>Executive summary</h2>
+<div class='card'><strong>Severe class imbalance: 29.994:1 (positive class only 3.2265% of samples).</strong></div>
+<h3>Prioritized insights</h3>
+<table><tr><th>Severity</th><th>Category</th><th>Finding</th><th>Recommendation</th></tr>
+<tr><td class='sev-critical'>critical</td><td>class_imbalance</td><td>Severe class imbalance: 29.994:1 (positive class only 3.2265% of samples).</td><td>Use class weighting or resampling (SMOTE/undersampling) and evaluate with PR-AUC / recall, not accuracy.</td></tr>
+<tr><td class='sev-warning'>warning</td><td>feature_distribution</td><td>67 feature(s) are highly skewed and 62 are heavy-tailed.</td><td>Apply log/Box-Cox/Yeo-Johnson transforms or robust scaling for linear/distance-based models.</td></tr>
+<tr><td class='sev-warning'>warning</td><td>multicollinearity</td><td>93 highly-correlated feature pair(s) and 47 feature(s) with high VIF detected.</td><td>Drop/combine redundant ratios or use regularized / tree-based models robust to collinearity.</td></tr>
+<tr><td class='sev-warning'>warning</td><td>outliers</td><td>Features average 8.1% IQR outliers after preprocessing.</td><td>Revisit winsorization limits or use outlier-robust models; extreme ratios may be economically meaningful.</td></tr>
+<tr><td class='sev-info'>info</td><td>data_quality</td><td>No missing values in the processed dataset.</td><td>No imputation needed downstream.</td></tr>
+<tr><td class='sev-info'>info</td><td>outliers</td><td>Isolation-Forest flags 5.5311% of rows as multivariate anomalies.</td><td>Inspect flagged firms — they may be genuine distress cases or data-entry errors.</td></tr>
+<tr><td class='sev-info'>info</td><td>financial_signal</td><td>Most bankruptcy-discriminative ratios: Net Income to Stockholder&#x27;s Equity, Borrowing dependency, Total debt/Total net worth, Net Income to Total Assets, Liability to Equity.</td><td>Prioritize these (and their categories) in feature selection and in the model-explainability narrative.</td></tr>
+<tr><td class='sev-info'>info</td><td>financial_signal</td><td>&#x27;interest_rate&#x27; is the strongest financial category for separating bankrupt vs solvent firms.</td><td>Ensure this category is well represented after any feature pruning.</td></tr>
+<tr><td class='sev-info'>info</td><td>predictive_power</td><td>Strongest univariate predictor: &#x27;Persistent EPS in the Last Four Seasons&#x27; (AUC 0.116).</td><td>Even single ratios carry signal; expect tree ensembles to exploit their interactions.</td></tr>
+<tr><td class='sev-info'>info</td><td>dimensionality</td><td>Only 42 of 95 components explain 95% of variance (redundancy index 0.5579).</td><td>Consider PCA/feature selection to cut dimensionality and speed up training without losing much signal.</td></tr>
+</table>
+<h2>Analyzer details</h2>
+<h3>overview <small>(completed)</small></h3>
+<ul><li>4773 rows x 96 cols; 95 numeric / 0 categorical; 3.496 MB</li></ul>
+<pre>{
+  &quot;n_rows&quot;: 4773,
+  &quot;n_cols&quot;: 96,
+  &quot;n_features&quot;: 95,
+  &quot;n_numeric_features&quot;: 95,
+  &quot;n_categorical_features&quot;: 0,
+  &quot;memory_bytes&quot;: 3665792,
+  &quot;memory_mb&quot;: 3.496,
+  &quot;feature_names&quot;: [
+    &quot;ROA(C) before interest and depreciation before interest&quot;,
+    &quot;ROA(A) before interest and % after tax&quot;,
+    &quot;ROA(B) before interest and depreciation after tax&quot;,
+    &quot;Operating Gross Margin&quot;,
+    &quot;Realized Sales Gross Margin&quot;,
+    &quot;Operating Profit Rate&quot;,
+    &quot;Pre-tax net Interest Rate&quot;,
+    &quot;After-tax net Interest Rate&quot;,
+    &quot;... (+87 more)&quot;
+  ],
+  &quot;target_col&quot;: &quot;Bankrupt?&quot;,
+  &quot;target&quot;: {
+    &quot;dtype&quot;: &quot;int64&quot;,
+    &quot;n_classes&quot;: 2,
+    &quot;class_counts&quot;: {
+      &quot;0&quot;: 4619,
+      &quot;1&quot;: 154
+    },
+    &quot;is_binary&quot;: true
+  }
+}</pre>
+<h3>target <small>(completed)</small></h3>
+<ul><li>4773 samples; imbalance ratio 29.994:1 (positive 3.2265%)</li></ul>
+<pre>{
+  &quot;n_samples&quot;: 4773,
+  &quot;n_classes&quot;: 2,
+  &quot;class_counts&quot;: {
+    &quot;0&quot;: 4619,
+    &quot;1&quot;: 154
+  },
+  &quot;class_percentages&quot;: {
+    &quot;0&quot;: 96.7735,
+    &quot;1&quot;: 3.2265
+  },
+  &quot;majority_count&quot;: 4619,
+  &quot;minority_count&quot;: 154,
+  &quot;imbalance_ratio&quot;: 29.994,
+  &quot;positive_count&quot;: 154,
+  &quot;negative_count&quot;: 4619,
+  &quot;positive_pct&quot;: 3.2265,
+  &quot;is_imbalanced&quot;: true
+}</pre>
+<h3>descriptive <small>(completed)</small></h3>
+<ul><li>described 95 numeric feature(s)</li></ul>
+<pre>{
+  &quot;n_features_described&quot;: 95,
+  &quot;percentiles&quot;: [
+    1,
+    5,
+    10,
+    25,
+    50,
+    75,
+    90,
+    95,
+    &quot;... (+1 more)&quot;
+  ],
+  &quot;mean_abs_skew&quot;: 2.0246549300472334,
+  &quot;mean_kurtosis&quot;: 9.603297089082222
+}</pre>
+<h3>missing <small>(completed)</small></h3>
+<ul><li>no missing values in the processed dataset</li><li>0 missing cell(s) across 0 feature(s)</li></ul>
+<pre>{
+  &quot;total_missing_cells&quot;: 0,
+  &quot;overall_missing_pct&quot;: 0.0,
+  &quot;n_features_with_missing&quot;: 0,
+  &quot;top_missing&quot;: []
+}</pre>
+<h3>outliers <small>(completed)</small></h3>
+<ul><li>36822 IQR outlier cell(s); mean 8.12% per feature</li></ul>
+<pre>{
+  &quot;iqr_multiplier&quot;: 1.5,
+  &quot;zscore_threshold&quot;: 3.0,
+  &quot;n_features&quot;: 95,
+  &quot;total_iqr_outliers&quot;: 36822,
+  &quot;total_zscore_outliers&quot;: 8759,
+  &quot;mean_iqr_outlier_pct&quot;: 8.120674736842105,
+  &quot;top_outlier_features&quot;: [
+    {
+      &quot;feature&quot;: &quot;Degree of Financial Leverage (DFL)&quot;,
+      &quot;iqr_outlier_pct&quot;: 22.0197,
+      &quot;zscore_outlier_pct&quot;: 2.0532
+    },
+    {
+      &quot;feature&quot;: &quot;Fixed Assets Turnover Frequency&quot;,
+      &quot;iqr_outlier_pct&quot;: 21.0978,
+      &quot;zscore_outlier_pct&quot;: 3.2474
+    },
+    {
+      &quot;feature&quot;: &quot;Interest Coverage Ratio (Interest expense to EBIT)&quot;,
+      &quot;iqr_outlier_pct&quot;: 21.014,
+      &quot;zscore_outlier_pct&quot;: 3.0798
+    },
+    {
+      &quot;feature&quot;: &quot;Current Asset Turnover Rate&quot;,
+      &quot;iqr_outlier_pct&quot;: 20.4484,
+      &quot;zscore_outlier_pct&quot;: 1.5923
+    },
+    {
+      &quot;feature&quot;: &quot;Total Asset Growth Rate&quot;,
+      &quot;iqr_outlier_pct&quot;: 20.2179,
+      &quot;zscore_outlier_pct&quot;: 0.0
+    },
+    {
+      &quot;feature&quot;: &quot;Interest Expense Ratio&quot;,
+      &quot;iqr_outlier_pct&quot;: 20.1341,
+      &quot;zscore_outlier_pct&quot;: 3.2055
+    },
+    {
+      &quot;feature&quot;: &quot;Cash Flow to Liability&quot;,
+      &quot;iqr_outlier_pct&quot;: 17.9342,
+      &quot;zscore_outlier_pct&quot;: 3.415
+    },
+    {
+      &quot;feature&quot;: &quot;No-credit Interval&quot;,
+      &quot;iqr_outlier_pct&quot;: 16.321,
+      &quot;zscore_outlier_pct&quot;: 3.6246
+    },
+    &quot;... (+7 more)&quot;
+  ],
+  &quot;isolation_forest&quot;: {
+    &quot;available&quot;: true,
+    &quot;n_anomalies&quot;: 264,
+    &quot;anomaly_pct&quot;: 5.5311,
+    &quot;min_score&quot;: -0.629345933941696,
+    &quot;mean_score&quot;: -0.4118991689912868
+  }
+}</pre>
+<h3>distributions <small>(completed)</small></h3>
+<ul><li>67 highly-skewed, 62 heavy-tailed of 95 feature(s)</li></ul>
+<pre>{
+  &quot;n_features&quot;: 95,
+  &quot;n_highly_skewed&quot;: 67,
+  &quot;n_heavy_tailed&quot;: 62,
+  &quot;highly_skewed&quot;: [
+    &quot;Operating Gross Margin&quot;,
+    &quot;Realized Sales Gross Margin&quot;,
+    &quot;Operating Profit Rate&quot;,
+    &quot;Pre-tax net Interest Rate&quot;,
+    &quot;After-tax net Interest Rate&quot;,
+    &quot;Continuous interest rate (after tax)&quot;,
+    &quot;Operating Expense Rate&quot;,
+    &quot;Research and development expense rate&quot;,
+    &quot;... (+17 more)&quot;
+  ],
+  &quot;heavy_tailed&quot;: [
+    &quot;Operating Profit Rate&quot;,
+    &quot;Pre-tax net Interest Rate&quot;,
+    &quot;After-tax net Interest Rate&quot;,
+    &quot;Non-industry income and expenditure/revenue&quot;,
+    &quot;Continuous interest rate (after tax)&quot;,
+    &quot;Cash flow rate&quot;,
+    &quot;Interest-bearing debt interest rate&quot;,
+    &quot;Net Value Per Share (B)&quot;,
+    &quot;... (+17 more)&quot;
+  ]
+}</pre>
+<h3>correlation <small>(completed)</small></h3>
+<ul><li>93 pair(s) |r|&gt;=0.8; 47 feature(s) VIF&gt;10.0</li></ul>
+<pre>{
+  &quot;n_features&quot;: 95,
+  &quot;high_correlation_threshold&quot;: 0.8,
+  &quot;n_high_correlation_pairs&quot;: 93,
+  &quot;top_pairs&quot;: [
+    {
+      &quot;feature_a&quot;: &quot;Current Liabilities/Equity&quot;,
+      &quot;feature_b&quot;: &quot;Current Liability to Equity&quot;,
+      &quot;pearson_r&quot;: 1.0
+    },
+    {
+      &quot;feature_a&quot;: &quot;Current Liabilities/Liability&quot;,
+      &quot;feature_b&quot;: &quot;Current Liability to Liability&quot;,
+      &quot;pearson_r&quot;: 1.0
+    },
+    {
+      &quot;feature_a&quot;: &quot;Debt ratio %&quot;,
+      &quot;feature_b&quot;: &quot;Net worth/Assets&quot;,
+      &quot;pearson_r&quot;: -1.0
+    },
+    {
+      &quot;feature_a&quot;: &quot;Operating Gross Margin&quot;,
+      &quot;feature_b&quot;: &quot;Gross Profit to Sales&quot;,
+      &quot;pearson_r&quot;: 0.999999984545077
+    },
+    {
+      &quot;feature_a&quot;: &quot;Net Value Per Share (A)&quot;,
+      &quot;feature_b&quot;: &quot;Net Value Per Share (C)&quot;,
+      &quot;pearson_r&quot;: 0.9998384374943013
+    },
+    {
+      &quot;feature_a&quot;: &quot;Net Value Per Share (B)&quot;,
+      &quot;feature_b&quot;: &quot;Net Value Per Share (A)&quot;,
+      &quot;pearson_r&quot;: 0.9998080685626872
+    },
+    {
+      &quot;feature_a&quot;: &quot;Net Value Per Share (B)&quot;,
+      &quot;feature_b&quot;: &quot;Net Value Per Share (C)&quot;,
+      &quot;pearson_r&quot;: 0.9996461962822704
+    },
+    {
+      &quot;feature_a&quot;: &quot;Operating Gross Margin&quot;,
+      &quot;feature_b&quot;: &quot;Realized Sales Gross Margin&quot;,
+      &quot;pearson_r&quot;: 0.9988435903221798
+    },
+    &quot;... (+7 more)&quot;
+  ],
+  &quot;vif_threshold&quot;: 10.0,
+  &quot;n_high_vif&quot;: 47,
+  &quot;high_vif_features&quot;: [
+    &quot;Operating Gross Margin&quot;,
+    &quot;Gross Profit to Sales&quot;,
+    &quot;Net Value Per Share (A)&quot;,
+    &quot;Net Value Per Share (C)&quot;,
+    &quot;Net Value Per Share (B)&quot;,
+    &quot;Operating Profit Per Share (Yuan \u00a5)&quot;,
+    &quot;Operating profit/Paid-in capital&quot;,
+    &quot;Realized Sales Gross Margin&quot;,
+    &quot;... (+12 more)&quot;
+  ]
+}</pre>
+<h3>ratios <small>(completed)</small></h3>
+<ul><li>95 ratios in 7 categories; target-conditioned</li></ul>
+<pre>{
+  &quot;n_ratios&quot;: 95,
+  &quot;categories&quot;: {
+    &quot;profitability&quot;: 30,
+    &quot;leverage&quot;: 22,
+    &quot;liquidity&quot;: 14,
+    &quot;other&quot;: 13,
+    &quot;efficiency&quot;: 10,
+    &quot;interest_rate&quot;: 4,
+    &quot;growth&quot;: 2
+  },
+  &quot;target_conditioned&quot;: true,
+  &quot;top_discriminative&quot;: [
+    {
+      &quot;feature&quot;: &quot;Net Income to Stockholder&#x27;s Equity&quot;,
+      &quot;category&quot;: &quot;profitability&quot;,
+      &quot;cohens_d&quot;: -2.024494310860355,
+      &quot;mean_solvent&quot;: 0.06151444974500832,
+      &quot;mean_bankrupt&quot;: -1.8450340478718845
+    },
+    {
+      &quot;feature&quot;: &quot;Borrowing dependency&quot;,
+      &quot;category&quot;: &quot;leverage&quot;,
+      &quot;cohens_d&quot;: 1.9656533420295688,
+      &quot;mean_solvent&quot;: -0.059921671024376344,
+      &quot;mean_bankrupt&quot;: 1.7972610289712863
+    },
+    {
+      &quot;feature&quot;: &quot;Total debt/Total net worth&quot;,
+      &quot;category&quot;: &quot;leverage&quot;,
+      &quot;cohens_d&quot;: 1.8777519548525088,
+      &quot;mean_solvent&quot;: -0.05751348469668205,
+      &quot;mean_bankrupt&quot;: 1.7250310767141157
+    },
+    {
+      &quot;feature&quot;: &quot;Net Income to Total Assets&quot;,
+      &quot;category&quot;: &quot;profitability&quot;,
+      &quot;cohens_d&quot;: -1.7123339760110068,
+      &quot;mean_solvent&quot;: 0.05289067781389604,
+      &quot;mean_bankrupt&quot;: -1.5863768884570713
+    },
+    {
+      &quot;feature&quot;: &quot;Liability to Equity&quot;,
+      &quot;category&quot;: &quot;leverage&quot;,
+      &quot;cohens_d&quot;: 1.7031070701250168,
+      &quot;mean_solvent&quot;: -0.052629412594782696,
+      &quot;mean_bankrupt&quot;: 1.5785406284111545
+    },
+    {
+      &quot;feature&quot;: &quot;Retained Earnings to Total Assets&quot;,
+      &quot;category&quot;: &quot;profitability&quot;,
+      &quot;cohens_d&quot;: -1.6100086046527076,
+      &quot;mean_solvent&quot;: 0.04997371878875066,
+      &quot;mean_bankrupt&quot;: -1.498887058994774
+    },
+    {
+      &quot;feature&quot;: &quot;ROA(A) before interest and % after tax&quot;,
+      &quot;category&quot;: &quot;profitability&quot;,
+      &quot;cohens_d&quot;: -1.5238547781142,
+      &quot;mean_solvent&quot;: 0.047485158315555866,
+      &quot;mean_bankrupt&quot;: -1.4242464042828165
+    },
+    {
+      &quot;feature&quot;: &quot;ROA(B) before interest and depreciation after tax&quot;,
+      &quot;category&quot;: &quot;profitability&quot;,
+      &quot;cohens_d&quot;: -1.49718715335598,
+      &quot;mean_solvent&quot;: 0.046708993397324525,
+      &quot;mean_bankrupt&quot;: -1.4009664967677822
+    },
+    &quot;... (+7 more)&quot;
+  ],
+  &quot;category_strength&quot;: {
+    &quot;interest_rate&quot;: 1.2694,
+    &quot;profitability&quot;: 1.0074,
+    &quot;leverage&quot;: 0.8144,
+    &quot;growth&quot;: 0.558,
+    &quot;liquidity&quot;: 0.4729,
+    &quot;other&quot;: 0.4465,
+    &quot;efficiency&quot;: 0.1869
+  }
+}</pre>
+<h3>relationships <small>(completed)</small></h3>
+<ul><li>ranked 95 features vs target; max |r|=0.337</li></ul>
+<pre>{
+  &quot;n_features&quot;: 95,
+  &quot;positive_class&quot;: &quot;1&quot;,
+  &quot;mutual_info_available&quot;: true,
+  &quot;top_by_separability&quot;: [
+    {
+      &quot;feature&quot;: &quot;Persistent EPS in the Last Four Seasons&quot;,
+      &quot;point_biserial_r&quot;: -0.24012575677506282,
+      &quot;mutual_info&quot;: 0.042079070369428484,
+      &quot;univariate_auc&quot;: 0.11552719849970337,
+      &quot;separability&quot;: 0.7689456030005932
+    },
+    {
+      &quot;feature&quot;: &quot;Net Income to Total Assets&quot;,
+      &quot;point_biserial_r&quot;: -0.289662819324115,
+      &quot;mutual_info&quot;: 0.03483650762810098,
+      &quot;univariate_auc&quot;: 0.1224607282736748,
+      &quot;separability&quot;: 0.7550785434526504
+    },
+    {
+      &quot;feature&quot;: &quot;Net profit before tax/Paid-in capital&quot;,
+      &quot;point_biserial_r&quot;: -0.22739118364872885,
+      &quot;mutual_info&quot;: 0.03888059657723475,
+      &quot;univariate_auc&quot;: 0.12406758645121928,
+      &quot;separability&quot;: 0.7518648270975614
+    },
+    {
+      &quot;feature&quot;: &quot;Per Share Net profit before tax (Yuan \u00a5)&quot;,
+      &quot;point_biserial_r&quot;: -0.22801401956014528,
+      &quot;mutual_info&quot;: 0.0396521883641785,
+      &quot;univariate_auc&quot;: 0.1248717184525801,
+      &quot;separability&quot;: 0.7502565630948398
+    },
+    {
+      &quot;feature&quot;: &quot;Total debt/Total net worth&quot;,
+      &quot;point_biserial_r&quot;: 0.31498023498609895,
+      &quot;mutual_info&quot;: 0.037472929919869946,
+      &quot;univariate_auc&quot;: 0.8742897068292176,
+      &quot;separability&quot;: 0.7485794136584352
+    },
+    {
+      &quot;feature&quot;: &quot;Continuous interest rate (after tax)&quot;,
+      &quot;point_biserial_r&quot;: -0.2535492286395594,
+      &quot;mutual_info&quot;: 0.03681749604466478,
+      &quot;univariate_auc&quot;: 0.12917284058223655,
+      &quot;separability&quot;: 0.7416543188355269
+    },
+    {
+      &quot;feature&quot;: &quot;Borrowing dependency&quot;,
+      &quot;point_biserial_r&quot;: 0.32816898714373305,
+      &quot;mutual_info&quot;: 0.03798432752131409,
+      &quot;univariate_auc&quot;: 0.8704890584626458,
+      &quot;separability&quot;: 0.7409781169252916
+    },
+    {
+      &quot;feature&quot;: &quot;Retained Earnings to Total Assets&quot;,
+      &quot;point_biserial_r&quot;: -0.27368770593924907,
+      &quot;mutual_info&quot;: 0.029979271630338644,
+      &quot;univariate_auc&quot;: 0.12999946578643265,
+      &quot;separability&quot;: 0.7400010684271348
+    },
+    &quot;... (+12 more)&quot;
+  ],
+  &quot;max_abs_point_biserial&quot;: 0.33689205128004,
+  &quot;mean_separability&quot;: 0.4362720061584022
+}</pre>
+<h3>dimensionality <small>(completed)</small></h3>
+<ul><li>42 PCs explain 95% of variance (95 features); PC1=22.0%</li></ul>
+<pre>{
+  &quot;n_features&quot;: 95,
+  &quot;n_components&quot;: 95,
+  &quot;pc1_variance&quot;: 0.22028620996795914,
+  &quot;pc2_variance&quot;: 0.1183475494187914,
+  &quot;top5_cumulative_variance&quot;: 0.5005348441201014,
+  &quot;n_components_80pct&quot;: 22,
+  &quot;n_components_90pct&quot;: 33,
+  &quot;n_components_95pct&quot;: 42,
+  &quot;n_components_99pct&quot;: 59,
+  &quot;redundancy_index&quot;: 0.5579
+}</pre>
+<h2>Figures</h2>
+<h4>target_distribution.png</h4><img src='figures/target_distribution.png' alt='target_distribution.png'>
+<h4>outlier_rates.png</h4><img src='figures/outlier_rates.png' alt='outlier_rates.png'>
+<h4>feature_histograms.png</h4><img src='figures/feature_histograms.png' alt='feature_histograms.png'>
+<h4>feature_boxplots.png</h4><img src='figures/feature_boxplots.png' alt='feature_boxplots.png'>
+<h4>feature_density.png</h4><img src='figures/feature_density.png' alt='feature_density.png'>
+<h4>feature_violins.png</h4><img src='figures/feature_violins.png' alt='feature_violins.png'>
+<h4>correlation_heatmap.png</h4><img src='figures/correlation_heatmap.png' alt='correlation_heatmap.png'>
+<h4>ratio_discrimination.png</h4><img src='figures/ratio_discrimination.png' alt='ratio_discrimination.png'>
+<h4>feature_target_relationships.png</h4><img src='figures/feature_target_relationships.png' alt='feature_target_relationships.png'>
+<h4>pca_scree.png</h4><img src='figures/pca_scree.png' alt='pca_scree.png'>
+<h4>pca_projection.png</h4><img src='figures/pca_projection.png' alt='pca_projection.png'>
+</body></html>

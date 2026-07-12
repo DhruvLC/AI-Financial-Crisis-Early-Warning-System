@@ -1,0 +1,128 @@
+{
+  "validated_at": "2026-07-11T14:23:55.254029+00:00",
+  "n_datasets": 10,
+  "n_present": 3,
+  "n_valid": 3,
+  "datasets": [
+    {
+      "source": "alpha_vantage",
+      "present": false,
+      "n_rows": 0,
+      "n_cols": 0,
+      "quality_score": 0.0,
+      "quality_grade": "F",
+      "n_errors": 0,
+      "n_warnings": 0,
+      "is_valid": false,
+      "load_error": null
+    },
+    {
+      "source": "fred",
+      "present": true,
+      "n_rows": 7010,
+      "n_cols": 7,
+      "quality_score": 82.49,
+      "quality_grade": "B",
+      "n_errors": 0,
+      "n_warnings": 1,
+      "is_valid": true,
+      "load_error": null
+    },
+    {
+      "source": "imf",
+      "present": false,
+      "n_rows": 0,
+      "n_cols": 0,
+      "quality_score": 0.0,
+      "quality_grade": "F",
+      "n_errors": 0,
+      "n_warnings": 0,
+      "is_valid": false,
+      "load_error": null
+    },
+    {
+      "source": "kaggle_bankruptcy",
+      "present": false,
+      "n_rows": 0,
+      "n_cols": 0,
+      "quality_score": 0.0,
+      "quality_grade": "F",
+      "n_errors": 0,
+      "n_warnings": 0,
+      "is_valid": false,
+      "load_error": null
+    },
+    {
+      "source": "kaggle_news",
+      "present": false,
+      "n_rows": 0,
+      "n_cols": 0,
+      "quality_score": 0.0,
+      "quality_grade": "F",
+      "n_errors": 0,
+      "n_warnings": 0,
+      "is_valid": false,
+      "load_error": null
+    },
+    {
+      "source": "kaggle_stock",
+      "present": false,
+      "n_rows": 0,
+      "n_cols": 0,
+      "quality_score": 0.0,
+      "quality_grade": "F",
+      "n_errors": 0,
+      "n_warnings": 0,
+      "is_valid": false,
+      "load_error": null
+    },
+    {
+      "source": "oecd",
+      "present": false,
+      "n_rows": 0,
+      "n_cols": 0,
+      "quality_score": 0.0,
+      "quality_grade": "F",
+      "n_errors": 0,
+      "n_warnings": 0,
+      "is_valid": false,
+      "load_error": null
+    },
+    {
+      "source": "sec_edgar",
+      "present": true,
+      "n_rows": 2613,
+      "n_cols": 11,
+      "quality_score": 84.38,
+      "quality_grade": "B",
+      "n_errors": 0,
+      "n_warnings": 4,
+      "is_valid": true,
+      "load_error": null
+    },
+    {
+      "source": "world_bank",
+      "present": true,
+      "n_rows": 120,
+      "n_cols": 6,
+      "quality_score": 98.33,
+      "quality_grade": "A",
+      "n_errors": 0,
+      "n_warnings": 2,
+      "is_valid": true,
+      "load_error": null
+    },
+    {
+      "source": "yahoo_finance",
+      "present": false,
+      "n_rows": 0,
+      "n_cols": 0,
+      "quality_score": 0.0,
+      "quality_grade": "F",
+      "n_errors": 0,
+      "n_warnings": 0,
+      "is_valid": false,
+      "load_error": null
+    }
+  ]
+}

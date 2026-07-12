@@ -9,6 +9,97 @@ data:
   # The label column as it appears in that CSV (note the leading space).
   target_col: "Bankrupt?"
 
+# Stage 4/5 — Data Validation & Quality gate (runs before data prep).
+validation:
+  enabled: true
+  max_missing_pct: 0.5       # per-column null fraction -> error above this
+  min_rows: 50               # fewer rows than this -> error
+  min_minority_pct: 0.01     # rarer class below this -> warning (imbalance)
+  fail_fast: true            # raise on any error (false = report only)
+  report_path: "reports/data_validation.json"
+
+# Stage 3 — Data Preparation (preprocessing) module (src/pipeline/preprocessing).
+# Each learned step is fit on the train split and re-applied to val/test (leak-safe).
+preprocessing:
+  fail_fast: true            # raise on the first step failure (false = continue)
+  cleaning:
+    enabled: true
+    drop_invalid_target: true
+    drop_inf_rows: true
+    standardize_categoricals: true
+    lowercase_categoricals: false
+    standardize_dates: true
+  duplicates:
+    enabled: true
+    drop_rows: true
+    drop_entity_timestamps: true
+    drop_timestamps: true
+    keep: last
+  imputation:
+    enabled: true
+    strategy: median         # mean | median | knn
+    knn_neighbors: 5
+  outliers:
+    enabled: true
+    method: winsorize        # winsorize | iqr_clip | zscore_clip | zscore_filter | isolation_forest | none
+    winsor_limits: [0.01, 0.99]
+    iqr_multiplier: 1.5
+    zscore_threshold: 5.0
+  encoding:
+    enabled: true
+    method: onehot           # onehot | ordinal
+    max_cardinality: 50
+    drop_first: false
+  scaling:
+    enabled: true
+    method: standard         # standard | minmax | robust | none
+
+# Stage 6 — Exploratory Data Analysis (src/pipeline/eda).
+# Runs a suite of analyzers over the processed splits and emits publication-
+# quality figures plus JSON/Markdown/HTML/CSV reports under reports/eda/.
+eda:
+  fail_fast: false           # false = a crashing analyzer is logged & skipped
+  reports_dir: "reports/eda"
+  dataset: "train"           # which processed split to analyze (train|val|test)
+  # Analyzer execution order (also the report order). Omit to use the default.
+  analyzers:
+    - overview
+    - target
+    - descriptive
+    - missing
+    - outliers
+    - distributions
+    - correlation
+    - ratios
+    - relationships
+    - dimensionality
+  figures:
+    enabled: true
+    dir: "reports/eda/figures"
+    dpi: 150
+    style: "whitegrid"
+    palette: "deep"
+  # Per-analyzer overrides (all optional; sensible defaults baked in).
+  descriptive:
+    percentiles: [1, 5, 10, 25, 50, 75, 90, 95, 99]
+  distributions:
+    skew_threshold: 1.0
+    kurtosis_threshold: 3.0
+    top_n: 12
+    max_grid_features: 36
+  outliers:
+    iqr_multiplier: 1.5
+    zscore_threshold: 3.0
+    isolation_forest: true
+    contamination: auto
+  correlation:
+    high_correlation_threshold: 0.8
+    vif_threshold: 10.0
+    kendall_max_features: 40
+  dimensionality:
+    projection: true
+    scree_components: 30
+
 split:
   test_size: 0.15
   val_size: 0.15

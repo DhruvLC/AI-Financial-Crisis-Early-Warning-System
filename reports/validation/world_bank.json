@@ -1,0 +1,158 @@
+{
+  "source": "world_bank",
+  "present": true,
+  "interim_path": "data/interim/world_bank.parquet",
+  "n_rows": 120,
+  "n_cols": 6,
+  "load_error": null,
+  "is_valid": true,
+  "n_errors": 0,
+  "n_warnings": 2,
+  "quality": {
+    "score": 98.33,
+    "grade": "A",
+    "components": {
+      "schema": 1.0,
+      "completeness": 1.0,
+      "uniqueness": 1.0,
+      "timeliness": 1.0,
+      "validity": 0.9334
+    }
+  },
+  "checks": [
+    {
+      "check": "schema",
+      "status": "info",
+      "skip_reason": null,
+      "metrics": {
+        "n_required": 2,
+        "n_missing_required": 0,
+        "n_unexpected": 3,
+        "n_dtype_mismatch": 0,
+        "schema_score": 1.0
+      },
+      "findings": [
+        {
+          "code": "unexpected_columns",
+          "level": "info",
+          "message": "3 unexpected column(s): ['GDP', 'Population', 'TradePctGDP']",
+          "details": {
+            "columns": [
+              "GDP",
+              "Population",
+              "TradePctGDP"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "check": "missing_values",
+      "status": "info",
+      "skip_reason": null,
+      "metrics": {
+        "overall_missing_pct": 0.0,
+        "columns_with_missing": 0,
+        "missing_by_col": {},
+        "completeness_score": 1.0
+      },
+      "findings": []
+    },
+    {
+      "check": "duplicates",
+      "status": "info",
+      "skip_reason": null,
+      "metrics": {
+        "duplicate_rows": 0,
+        "duplicate_row_pct": 0.0,
+        "duplicate_timestamps": 0,
+        "uniqueness_score": 1.0
+      },
+      "findings": [
+        {
+          "code": "no_duplicates",
+          "level": "info",
+          "message": "no duplicate rows detected"
+        }
+      ]
+    },
+    {
+      "check": "outliers",
+      "status": "warn",
+      "skip_reason": null,
+      "metrics": {
+        "iqr_outlier_pct_by_col": {
+          "GDP": 0.2,
+          "Population": 0.2,
+          "TradePctGDP": 0.0
+        },
+        "zscore_outlier_pct_by_col": {
+          "GDP": 0.0167,
+          "Population": 0.0,
+          "TradePctGDP": 0.0
+        },
+        "isolation_forest_outlier_pct": 0.375,
+        "mean_iqr_outlier_pct": 0.1333
+      },
+      "findings": [
+        {
+          "code": "iqr_outliers",
+          "level": "warn",
+          "message": "2 column(s) exceed 10% IQR outliers: ['GDP', 'Population']",
+          "details": {
+            "columns": {
+              "GDP": 0.2,
+              "Population": 0.2
+            }
+          }
+        },
+        {
+          "code": "isolation_forest_outliers",
+          "level": "warn",
+          "message": "Isolation Forest flags 37.50% of rows as anomalous",
+          "details": {
+            "pct": 0.375,
+            "n_rows": 120
+          }
+        }
+      ]
+    },
+    {
+      "check": "financial",
+      "status": "info",
+      "skip_reason": null,
+      "metrics": {
+        "invalid_financial_rows": 0,
+        "invalid_financial_pct": 0.0,
+        "validity_score": 1.0
+      },
+      "findings": [
+        {
+          "code": "financials_ok",
+          "level": "info",
+          "message": "financial sanity checks passed"
+        }
+      ]
+    },
+    {
+      "check": "time_series",
+      "status": "info",
+      "skip_reason": null,
+      "metrics": {
+        "n_series": 5,
+        "unordered_series": 0,
+        "duplicate_timestamps": 0,
+        "series_with_gaps": 0,
+        "unparseable_timestamps": 0,
+        "timeliness_score": 1.0
+      },
+      "findings": [
+        {
+          "code": "time_series_ok",
+          "level": "info",
+          "message": "timestamps ordered, unique, and evenly spaced"
+        }
+      ]
+    }
+  ]
+}

@@ -10,6 +10,7 @@ are stubbed for phase 2.
 | Stage | Module | Status |
 |-------|--------|--------|
 | 2  Data Collection      | `src/pipeline/data_collection.py` | ✅ Kaggle auto-download |
+| 4/5 Data Validation     | `src/pipeline/data_validation.py` | ✅ quality gate + JSON report |
 | 3  Data Preparation     | `src/pipeline/data_prep.py`       | ✅ clean, outliers, split |
 | 6  Feature Engineering  | `src/pipeline/features.py`        | ✅ variance filter, scaling |
 | 7  Traditional ML       | `src/pipeline/models.py`          | ✅ RandomForest, XGBoost |
@@ -45,6 +46,9 @@ python src/run_pipeline.py --config configs/config.yaml
 
 ## Outputs
 
+- `reports/data_validation.json` — data quality gate report (schema, missingness,
+  class balance, constant/inf columns); the run aborts on fatal errors unless
+  `validation.fail_fast: false`
 - `reports/model_comparison.csv` — ROC-AUC / PR-AUC / P / R / F1 per model
 - `reports/shap_<model>.png` + `reports/feature_importance_<model>.csv`
 - `reports/risk_scores.csv` — per-company 0–100 risk score + level
@@ -82,6 +86,66 @@ python src/run_ingestion.py --only kaggle_bankruptcy fred world_bank
 - `logs/ingestion.log` — full ingestion log
 
 **Config:** `configs/ingestion.yaml` (tickers, CIKs, FRED series, countries, etc.)
+
+## Cross-source data validation module
+
+After an ingestion pass, `src/ingestion/cross_validation.py` validates the whole
+ingested corpus (everything under `data/interim/` + the metadata sidecars) —
+the checks no single-source validator can do:
+
+- **Coverage** — every expected source landed (cross-checked against `run_manifest.json`)
+- **Schema** — each interim dataset matches its registered contract (`SCHEMA_REGISTRY`)
+- **Sanity** — values sit in domain ranges (unemployment 0–100, prices > 0, …), no infinities
+- **Freshness** — newest observation is recent enough (per-source staleness caps)
+- **Integrity** — interim checksum still matches the metadata sidecar
+- **Anomalies** — fraction of each numeric column beyond a 3×IQR fence
+- **Consistency** — sources sharing the canonical `entity_id` key agree on their entity universe
+
+```bash
+python src/run_data_validation.py --config configs/ingestion.yaml
+python src/run_data_validation.py --config configs/ingestion.yaml --fail-fast
+```
+
+Writes `reports/cross_source_validation.json` (per-source status + every check,
+plus cross-source findings). Tuned via the `data_validation:` block in
+`configs/ingestion.yaml`; findings are `pass`/`warn`/`fail`, and only `fail`
+aborts when `fail_fast` is on.
+
+This is the third validation layer, complementing the per-source ingestion gate
+(`ingestion/validation.py`) and the modelling-table gate (`pipeline/data_validation.py`).
+
+## Data Validation module
+
+`src/validation/` is a deep, per-dataset validation framework (modular OOP: one
+`BaseCheck` subclass per family) that runs over every ingested interim dataset
+and produces a **0–100 quality score + letter grade** per source. It works with
+all 10 sources via a declarative schema/semantic contract (`validation/schemas.py`).
+
+Checks:
+
+| Check | Class | What it does |
+|-------|-------|--------------|
+| Schema | `SchemaValidator` | required cols, dtypes, missing/unexpected cols |
+| Missing values | `MissingValueAnalyzer` | per-column counts + %, overall report |
+| Duplicates | `DuplicateDetector` | duplicate rows, entity records, timestamps |
+| Outliers | `OutlierDetector` | IQR, Z-Score, Isolation Forest* |
+| Financial | `FinancialValidator` | negative revenue, invalid assets/liabilities, impossible ratios, invalid fiscal years, future dates |
+| Time-series | `TimeSeriesValidator` | chronological order, dup/missing timestamps, gaps |
+
+\* Isolation Forest needs scikit-learn; it auto-skips (with a note) if absent.
+
+```bash
+python src/run_validation.py --config configs/ingestion.yaml
+python src/run_validation.py --only fred sec_edgar
+python src/run_validation.py --fail-fast          # exit non-zero on any error
+```
+
+**Outputs** (`reports/validation/`): `<source>.json` per dataset (every check +
+metrics + quality score), plus `_summary.json` and a readable `_summary.md`.
+Tuned via the `data_validation:` block in `configs/ingestion.yaml`
+(thresholds, outlier settings, quality weights).
+
+**Tests:** `.venv/bin/python -m unittest discover -s tests -v`
 
 ## Roadmap (phase 2)
 

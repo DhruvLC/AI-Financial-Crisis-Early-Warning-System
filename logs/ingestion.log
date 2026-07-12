@@ -1,0 +1,132 @@
+2026-07-10 23:11:22 | INFO    | ingest.runner          | ingestion targets: ['sec_edgar', 'fred', 'world_bank', 'imf', 'oecd']
+2026-07-10 23:11:22 | INFO    | ingest.sec_edgar       | === ingest 'sec_edgar' started ===
+2026-07-10 23:11:22 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:23 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:24 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:24 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:24 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:25 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:25 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:26 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:26 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:26 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:27 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:28 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:28 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:29 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:29 | WARNING | ingest.sec_edgar       | SEC user_agent looks like a placeholder; set a real contact email in configs/ingestion.yaml (SEC may block otherwise).
+2026-07-10 23:11:30 | WARNING | ingest.sec_edgar       | validation: 0.33% of cells missing
+2026-07-10 23:11:30 | INFO    | ingest.sec_edgar       | raw stored: data/raw/sec_edgar/sec_edgar.csv (2613 rows)
+2026-07-10 23:11:31 | INFO    | ingest.sec_edgar       | interim stored: data/interim/sec_edgar.parquet
+2026-07-10 23:11:31 | INFO    | ingest.sec_edgar       | === ingest 'sec_edgar' success (2613 rows) ===
+2026-07-10 23:11:31 | INFO    | ingest.fred            | === ingest 'fred' started ===
+2026-07-10 23:11:33 | WARNING | ingest.fred            | validation: 69.40% of cells missing
+2026-07-10 23:11:33 | INFO    | ingest.fred            | raw stored: data/raw/fred/fred.csv (7010 rows)
+2026-07-10 23:11:33 | INFO    | ingest.fred            | interim stored: data/interim/fred.parquet
+2026-07-10 23:11:33 | INFO    | ingest.fred            | === ingest 'fred' success (7010 rows) ===
+2026-07-10 23:11:33 | INFO    | ingest.world_bank      | === ingest 'world_bank' started ===
+2026-07-10 23:11:59 | INFO    | ingest.world_bank      | raw stored: data/raw/world_bank/world_bank.csv (120 rows)
+2026-07-10 23:11:59 | INFO    | ingest.world_bank      | interim stored: data/interim/world_bank.parquet
+2026-07-10 23:11:59 | INFO    | ingest.world_bank      | === ingest 'world_bank' success (120 rows) ===
+2026-07-10 23:11:59 | INFO    | ingest.imf             | === ingest 'imf' started ===
+2026-07-10 23:11:59 | WARNING | ingest.imf             | GET https://dataservices.imf.org/REST/SDMX_JSON.svc/CompactData/IFS/A.US.ENDA_XDC_USD_RATE failed (attempt 1/3): HTTPSConnectionPool(host='dataservices.imf.org', port=443): Max retries exceeded with url: /REST/SDMX_JSON.svc/CompactData/IFS/A.US.ENDA_XDC_USD_RATE (Caused by NameResolutionError("HTTPSConnection(host='dataservices.imf.org', port=443): Failed to resolve 'dataservices.imf.org' ([Errno 8] nodename nor servname provided, or not known)")); retrying in 2s
+2026-07-10 23:12:01 | WARNING | ingest.imf             | GET https://dataservices.imf.org/REST/SDMX_JSON.svc/CompactData/IFS/A.US.ENDA_XDC_USD_RATE failed (attempt 2/3): HTTPSConnectionPool(host='dataservices.imf.org', port=443): Max retries exceeded with url: /REST/SDMX_JSON.svc/CompactData/IFS/A.US.ENDA_XDC_USD_RATE (Caused by NameResolutionError("HTTPSConnection(host='dataservices.imf.org', port=443): Failed to resolve 'dataservices.imf.org' ([Errno 8] nodename nor servname provided, or not known)")); retrying in 4s
+2026-07-10 23:12:05 | WARNING | ingest.imf             | GET https://dataservices.imf.org/REST/SDMX_JSON.svc/CompactData/IFS/A.US.ENDA_XDC_USD_RATE failed (attempt 3/3): HTTPSConnectionPool(host='dataservices.imf.org', port=443): Max retries exceeded with url: /REST/SDMX_JSON.svc/CompactData/IFS/A.US.ENDA_XDC_USD_RATE (Caused by NameResolutionError("HTTPSConnection(host='dataservices.imf.org', port=443): Failed to resolve 'dataservices.imf.org' ([Errno 8] nodename nor servname provided, or not known)")); retrying in 8s
+2026-07-10 23:12:13 | WARNING | ingest.imf             | IMF fetch failed for US (GET https://dataservices.imf.org/REST/SDMX_JSON.svc/CompactData/IFS/A.US.ENDA_XDC_USD_RATE failed after 3 attempts: HTTPSConnectionPool(host='dataservices.imf.org', port=443): Max retries exceeded with url: /REST/SDMX_JSON.svc/CompactData/IFS/A.US.ENDA_XDC_USD_RATE (Caused by NameResolutionError("HTTPSConnection(host='dataservices.imf.org', port=443): Failed to resolve 'dataservices.imf.org' ([Errno 8] nodename nor servname provided, or not known)")))
+2026-07-10 23:12:13 | WARNING | ingest.imf             | GET https://dataservices.imf.org/REST/SDMX_JSON.svc/CompactData/IFS/A.GB.ENDA_XDC_USD_RATE failed (attempt 1/3): HTTPSConnectionPool(host='dataservices.imf.org', port=443): Max retries exceeded with url: /REST/SDMX_JSON.svc/CompactData/IFS/A.GB.ENDA_XDC_USD_RATE (Caused by NameResolutionError("HTTPSConnection(host='dataservices.imf.org', port=443): Failed to resolve 'dataservices.imf.org' ([Errno 8] nodename nor servname provided, or not known)")); retrying in 2s
+2026-07-10 23:12:15 | WARNING | ingest.imf             | GET https://dataservices.imf.org/REST/SDMX_JSON.svc/CompactData/IFS/A.GB.ENDA_XDC_USD_RATE failed (attempt 2/3): HTTPSConnectionPool(host='dataservices.imf.org', port=443): Max retries exceeded with url: /REST/SDMX_JSON.svc/CompactData/IFS/A.GB.ENDA_XDC_USD_RATE (Caused by NameResolutionError("HTTPSConnection(host='dataservices.imf.org', port=443): Failed to resolve 'dataservices.imf.org' ([Errno 8] nodename nor servname provided, or not known)")); retrying in 4s
+2026-07-10 23:12:20 | WARNING | ingest.imf             | GET https://dataservices.imf.org/REST/SDMX_JSON.svc/CompactData/IFS/A.GB.ENDA_XDC_USD_RATE failed (attempt 3/3): HTTPSConnectionPool(host='dataservices.imf.org', port=443): Max retries exceeded with url: /REST/SDMX_JSON.svc/CompactData/IFS/A.GB.ENDA_XDC_USD_RATE (Caused by NameResolutionError("HTTPSConnection(host='dataservices.imf.org', port=443): Failed to resolve 'dataservices.imf.org' ([Errno 8] nodename nor servname provided, or not known)")); retrying in 8s
+2026-07-10 23:12:28 | WARNING | ingest.imf             | IMF fetch failed for GB (GET https://dataservices.imf.org/REST/SDMX_JSON.svc/CompactData/IFS/A.GB.ENDA_XDC_USD_RATE failed after 3 attempts: HTTPSConnectionPool(host='dataservices.imf.org', port=443): Max retries exceeded with url: /REST/SDMX_JSON.svc/CompactData/IFS/A.GB.ENDA_XDC_USD_RATE (Caused by NameResolutionError("HTTPSConnection(host='dataservices.imf.org', port=443): Failed to resolve 'dataservices.imf.org' ([Errno 8] nodename nor servname provided, or not known)")))
+2026-07-10 23:12:28 | WARNING | ingest.imf             | GET https://dataservices.imf.org/REST/SDMX_JSON.svc/CompactData/IFS/A.JP.ENDA_XDC_USD_RATE failed (attempt 1/3): HTTPSConnectionPool(host='dataservices.imf.org', port=443): Max retries exceeded with url: /REST/SDMX_JSON.svc/CompactData/IFS/A.JP.ENDA_XDC_USD_RATE (Caused by NameResolutionError("HTTPSConnection(host='dataservices.imf.org', port=443): Failed to resolve 'dataservices.imf.org' ([Errno 8] nodename nor servname provided, or not known)")); retrying in 2s
+2026-07-10 23:12:30 | WARNING | ingest.imf             | GET https://dataservices.imf.org/REST/SDMX_JSON.svc/CompactData/IFS/A.JP.ENDA_XDC_USD_RATE failed (attempt 2/3): HTTPSConnectionPool(host='dataservices.imf.org', port=443): Max retries exceeded with url: /REST/SDMX_JSON.svc/CompactData/IFS/A.JP.ENDA_XDC_USD_RATE (Caused by NameResolutionError("HTTPSConnection(host='dataservices.imf.org', port=443): Failed to resolve 'dataservices.imf.org' ([Errno 8] nodename nor servname provided, or not known)")); retrying in 4s
+2026-07-10 23:12:34 | WARNING | ingest.imf             | GET https://dataservices.imf.org/REST/SDMX_JSON.svc/CompactData/IFS/A.JP.ENDA_XDC_USD_RATE failed (attempt 3/3): HTTPSConnectionPool(host='dataservices.imf.org', port=443): Max retries exceeded with url: /REST/SDMX_JSON.svc/CompactData/IFS/A.JP.ENDA_XDC_USD_RATE (Caused by NameResolutionError("HTTPSConnection(host='dataservices.imf.org', port=443): Failed to resolve 'dataservices.imf.org' ([Errno 8] nodename nor servname provided, or not known)")); retrying in 8s
+2026-07-10 23:12:42 | WARNING | ingest.imf             | IMF fetch failed for JP (GET https://dataservices.imf.org/REST/SDMX_JSON.svc/CompactData/IFS/A.JP.ENDA_XDC_USD_RATE failed after 3 attempts: HTTPSConnectionPool(host='dataservices.imf.org', port=443): Max retries exceeded with url: /REST/SDMX_JSON.svc/CompactData/IFS/A.JP.ENDA_XDC_USD_RATE (Caused by NameResolutionError("HTTPSConnection(host='dataservices.imf.org', port=443): Failed to resolve 'dataservices.imf.org' ([Errno 8] nodename nor servname provided, or not known)")))
+2026-07-10 23:12:42 | ERROR   | ingest.imf             | === ingest 'imf' FAILED: no IMF observations returned ===
+2026-07-10 23:12:42 | INFO    | ingest.oecd            | === ingest 'oecd' started ===
+2026-07-10 23:12:43 | WARNING | ingest.oecd            | GET https://sdmx.oecd.org/public/rest/data/MEI_CLI/BSCICP03.USA+GBR+JPN?format=jsondata failed (attempt 1/3): 404 Client Error: Not Found for url: https://sdmx.oecd.org/public/rest/data/MEI_CLI/BSCICP03.USA+GBR+JPN?format=jsondata; retrying in 2s
+2026-07-10 23:12:45 | WARNING | ingest.oecd            | GET https://sdmx.oecd.org/public/rest/data/MEI_CLI/BSCICP03.USA+GBR+JPN?format=jsondata failed (attempt 2/3): 404 Client Error: Not Found for url: https://sdmx.oecd.org/public/rest/data/MEI_CLI/BSCICP03.USA+GBR+JPN?format=jsondata; retrying in 4s
+2026-07-10 23:12:49 | WARNING | ingest.oecd            | GET https://sdmx.oecd.org/public/rest/data/MEI_CLI/BSCICP03.USA+GBR+JPN?format=jsondata failed (attempt 3/3): 404 Client Error: Not Found for url: https://sdmx.oecd.org/public/rest/data/MEI_CLI/BSCICP03.USA+GBR+JPN?format=jsondata; retrying in 8s
+2026-07-10 23:12:57 | ERROR   | ingest.oecd            | === ingest 'oecd' FAILED: GET https://sdmx.oecd.org/public/rest/data/MEI_CLI/BSCICP03.USA+GBR+JPN?format=jsondata failed after 3 attempts: 404 Client Error: Not Found for url: https://sdmx.oecd.org/public/rest/data/MEI_CLI/BSCICP03.USA+GBR+JPN?format=jsondata ===
+2026-07-10 23:12:57 | INFO    | ingest.runner          | manifest written: data/raw/_metadata/run_manifest.json
+2026-07-10 23:12:57 | INFO    | ingest.runner          | ingestion complete: 3/5 succeeded
+2026-07-11 19:25:17 | WARNING | ingest.cross_validation | [alpha_vantage] coverage: no interim data present
+2026-07-11 19:25:17 | WARNING | ingest.cross_validation | [imf] coverage: source not present (last run: failed)
+2026-07-11 19:25:17 | WARNING | ingest.cross_validation | [kaggle_bankruptcy] coverage: no interim data present
+2026-07-11 19:25:17 | WARNING | ingest.cross_validation | [oecd] coverage: source not present (last run: failed)
+2026-07-11 19:25:17 | WARNING | ingest.cross_validation | [sec_edgar] key_uniqueness: 1698 duplicate rows on key ['cik', 'concept', 'date']
+2026-07-11 19:25:17 | WARNING | ingest.cross_validation | [yahoo_finance] coverage: no interim data present
+2026-07-11 19:25:17 | WARNING | ingest.cross_validation | [cross] entity_overlap: no shared entity_id across ['sec_edgar', 'world_bank'] — sources cover disjoint entity universes
+2026-07-11 19:25:17 | INFO    | ingest.cross_validation | cross-source validation PASS — 8 source(s), 0 fail / 7 warn -> reports/cross_source_validation.json
+2026-07-11 19:37:52 | INFO    | validation.runner      | validation targets: ['alpha_vantage', 'fred', 'imf', 'kaggle_bankruptcy', 'kaggle_news', 'kaggle_stock', 'oecd', 'sec_edgar', 'world_bank', 'yahoo_finance']
+2026-07-11 19:37:52 | WARNING | validation.runner      | [alpha_vantage] no interim file found — skipping
+2026-07-11 19:37:52 | INFO    | validation.runner      | [fred] quality score 82.5 (B), 0 error(s), 0 warning(s)
+2026-07-11 19:37:52 | INFO    | validation.report      | wrote dataset report: reports/validation/fred.json
+2026-07-11 19:37:52 | WARNING | validation.runner      | [imf] no interim file found — skipping
+2026-07-11 19:37:52 | WARNING | validation.runner      | [kaggle_bankruptcy] no interim file found — skipping
+2026-07-11 19:37:52 | WARNING | validation.runner      | [kaggle_news] no interim file found — skipping
+2026-07-11 19:37:52 | WARNING | validation.runner      | [kaggle_stock] no interim file found — skipping
+2026-07-11 19:37:52 | WARNING | validation.runner      | [oecd] no interim file found — skipping
+2026-07-11 19:37:52 | WARNING | validation.runner      | [sec_edgar/duplicates] 2389 duplicate (entity, date) record(s) on ['entity_id', 'date']
+2026-07-11 19:37:52 | WARNING | validation.runner      | [sec_edgar/time_series] 3/3 series not in chronological order (as stored)
+2026-07-11 19:37:52 | WARNING | validation.runner      | [sec_edgar/time_series] 2389 duplicate timestamp(s) within series
+2026-07-11 19:37:52 | INFO    | validation.runner      | [sec_edgar] quality score 84.4 (B), 0 error(s), 3 warning(s)
+2026-07-11 19:37:52 | INFO    | validation.report      | wrote dataset report: reports/validation/sec_edgar.json
+2026-07-11 19:37:52 | WARNING | validation.runner      | [world_bank/outliers] 2 column(s) exceed 10% IQR outliers: ['GDP', 'Population']
+2026-07-11 19:37:52 | INFO    | validation.runner      | [world_bank] quality score 98.3 (A), 0 error(s), 1 warning(s)
+2026-07-11 19:37:52 | INFO    | validation.report      | wrote dataset report: reports/validation/world_bank.json
+2026-07-11 19:37:52 | WARNING | validation.runner      | [yahoo_finance] no interim file found — skipping
+2026-07-11 19:37:52 | INFO    | validation.report      | wrote corpus summary: reports/validation/_summary.json / reports/validation/_summary.md
+2026-07-11 19:37:52 | INFO    | validation.runner      | validation complete: 3/3 present dataset(s) valid
+2026-07-11 19:52:57 | INFO    | ingest.runner          | ingestion targets: ['world_bank']
+2026-07-11 19:52:57 | INFO    | ingest.world_bank      | === ingest 'world_bank' started ===
+2026-07-11 19:53:18 | INFO    | ingest.world_bank      | raw stored: data/raw/world_bank/world_bank.csv (120 rows)
+2026-07-11 19:53:18 | INFO    | ingest.world_bank      | interim stored: data/interim/world_bank.parquet
+2026-07-11 19:53:18 | INFO    | ingest.world_bank      | === ingest 'world_bank' success (120 rows) ===
+2026-07-11 19:53:18 | INFO    | ingest.runner          | manifest written: data/raw/_metadata/run_manifest.json
+2026-07-11 19:53:18 | INFO    | ingest.runner          | ingestion complete: 1/1 succeeded
+2026-07-11 19:53:26 | INFO    | validation.runner      | validation targets: ['alpha_vantage', 'fred', 'imf', 'kaggle_bankruptcy', 'kaggle_news', 'kaggle_stock', 'oecd', 'sec_edgar', 'world_bank', 'yahoo_finance']
+2026-07-11 19:53:26 | WARNING | validation.runner      | [alpha_vantage] no interim file found — skipping
+2026-07-11 19:53:46 | WARNING | validation.runner      | [fred/outliers] Isolation Forest flags 37.74% of rows as anomalous
+2026-07-11 19:53:46 | INFO    | validation.runner      | [fred] quality score 82.5 (B), 0 error(s), 1 warning(s)
+2026-07-11 19:53:46 | INFO    | validation.report      | wrote dataset report: reports/validation/fred.json
+2026-07-11 19:53:46 | WARNING | validation.runner      | [imf] no interim file found — skipping
+2026-07-11 19:53:46 | WARNING | validation.runner      | [kaggle_bankruptcy] no interim file found — skipping
+2026-07-11 19:53:46 | WARNING | validation.runner      | [kaggle_news] no interim file found — skipping
+2026-07-11 19:53:46 | WARNING | validation.runner      | [kaggle_stock] no interim file found — skipping
+2026-07-11 19:53:46 | WARNING | validation.runner      | [oecd] no interim file found — skipping
+2026-07-11 19:53:46 | WARNING | validation.runner      | [sec_edgar/duplicates] 2389 duplicate (entity, date) record(s) on ['entity_id', 'date']
+2026-07-11 19:53:46 | WARNING | validation.runner      | [sec_edgar/outliers] Isolation Forest flags 40.26% of rows as anomalous
+2026-07-11 19:53:46 | WARNING | validation.runner      | [sec_edgar/time_series] 3/3 series not in chronological order (as stored)
+2026-07-11 19:53:46 | WARNING | validation.runner      | [sec_edgar/time_series] 2389 duplicate timestamp(s) within series
+2026-07-11 19:53:46 | INFO    | validation.runner      | [sec_edgar] quality score 84.4 (B), 0 error(s), 4 warning(s)
+2026-07-11 19:53:46 | INFO    | validation.report      | wrote dataset report: reports/validation/sec_edgar.json
+2026-07-11 19:53:46 | WARNING | validation.runner      | [world_bank/outliers] 2 column(s) exceed 10% IQR outliers: ['GDP', 'Population']
+2026-07-11 19:53:46 | WARNING | validation.runner      | [world_bank/outliers] Isolation Forest flags 37.50% of rows as anomalous
+2026-07-11 19:53:46 | INFO    | validation.runner      | [world_bank] quality score 98.3 (A), 0 error(s), 2 warning(s)
+2026-07-11 19:53:46 | INFO    | validation.report      | wrote dataset report: reports/validation/world_bank.json
+2026-07-11 19:53:46 | WARNING | validation.runner      | [yahoo_finance] no interim file found — skipping
+2026-07-11 19:53:46 | INFO    | validation.report      | wrote corpus summary: reports/validation/_summary.json / reports/validation/_summary.md
+2026-07-11 19:53:46 | INFO    | validation.runner      | validation complete: 3/3 present dataset(s) valid
+2026-07-11 19:53:54 | INFO    | validation.runner      | validation targets: ['alpha_vantage', 'fred', 'imf', 'kaggle_bankruptcy', 'kaggle_news', 'kaggle_stock', 'oecd', 'sec_edgar', 'world_bank', 'yahoo_finance']
+2026-07-11 19:53:54 | WARNING | validation.runner      | [alpha_vantage] no interim file found — skipping
+2026-07-11 19:53:55 | WARNING | validation.runner      | [fred/outliers] Isolation Forest flags 37.74% of rows as anomalous
+2026-07-11 19:53:55 | INFO    | validation.runner      | [fred] quality score 82.5 (B), 0 error(s), 1 warning(s)
+2026-07-11 19:53:55 | INFO    | validation.report      | wrote dataset report: reports/validation/fred.json
+2026-07-11 19:53:55 | WARNING | validation.runner      | [imf] no interim file found — skipping
+2026-07-11 19:53:55 | WARNING | validation.runner      | [kaggle_bankruptcy] no interim file found — skipping
+2026-07-11 19:53:55 | WARNING | validation.runner      | [kaggle_news] no interim file found — skipping
+2026-07-11 19:53:55 | WARNING | validation.runner      | [kaggle_stock] no interim file found — skipping
+2026-07-11 19:53:55 | WARNING | validation.runner      | [oecd] no interim file found — skipping
+2026-07-11 19:53:55 | WARNING | validation.runner      | [sec_edgar/duplicates] 2389 duplicate (entity, date) record(s) on ['entity_id', 'date']
+2026-07-11 19:53:55 | WARNING | validation.runner      | [sec_edgar/outliers] Isolation Forest flags 40.26% of rows as anomalous
+2026-07-11 19:53:55 | WARNING | validation.runner      | [sec_edgar/time_series] 3/3 series not in chronological order (as stored)
+2026-07-11 19:53:55 | WARNING | validation.runner      | [sec_edgar/time_series] 2389 duplicate timestamp(s) within series
+2026-07-11 19:53:55 | INFO    | validation.runner      | [sec_edgar] quality score 84.4 (B), 0 error(s), 4 warning(s)
+2026-07-11 19:53:55 | INFO    | validation.report      | wrote dataset report: reports/validation/sec_edgar.json
+2026-07-11 19:53:55 | WARNING | validation.runner      | [world_bank/outliers] 2 column(s) exceed 10% IQR outliers: ['GDP', 'Population']
+2026-07-11 19:53:55 | WARNING | validation.runner      | [world_bank/outliers] Isolation Forest flags 37.50% of rows as anomalous
+2026-07-11 19:53:55 | INFO    | validation.runner      | [world_bank] quality score 98.3 (A), 0 error(s), 2 warning(s)
+2026-07-11 19:53:55 | INFO    | validation.report      | wrote dataset report: reports/validation/world_bank.json
+2026-07-11 19:53:55 | WARNING | validation.runner      | [yahoo_finance] no interim file found — skipping
+2026-07-11 19:53:55 | INFO    | validation.report      | wrote corpus summary: reports/validation/_summary.json / reports/validation/_summary.md
+2026-07-11 19:53:55 | INFO    | validation.runner      | validation complete: 3/3 present dataset(s) valid

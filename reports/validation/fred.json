@@ -1,0 +1,187 @@
+{
+  "source": "fred",
+  "present": true,
+  "interim_path": "data/interim/fred.parquet",
+  "n_rows": 7010,
+  "n_cols": 7,
+  "load_error": null,
+  "is_valid": true,
+  "n_errors": 0,
+  "n_warnings": 1,
+  "quality": {
+    "score": 82.49,
+    "grade": "B",
+    "components": {
+      "schema": 1.0,
+      "completeness": 0.306,
+      "uniqueness": 1.0,
+      "timeliness": 1.0,
+      "validity": 0.9937
+    }
+  },
+  "checks": [
+    {
+      "check": "schema",
+      "status": "info",
+      "skip_reason": null,
+      "metrics": {
+        "n_required": 1,
+        "n_missing_required": 0,
+        "n_unexpected": 6,
+        "n_dtype_mismatch": 0,
+        "schema_score": 1.0
+      },
+      "findings": [
+        {
+          "code": "unexpected_columns",
+          "level": "info",
+          "message": "6 unexpected column(s): ['CPI', 'FedFundsRate', 'GDP', 'MoneySupplyM2', 'Treasury10Y', 'Unemployment']",
+          "details": {
+            "columns": [
+              "CPI",
+              "FedFundsRate",
+              "GDP",
+              "MoneySupplyM2",
+              "Treasury10Y",
+              "Unemployment"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "check": "missing_values",
+      "status": "info",
+      "skip_reason": null,
+      "metrics": {
+        "overall_missing_pct": 0.694,
+        "columns_with_missing": 6,
+        "missing_by_col": {
+          "GDP": {
+            "count": 6905,
+            "pct": 0.985
+          },
+          "CPI": {
+            "count": 6694,
+            "pct": 0.9549
+          },
+          "FedFundsRate": {
+            "count": 6692,
+            "pct": 0.9546
+          },
+          "Treasury10Y": {
+            "count": 379,
+            "pct": 0.0541
+          },
+          "Unemployment": {
+            "count": 6693,
+            "pct": 0.9548
+          },
+          "MoneySupplyM2": {
+            "count": 6693,
+            "pct": 0.9548
+          }
+        },
+        "completeness_score": 0.306
+      },
+      "findings": [
+        {
+          "code": "some_missing",
+          "level": "info",
+          "message": "69.40% of cells missing"
+        }
+      ]
+    },
+    {
+      "check": "duplicates",
+      "status": "info",
+      "skip_reason": null,
+      "metrics": {
+        "duplicate_rows": 0,
+        "duplicate_row_pct": 0.0,
+        "duplicate_timestamps": 0,
+        "uniqueness_score": 1.0
+      },
+      "findings": [
+        {
+          "code": "no_duplicates",
+          "level": "info",
+          "message": "no duplicate rows detected"
+        }
+      ]
+    },
+    {
+      "check": "outliers",
+      "status": "warn",
+      "skip_reason": null,
+      "metrics": {
+        "iqr_outlier_pct_by_col": {
+          "GDP": 0.0,
+          "CPI": 0.0,
+          "FedFundsRate": 0.0,
+          "Treasury10Y": 0.0,
+          "Unemployment": 0.0757,
+          "MoneySupplyM2": 0.0
+        },
+        "zscore_outlier_pct_by_col": {
+          "GDP": 0.0,
+          "CPI": 0.0,
+          "FedFundsRate": 0.0,
+          "Treasury10Y": 0.0,
+          "Unemployment": 0.0063,
+          "MoneySupplyM2": 0.0
+        },
+        "isolation_forest_outlier_pct": 0.3774,
+        "mean_iqr_outlier_pct": 0.0126
+      },
+      "findings": [
+        {
+          "code": "isolation_forest_outliers",
+          "level": "warn",
+          "message": "Isolation Forest flags 37.74% of rows as anomalous",
+          "details": {
+            "pct": 0.3774,
+            "n_rows": 53
+          }
+        }
+      ]
+    },
+    {
+      "check": "financial",
+      "status": "info",
+      "skip_reason": null,
+      "metrics": {
+        "invalid_financial_rows": 0,
+        "invalid_financial_pct": 0.0,
+        "validity_score": 1.0
+      },
+      "findings": [
+        {
+          "code": "financials_ok",
+          "level": "info",
+          "message": "financial sanity checks passed"
+        }
+      ]
+    },
+    {
+      "check": "time_series",
+      "status": "info",
+      "skip_reason": null,
+      "metrics": {
+        "n_series": 1,
+        "unordered_series": 0,
+        "duplicate_timestamps": 0,
+        "series_with_gaps": 0,
+        "unparseable_timestamps": 0,
+        "timeliness_score": 1.0
+      },
+      "findings": [
+        {
+          "code": "time_series_ok",
+          "level": "info",
+          "message": "timestamps ordered, unique, and evenly spaced"
+        }
+      ]
+    }
+  ]
+}

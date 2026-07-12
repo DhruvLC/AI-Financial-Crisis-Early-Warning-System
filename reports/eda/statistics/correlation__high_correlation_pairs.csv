@@ -1,0 +1,94 @@
+feature_a,feature_b,pearson_r
+Current Liabilities/Equity,Current Liability to Equity,1.0
+Current Liabilities/Liability,Current Liability to Liability,1.0
+Debt ratio %,Net worth/Assets,-1.0
+Operating Gross Margin,Gross Profit to Sales,0.999999984545077
+Net Value Per Share (A),Net Value Per Share (C),0.9998384374943013
+Net Value Per Share (B),Net Value Per Share (A),0.9998080685626872
+Net Value Per Share (B),Net Value Per Share (C),0.9996461962822704
+Operating Gross Margin,Realized Sales Gross Margin,0.9988435903221798
+Realized Sales Gross Margin,Gross Profit to Sales,0.9988434647848096
+Operating Profit Per Share (Yuan ¥),Operating profit/Paid-in capital,0.9985868275595223
+Pre-tax net Interest Rate,After-tax net Interest Rate,0.992919111943278
+After-tax Net Profit Growth Rate,Regular Net Profit Growth Rate,0.9898977535450548
+Per Share Net profit before tax (Yuan ¥),Net profit before tax/Paid-in capital,0.9895776820780863
+ROA(C) before interest and depreciation before interest,ROA(B) before interest and depreciation after tax,0.9879330230382899
+ROA(A) before interest and % after tax,Net Income to Total Assets,0.987918690083577
+Total debt/Total net worth,Liability to Equity,0.9798019089734522
+Persistent EPS in the Last Four Seasons,Net profit before tax/Paid-in capital,0.9785964069548686
+Persistent EPS in the Last Four Seasons,Per Share Net profit before tax (Yuan ¥),0.9746593462031227
+After-tax net Interest Rate,Continuous interest rate (after tax),0.9709082776369593
+Pre-tax net Interest Rate,Continuous interest rate (after tax),0.9661060182968492
+Quick Ratio,Quick Assets/Current Liability,0.9653989998252009
+ROA(A) before interest and % after tax,ROA(B) before interest and depreciation after tax,0.9559965012078292
+Current Ratio,Quick Assets/Current Liability,0.9535750519380392
+Cash Flow to Total Assets,Cash Flow to Equity,0.9453343809847133
+ROA(C) before interest and depreciation before interest,ROA(A) before interest and % after tax,0.941752132322626
+ROA(B) before interest and depreciation after tax,Net Income to Total Assets,0.9409992888212628
+Current Ratio,Quick Ratio,0.9407910647623603
+Current Liabilities/Equity,Liability to Equity,0.9403975011257348
+Current Liability to Equity,Liability to Equity,0.9403975011257348
+Cash flow rate,Operating Funds to Liability,0.9365568642781067
+ROA(C) before interest and depreciation before interest,Net Income to Total Assets,0.9237879874692514
+Total debt/Total net worth,Current Liabilities/Equity,0.9230214575252493
+Total debt/Total net worth,Current Liability to Equity,0.9230214575252493
+Net Income to Total Assets,Net Income to Stockholder's Equity,0.9181031456706636
+Net worth/Assets,Liability to Equity,-0.899105066500258
+Debt ratio %,Liability to Equity,0.8991050665002577
+ROA(A) before interest and % after tax,Net Income to Stockholder's Equity,0.8981962781501978
+Cash Reinvestment %,CFO to Assets,0.8977764644336497
+Total debt/Total net worth,Net worth/Assets,-0.8949806884757148
+Total debt/Total net worth,Debt ratio %,0.8949806884757145
+Working Capital to Total Assets,Working Capital/Equity,0.8948459021940993
+Current Liability to Assets,Current Liabilities/Equity,0.8912246436329834
+Current Liability to Assets,Current Liability to Equity,0.8912246436329834
+Cash Flow Per Share,CFO to Assets,0.8891928054356045
+Operating profit/Paid-in capital,Net profit before tax/Paid-in capital,0.8828921071253948
+Persistent EPS in the Last Four Seasons,Operating Profit Per Share (Yuan ¥),0.8814774184710965
+Operating Profit Per Share (Yuan ¥),Net profit before tax/Paid-in capital,0.8814162887689891
+Persistent EPS in the Last Four Seasons,Operating profit/Paid-in capital,0.8792916300648905
+Total Asset Turnover,Net Worth Turnover Rate (times),0.8784273870789506
+Operating Profit Per Share (Yuan ¥),Per Share Net profit before tax (Yuan ¥),0.8767682674019861
+Per Share Net profit before tax (Yuan ¥),Operating profit/Paid-in capital,0.8753393059941258
+Borrowing dependency,Liability to Equity,0.8752487404579442
+ROA(A) before interest and % after tax,Per Share Net profit before tax (Yuan ¥),0.8724553551928105
+ROA(A) before interest and % after tax,Persistent EPS in the Last Four Seasons,0.8698863458585349
+ROA(A) before interest and % after tax,Net profit before tax/Paid-in capital,0.8683792953129132
+Cash Flow to Total Assets,Cash Flow to Liability,0.8648758370126806
+ROA(C) before interest and depreciation before interest,Persistent EPS in the Last Four Seasons,0.8615097769191572
+ROA(B) before interest and depreciation after tax,Persistent EPS in the Last Four Seasons,0.861495516769518
+Total debt/Total net worth,Borrowing dependency,0.8578014573622531
+Revenue Per Share (Yuan ¥),Net Worth Turnover Rate (times),0.8539774774161651
+Retained Earnings to Total Assets,Net Income to Total Assets,0.8538412711870842
+ROA(C) before interest and depreciation before interest,Per Share Net profit before tax (Yuan ¥),0.852537900630253
+ROA(B) before interest and depreciation after tax,Net Income to Stockholder's Equity,0.8519139009170525
+ROA(C) before interest and depreciation before interest,Net profit before tax/Paid-in capital,0.8489221059505052
+Operating Profit Rate,Continuous interest rate (after tax),0.8479468364731806
+Persistent EPS in the Last Four Seasons,Net Income to Total Assets,0.8470838583879068
+Net profit before tax/Paid-in capital,Net Income to Total Assets,0.8463794288052141
+Per Share Net profit before tax (Yuan ¥),Net Income to Total Assets,0.8456663638363008
+Operating Profit Rate,Pre-tax net Interest Rate,0.8428843592469667
+Cash Flow Per Share,Cash Reinvestment %,0.8417994115540448
+Revenue Per Share (Yuan ¥),Total Asset Turnover,0.8402764352891514
+Net worth/Assets,Current Liability to Assets,-0.8388066613293502
+Debt ratio %,Current Liability to Assets,0.8388066613293497
+Working Capital to Total Assets,Current Liability to Current Assets,-0.8371322192874451
+ROA(B) before interest and depreciation after tax,Per Share Net profit before tax (Yuan ¥),0.8365076863619889
+ROA(A) before interest and % after tax,Retained Earnings to Total Assets,0.8345462067763997
+ROA(B) before interest and depreciation after tax,Net profit before tax/Paid-in capital,0.8324959113791014
+Operating Profit Rate,After-tax net Interest Rate,0.8318696566879817
+ROA(C) before interest and depreciation before interest,Net Income to Stockholder's Equity,0.8316626686427774
+Cash Flow to Sales,Cash Flow to Total Assets,0.8302769997326388
+Inventory and accounts receivable/Net value,Current Liabilities/Equity,0.8262343414240705
+Inventory and accounts receivable/Net value,Current Liability to Equity,0.8262343414240705
+Regular Net Profit Growth Rate,Continuous Net Profit Growth Rate,0.8219208870830614
+Debt ratio %,Current Liabilities/Equity,0.8214698420850638
+Debt ratio %,Current Liability to Equity,0.8214698420850638
+Net worth/Assets,Current Liabilities/Equity,-0.8214698420850637
+Net worth/Assets,Current Liability to Equity,-0.8214698420850637
+Operating Funds to Liability,CFO to Assets,0.8185746133726872
+Cash Flow to Sales,Cash Flow to Liability,0.817228022466973
+Current Ratio,Equity to Liability,0.8165642710635961
+After-tax Net Profit Growth Rate,Continuous Net Profit Growth Rate,0.8157991896647445
+Current Assets/Total Assets,Working Capital/Equity,0.8083485781017451
+Quick Assets/Current Liability,Equity to Liability,0.8022555159951762

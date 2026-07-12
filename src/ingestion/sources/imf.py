@@ -1,7 +1,13 @@
-"""IMF Data — via the SDMX-JSON CompactData REST API (open, no key).
+"""IMF Data — via the DataMapper REST API (open, no key).
 
-API: https://dataservices.imf.org/REST/SDMX_JSON.svc/CompactData/{flow}/{key}
-key form: {frequency}.{area}.{indicator}
+The legacy SDMX-JSON host (dataservices.imf.org) was decommissioned, so this
+uses the current DataMapper API:
+    https://www.imf.org/external/datamapper/api/v1/{indicator}/{area}/{area}/...
+
+Response shape: {"values": {INDICATOR: {AREA: {"YEAR": value, ...}}}}
+Areas are ISO-3 country codes (USA, GBR, JPN); indicators are WEO/IFS codes
+(e.g. NGDPD = GDP at current prices, USD). List indicators at
+    https://www.imf.org/external/datamapper/api/v1/indicators
 """
 from __future__ import annotations
 
@@ -9,52 +15,49 @@ import pandas as pd
 
 from ..base import BaseIngestor, IngestionError
 
-BASE = "https://dataservices.imf.org/REST/SDMX_JSON.svc/CompactData"
+BASE = "https://www.imf.org/external/datamapper/api/v1"
 
 
 class IMFIngestor(BaseIngestor):
     name = "imf"
 
     def fetch(self) -> pd.DataFrame:
-        flow = self.config.get("dataflow", "IFS")
         indicator = self.config.get("indicator")
-        freq = self.config.get("frequency", "A")
         areas = self.config.get("areas", [])
         if not indicator or not areas:
             raise IngestionError("imf requires 'indicator' and 'areas' in config")
 
-        rows: list[dict] = []
-        for area in areas:
-            key = f"{freq}.{area}.{indicator}"
-            url = f"{BASE}/{flow}/{key}"
-            try:
-                payload = self.http_get_json(url)
-            except Exception as exc:
-                self.log.warning("IMF fetch failed for %s (%s)", area, exc)
-                continue
+        url = f"{BASE}/{indicator}/{'/'.join(areas)}"
+        payload = self.http_get_json(url)
 
-            series = (payload.get("CompactData", {})
-                             .get("DataSet", {})
-                             .get("Series"))
-            if not series:
-                self.log.warning("no IMF series for %s", area)
+        values = (payload or {}).get("values", {}).get(indicator)
+        if not values:
+            raise IngestionError(
+                f"no IMF observations returned for '{indicator}' "
+                f"(areas={areas}); check the indicator code at {BASE}/indicators"
+            )
+
+        start = self.config.get("start")
+        rows: list[dict] = []
+        for area, by_year in values.items():
+            if not isinstance(by_year, dict):
                 continue
-            observations = series.get("Obs", [])
-            if isinstance(observations, dict):      # single observation
-                observations = [observations]
-            for obs in observations:
+            for year, value in by_year.items():
+                if start is not None and str(year) < str(start):
+                    continue
                 rows.append({
                     "entity_id": area,
                     "indicator": indicator,
-                    "date": obs.get("@TIME_PERIOD"),
-                    "value": obs.get("@OBS_VALUE"),
+                    "date": year,
+                    "value": value,
                 })
 
         if not rows:
             raise IngestionError("no IMF observations returned")
         df = pd.DataFrame(rows)
+        df["date"] = pd.to_numeric(df["date"], errors="coerce")
         df["value"] = pd.to_numeric(df["value"], errors="coerce")
-        return df
+        return df.sort_values(["entity_id", "date"]).reset_index(drop=True)
 
     def required_columns(self):
         return ["entity_id", "date", "value"]

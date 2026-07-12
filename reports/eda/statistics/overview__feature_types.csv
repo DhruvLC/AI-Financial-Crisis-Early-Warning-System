@@ -1,0 +1,97 @@
+feature,dtype,non_null,n_unique
+Bankrupt?,int64,4773,2
+ROA(C) before interest and depreciation before interest,float64,4773,2641
+ROA(A) before interest and % after tax,float64,4773,2515
+ROA(B) before interest and depreciation after tax,float64,4773,2530
+Operating Gross Margin,float64,4773,2962
+Realized Sales Gross Margin,float64,4773,2970
+Operating Profit Rate,float64,4773,2630
+Pre-tax net Interest Rate,float64,4773,2921
+After-tax net Interest Rate,float64,4773,2795
+Non-industry income and expenditure/revenue,float64,4773,1997
+Continuous interest rate (after tax),float64,4773,2811
+Operating Expense Rate,float64,4773,1636
+Research and development expense rate,float64,4773,1144
+Cash flow rate,float64,4773,4014
+Interest-bearing debt interest rate,float64,4773,975
+Tax rate (A),float64,4773,1976
+Net Value Per Share (B),float64,4773,1856
+Net Value Per Share (A),float64,4773,1862
+Net Value Per Share (C),float64,4773,1866
+Persistent EPS in the Last Four Seasons,float64,4773,1107
+Cash Flow Per Share,float64,4773,1237
+Revenue Per Share (Yuan ¥),float64,4773,2968
+Operating Profit Per Share (Yuan ¥),float64,4773,1009
+Per Share Net profit before tax (Yuan ¥),float64,4773,1242
+Realized Sales Gross Profit Growth Rate,float64,4773,4000
+Operating Profit Growth Rate,float64,4773,4404
+After-tax Net Profit Growth Rate,float64,4773,4381
+Regular Net Profit Growth Rate,float64,4773,4390
+Continuous Net Profit Growth Rate,float64,4773,4407
+Total Asset Growth Rate,float64,4773,1010
+Net Value Growth Rate,float64,4773,3386
+Total Asset Return Growth Rate Ratio,float64,4773,2305
+Cash Reinvestment %,float64,4773,2806
+Current Ratio,float64,4773,4341
+Quick Ratio,float64,4773,4318
+Interest Expense Ratio,float64,4773,2825
+Total debt/Total net worth,float64,4773,4018
+Debt ratio %,float64,4773,3270
+Net worth/Assets,float64,4773,3270
+Long-term fund suitability ratio (A),float64,4773,4536
+Borrowing dependency,float64,4773,3202
+Contingent liabilities/Net worth,float64,4773,1385
+Operating profit/Paid-in capital,float64,4773,3336
+Net profit before tax/Paid-in capital,float64,4773,3563
+Inventory and accounts receivable/Net value,float64,4773,3892
+Total Asset Turnover,float64,4773,304
+Accounts Receivable Turnover,float64,4773,1275
+Average Collection Days,float64,4773,3971
+Inventory Turnover Rate (times),float64,4773,1509
+Fixed Assets Turnover Frequency,float64,4773,1965
+Net Worth Turnover Rate (times),float64,4773,603
+Revenue per person,float64,4773,4054
+Operating profit per person,float64,4773,2384
+Allocation rate per person,float64,4773,4660
+Working Capital to Total Assets,float64,4773,4679
+Quick Assets/Total Assets,float64,4773,4679
+Current Assets/Total Assets,float64,4773,4679
+Cash/Total Assets,float64,4773,4679
+Quick Assets/Current Liability,float64,4773,4679
+Cash/Current Liability,float64,4773,4679
+Current Liability to Assets,float64,4773,4679
+Operating Funds to Liability,float64,4773,4679
+Inventory/Working Capital,float64,4773,4527
+Inventory/Current Liability,float64,4773,4573
+Current Liabilities/Liability,float64,4773,4587
+Working Capital/Equity,float64,4773,4679
+Current Liabilities/Equity,float64,4773,4679
+Long-term Liability to Current Assets,float64,4773,2938
+Retained Earnings to Total Assets,float64,4773,4679
+Total income/Total expense,float64,4773,4679
+Total expense/Assets,float64,4773,4679
+Current Asset Turnover Rate,float64,4773,1823
+Quick Asset Turnover Rate,float64,4773,1575
+Working capitcal Turnover Rate,float64,4773,4679
+Cash Turnover Rate,float64,4773,2004
+Cash Flow to Sales,float64,4773,4679
+Fixed Assets to Assets,float64,4773,4679
+Current Liability to Liability,float64,4773,4587
+Current Liability to Equity,float64,4773,4679
+Equity to Long-term Liability,float64,4773,2937
+Cash Flow to Total Assets,float64,4773,4679
+Cash Flow to Liability,float64,4773,4679
+CFO to Assets,float64,4773,4679
+Cash Flow to Equity,float64,4773,4679
+Current Liability to Current Assets,float64,4773,4679
+Liability-Assets Flag,float64,4773,1
+Net Income to Total Assets,float64,4773,4679
+Total assets to GNP price,float64,4773,4679
+No-credit Interval,float64,4773,4679
+Gross Profit to Sales,float64,4773,4679
+Net Income to Stockholder's Equity,float64,4773,4679
+Liability to Equity,float64,4773,4679
+Degree of Financial Leverage (DFL),float64,4773,4279
+Interest Coverage Ratio (Interest expense to EBIT),float64,4773,4279
+Net Income Flag,float64,4773,1
+Equity to Liability,float64,4773,4679

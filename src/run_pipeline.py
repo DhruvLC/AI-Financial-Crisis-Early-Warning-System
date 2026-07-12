@@ -15,7 +15,8 @@ import pandas as pd
 import yaml
 
 from pipeline import (
-    data_collection, data_prep, features, models, explain, risk_score,
+    data_collection, data_validation, data_prep, features, models,
+    explain, risk_score,
 )
 
 
@@ -30,6 +31,9 @@ def main(config_path: str):
 
     # Stage 2 — Data Collection
     df = data_collection.load(cfg)
+
+    # Stage 4/5 — Data Validation & Quality (gate before any transformation)
+    data_validation.validate(df, cfg)
 
     # Stage 3 — Data Preparation
     df = data_prep.clean(df, target)

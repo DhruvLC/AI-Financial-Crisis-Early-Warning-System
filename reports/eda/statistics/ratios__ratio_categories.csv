@@ -1,0 +1,96 @@
+feature,category
+ROA(C) before interest and depreciation before interest,profitability
+ROA(A) before interest and % after tax,profitability
+ROA(B) before interest and depreciation after tax,profitability
+Operating Gross Margin,profitability
+Realized Sales Gross Margin,profitability
+Operating Profit Rate,profitability
+Pre-tax net Interest Rate,interest_rate
+After-tax net Interest Rate,interest_rate
+Non-industry income and expenditure/revenue,profitability
+Continuous interest rate (after tax),interest_rate
+Operating Expense Rate,efficiency
+Research and development expense rate,efficiency
+Cash flow rate,liquidity
+Interest-bearing debt interest rate,leverage
+Tax rate (A),interest_rate
+Net Value Per Share (B),profitability
+Net Value Per Share (A),profitability
+Net Value Per Share (C),profitability
+Persistent EPS in the Last Four Seasons,profitability
+Cash Flow Per Share,profitability
+Revenue Per Share (Yuan ¥),profitability
+Operating Profit Per Share (Yuan ¥),profitability
+Per Share Net profit before tax (Yuan ¥),profitability
+Realized Sales Gross Profit Growth Rate,profitability
+Operating Profit Growth Rate,profitability
+After-tax Net Profit Growth Rate,profitability
+Regular Net Profit Growth Rate,profitability
+Continuous Net Profit Growth Rate,profitability
+Total Asset Growth Rate,growth
+Net Value Growth Rate,growth
+Total Asset Return Growth Rate Ratio,profitability
+Cash Reinvestment %,liquidity
+Current Ratio,liquidity
+Quick Ratio,liquidity
+Interest Expense Ratio,other
+Total debt/Total net worth,leverage
+Debt ratio %,leverage
+Net worth/Assets,leverage
+Long-term fund suitability ratio (A),other
+Borrowing dependency,leverage
+Contingent liabilities/Net worth,leverage
+Operating profit/Paid-in capital,profitability
+Net profit before tax/Paid-in capital,profitability
+Inventory and accounts receivable/Net value,other
+Total Asset Turnover,efficiency
+Accounts Receivable Turnover,efficiency
+Average Collection Days,other
+Inventory Turnover Rate (times),efficiency
+Fixed Assets Turnover Frequency,efficiency
+Net Worth Turnover Rate (times),leverage
+Revenue per person,efficiency
+Operating profit per person,profitability
+Allocation rate per person,other
+Working Capital to Total Assets,liquidity
+Quick Assets/Total Assets,other
+Current Assets/Total Assets,other
+Cash/Total Assets,liquidity
+Quick Assets/Current Liability,leverage
+Cash/Current Liability,liquidity
+Current Liability to Assets,leverage
+Operating Funds to Liability,leverage
+Inventory/Working Capital,liquidity
+Inventory/Current Liability,leverage
+Current Liabilities/Liability,leverage
+Working Capital/Equity,liquidity
+Current Liabilities/Equity,leverage
+Long-term Liability to Current Assets,leverage
+Retained Earnings to Total Assets,profitability
+Total income/Total expense,profitability
+Total expense/Assets,other
+Current Asset Turnover Rate,efficiency
+Quick Asset Turnover Rate,efficiency
+Working capitcal Turnover Rate,efficiency
+Cash Turnover Rate,liquidity
+Cash Flow to Sales,liquidity
+Fixed Assets to Assets,other
+Current Liability to Liability,leverage
+Current Liability to Equity,leverage
+Equity to Long-term Liability,leverage
+Cash Flow to Total Assets,liquidity
+Cash Flow to Liability,liquidity
+CFO to Assets,other
+Cash Flow to Equity,liquidity
+Current Liability to Current Assets,leverage
+Liability-Assets Flag,leverage
+Net Income to Total Assets,profitability
+Total assets to GNP price,other
+No-credit Interval,other
+Gross Profit to Sales,profitability
+Net Income to Stockholder's Equity,profitability
+Liability to Equity,leverage
+Degree of Financial Leverage (DFL),leverage
+Interest Coverage Ratio (Interest expense to EBIT),other
+Net Income Flag,profitability
+Equity to Liability,leverage

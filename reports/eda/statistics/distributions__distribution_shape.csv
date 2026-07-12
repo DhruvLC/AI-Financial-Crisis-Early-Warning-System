@@ -1,0 +1,96 @@
+feature,skewness,excess_kurtosis,highly_skewed,heavy_tailed
+ROA(C) before interest and depreciation before interest,-0.029395222526002674,1.0831797130590735,False,False
+ROA(A) before interest and % after tax,-0.489036557623548,2.1247309146644326,False,False
+ROA(B) before interest and depreciation after tax,-0.2438665816200516,1.4811936149058322,False,False
+Operating Gross Margin,1.1207904850499273,2.197529933033465,True,False
+Realized Sales Gross Margin,1.1237840663766703,2.200080929772228,True,False
+Operating Profit Rate,-3.4555066105897336,18.784110600233078,True,True
+Pre-tax net Interest Rate,-3.0623299508418564,15.138331852341196,True,True
+After-tax net Interest Rate,-3.073311327429668,14.710118788747327,True,True
+Non-industry income and expenditure/revenue,0.7010190366032127,10.25850528230713,False,True
+Continuous interest rate (after tax),-3.052224085536343,14.64511915627303,True,True
+Operating Expense Rate,1.2643963166657601,-0.04039803298783795,True,False
+Research and development expense rate,1.2560753437856607,0.500389226220006,True,False
+Cash flow rate,1.5002780918864609,5.179606673452465,True,True
+Interest-bearing debt interest rate,6.737072102462009,44.77729560509508,True,True
+Tax rate (A),1.4455199967775254,2.7990020830904774,True,False
+Net Value Per Share (B),1.6306748522075896,3.9695784794081703,True,True
+Net Value Per Share (A),1.619104997766433,3.9402348543817656,True,True
+Net Value Per Share (C),1.6170708576507176,3.932158097785714,True,True
+Persistent EPS in the Last Four Seasons,1.1617625032174654,3.2546485507604315,True,True
+Cash Flow Per Share,0.39071823115274884,2.9664800524687607,False,False
+Revenue Per Share (Yuan ¥),2.6435427990137117,8.541477394587492,True,True
+Operating Profit Per Share (Yuan ¥),1.6738805382319994,4.452372783356527,True,True
+Per Share Net profit before tax (Yuan ¥),1.1478719181779298,2.944233305109024,True,False
+Realized Sales Gross Profit Growth Rate,4.6631058113200226,26.839816198799994,True,True
+Operating Profit Growth Rate,2.4167125535190044,16.243744146995702,True,True
+After-tax Net Profit Growth Rate,-3.5621037549042742,28.23976157554904,True,True
+Regular Net Profit Growth Rate,-3.686070197293978,28.7629560760815,True,True
+Continuous Net Profit Growth Rate,-2.3460511251738065,20.665779332951715,True,True
+Total Asset Growth Rate,-0.931281004108005,-0.3966287458878557,False,False
+Net Value Growth Rate,3.0331089069565844,12.133841676073008,True,True
+Total Asset Return Growth Rate Ratio,1.0619343304082358,4.4035326612096215,True,True
+Cash Reinvestment %,-0.6610249806592555,3.298553159602644,False,True
+Current Ratio,2.6224823882890034,8.21774444314072,True,True
+Quick Ratio,2.739081064686158,8.909404456641012,True,True
+Interest Expense Ratio,1.067664334657972,8.94060789239598,True,True
+Total debt/Total net worth,2.254150516374919,6.6692099833635865,True,True
+Debt ratio %,0.21266739545266117,-0.5814755002918566,False,False
+Net worth/Assets,-0.2126673954526605,-0.5814755002918552,False,False
+Long-term fund suitability ratio (A),4.877377984745032,26.50140516167084,True,True
+Borrowing dependency,2.23114483363564,6.535214846537066,True,True
+Contingent liabilities/Net worth,2.9996973198941417,9.941695210156086,True,True
+Operating profit/Paid-in capital,1.6659783145732419,4.403300648683032,True,True
+Net profit before tax/Paid-in capital,1.2004802224343682,3.047526537219859,True,True
+Inventory and accounts receivable/Net value,1.9787908865082933,4.732024729571859,True,True
+Total Asset Turnover,1.6838628983834212,3.690373846169419,True,True
+Accounts Receivable Turnover,5.7051430964708505,36.20080958270562,True,True
+Average Collection Days,0.9390316842163206,1.5022561040404199,False,False
+Inventory Turnover Rate (times),1.1141295239412587,-0.3828532142584704,True,False
+Fixed Assets Turnover Frequency,2.280672807906424,3.721411729448632,True,True
+Net Worth Turnover Rate (times),2.8267794750581086,9.979235723477858,True,True
+Revenue per person,3.1695179916870884,11.492134504155825,True,True
+Operating profit per person,2.7681373332803716,12.132723900380432,True,True
+Allocation rate per person,4.3783897062430785,22.664849443832477,True,True
+Working Capital to Total Assets,0.30809426261752,-0.19879440462842135,False,False
+Quick Assets/Total Assets,0.3211650810705691,-0.640856947666764,False,False
+Current Assets/Total Assets,0.0901294751155086,-0.8547131505486205,False,False
+Cash/Total Assets,2.036727457110691,4.383284508643347,True,True
+Quick Assets/Current Liability,2.7116011556323163,8.662425686977208,True,True
+Cash/Current Liability,4.333822085373253,21.741306320331095,True,True
+Current Liability to Assets,0.7163256050915952,0.029605047458839184,False,False
+Operating Funds to Liability,1.5382447183347008,5.020737364652787,True,True
+Inventory/Working Capital,2.136347035017803,17.091294659805694,True,True
+Inventory/Current Liability,9.234322822202577,84.32076252827838,True,True
+Current Liabilities/Liability,-0.7825934177740914,-0.21864574467512599,False,False
+Working Capital/Equity,-0.4636406549713523,0.6876031385802914,False,False
+Current Liabilities/Equity,2.472927824352479,7.67904508410475,True,True
+Long-term Liability to Current Assets,8.887126340094786,78.239323406953,True,True
+Retained Earnings to Total Assets,-1.642652043521148,4.713878271313266,True,True
+Total income/Total expense,1.670199395316214,4.819247490103684,True,True
+Total expense/Assets,2.059478147098008,5.522848603109974,True,True
+Current Asset Turnover Rate,2.1168280803687862,2.7807027629869054,True,False
+Quick Asset Turnover Rate,1.1702289370360466,-0.3086909143320815,True,False
+Working capitcal Turnover Rate,2.4714849093215254,9.845317947753834,True,True
+Cash Turnover Rate,0.9453297971689923,-0.39911357663722224,False,False
+Cash Flow to Sales,0.08902809815915158,7.9279783838001805,False,True
+Fixed Assets to Assets,0.8079565964195164,-0.2470325919820393,False,False
+Current Liability to Liability,-0.7825934177740914,-0.21864574467512599,False,False
+Current Liability to Equity,2.472927824352479,7.67904508410475,True,True
+Equity to Long-term Liability,2.1596667493936796,5.29625462765393,True,True
+Cash Flow to Total Assets,0.6822321237746284,2.9800189677931295,False,False
+Cash Flow to Liability,1.3511065406560245,9.782702412330606,True,True
+CFO to Assets,-0.17939848876689632,0.9505735202103187,False,False
+Cash Flow to Equity,0.5271671180581925,2.966103938196909,False,False
+Current Liability to Current Assets,1.647719091732991,4.31600202973236,True,True
+Liability-Assets Flag,0.0,0.0,False,False
+Net Income to Total Assets,-0.929171383514147,2.692579408062035,False,False
+Total assets to GNP price,5.297455308147796,30.369601980480347,True,True
+No-credit Interval,0.7257244394830377,12.907740460343309,False,True
+Gross Profit to Sales,1.1207003609719293,2.197314877786191,True,False
+Net Income to Stockholder's Equity,-2.1703842603987926,7.886943342722519,True,True
+Liability to Equity,2.1272549097317364,5.834049713762276,True,True
+Degree of Financial Leverage (DFL),5.749221574393785,37.51709317801658,True,True
+Interest Coverage Ratio (Interest expense to EBIT),-0.9735638551449133,11.857146842310916,False,True
+Net Income Flag,0.0,0.0,False,False
+Equity to Liability,2.7112046575962006,8.933724481408223,True,True
