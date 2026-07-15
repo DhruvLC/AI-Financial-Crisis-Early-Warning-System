@@ -1,0 +1,526 @@
+{
+  "version": "v001",
+  "created_at": "2026-07-15T11:31:55.377342+00:00",
+  "files": {
+    "train": "data/features/v001/train.parquet",
+    "val": "data/features/v001/val.parquet",
+    "test": "data/features/v001/test.parquet"
+  },
+  "hashes": {
+    "train": "195ecbc10175c7e5",
+    "val": "9117e6490cc02fcc",
+    "test": "dece407ab155f3cf"
+  },
+  "splits": {
+    "train": {
+      "rows": 4773,
+      "cols": 23
+    },
+    "val": {
+      "rows": 1023,
+      "cols": 23
+    },
+    "test": {
+      "rows": 1023,
+      "cols": 23
+    }
+  },
+  "target_col": "Bankrupt?",
+  "n_features": 22,
+  "features": [
+    "ROA(B) before interest and depreciation after tax",
+    "Non-industry income and expenditure/revenue",
+    "Total debt/Total net worth",
+    "Debt ratio %",
+    "Borrowing dependency",
+    "Allocation rate per person",
+    "Retained Earnings to Total Assets",
+    "Total income/Total expense",
+    "Net Income to Total Assets",
+    "log__Net Value Growth Rate",
+    "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+    "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+    "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+    "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+    "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+    "pca__1",
+    "pca__2",
+    "pca__3",
+    "pca__4",
+    "pca__5",
+    "pca__6",
+    "pca__7"
+  ],
+  "lineage": {
+    "initial_shape": {
+      "rows": 4773,
+      "cols": 96
+    },
+    "final_shape": {
+      "rows": 4773,
+      "cols": 23
+    },
+    "cols_added": 124,
+    "cols_removed": 197,
+    "n_generated_total": 124,
+    "n_removed_total": 197,
+    "n_steps": 5,
+    "n_applied": 5,
+    "n_skipped": 0,
+    "trail": [
+      {
+        "order": 1,
+        "step": "generation",
+        "status": "applied",
+        "skip_reason": null,
+        "cols_before": 96,
+        "cols_after": 213,
+        "cols_delta": 117,
+        "n_generated": 117,
+        "n_removed": 0,
+        "stats": {
+          "n_generated": 117,
+          "n_features_after": 212
+        }
+      },
+      {
+        "order": 2,
+        "step": "multicollinearity",
+        "status": "applied",
+        "skip_reason": null,
+        "cols_before": 213,
+        "cols_after": 108,
+        "cols_delta": -105,
+        "n_generated": 0,
+        "n_removed": 105,
+        "stats": {
+          "n_removed_correlation": 73,
+          "n_removed_vif": 32,
+          "removed_correlation": [
+            "After-tax net Interest Rate",
+            "Cash flow rate",
+            "Continuous Net Profit Growth Rate",
+            "Continuous interest rate (after tax)",
+            "Current Liability to Equity",
+            "Current Liability to Liability",
+            "Gross Profit to Sales",
+            "Liability to Equity",
+            "Net Value Growth Rate",
+            "Net Value Per Share (A)",
+            "Net Value Per Share (B)",
+            "Net Value Per Share (C)",
+            "Net profit before tax/Paid-in capital",
+            "Net worth/Assets",
+            "Operating Expense Rate",
+            "Operating Gross Margin",
+            "Operating Profit Growth Rate",
+            "Operating Profit Per Share (Yuan \u00a5)",
+            "Operating profit/Paid-in capital",
+            "Per Share Net profit before tax (Yuan \u00a5)",
+            "Pre-tax net Interest Rate",
+            "Quick Assets/Current Liability",
+            "Quick Ratio",
+            "ROA(A) before interest and % after tax",
+            "ROA(C) before interest and depreciation before interest",
+            "Realized Sales Gross Margin",
+            "Regular Net Profit Growth Rate",
+            "Research and development expense rate",
+            "Revenue Per Share (Yuan \u00a5)",
+            "Tax rate (A)",
+            "diff__Borrowing dependency__minus__After-tax net Interest Rate",
+            "diff__Borrowing dependency__minus__Net Income to Total Assets",
+            "diff__Borrowing dependency__minus__ROA(A) before interest and % after tax",
+            "diff__Borrowing dependency__minus__ROA(B) before interest and depreciation after tax",
+            "diff__Net Income to Stockholder's Equity__minus__Continuous interest rate (after tax)",
+            "diff__Net Income to Stockholder's Equity__minus__Debt ratio %",
+            "diff__Net Income to Stockholder's Equity__minus__Liability to Equity",
+            "log__After-tax net Interest Rate",
+            "log__Interest-bearing debt interest rate",
+            "log__Net Value Per Share (B)",
+            "log__Net Value Per Share (C)",
+            "log__Per Share Net profit before tax (Yuan \u00a5)",
+            "log__Persistent EPS in the Last Four Seasons",
+            "log__Pre-tax net Interest Rate",
+            "log__Realized Sales Gross Margin",
+            "log__Regular Net Profit Growth Rate",
+            "log__Total Asset Return Growth Rate Ratio",
+            "mul__Borrowing dependency__x__After-tax net Interest Rate",
+            "mul__Borrowing dependency__x__Debt ratio %",
+            "mul__Borrowing dependency__x__Liability to Equity",
+            "mul__Borrowing dependency__x__ROA(A) before interest and % after tax",
+            "mul__Borrowing dependency__x__ROA(B) before interest and depreciation after tax",
+            "mul__Borrowing dependency__x__Total debt/Total net worth",
+            "mul__Net Income to Stockholder's Equity__x__After-tax net Interest Rate",
+            "mul__Net Income to Stockholder's Equity__x__Liability to Equity",
+            "mul__Net Income to Stockholder's Equity__x__Net worth/Assets",
+            "mul__Net Income to Stockholder's Equity__x__ROA(A) before interest and % after tax",
+            "mul__Net Income to Stockholder's Equity__x__ROA(B) before interest and depreciation after tax",
+            "mul__Net Income to Stockholder's Equity__x__Total debt/Total net worth",
+            "mul__Total debt/Total net worth__x__Continuous interest rate (after tax)",
+            "mul__Total debt/Total net worth__x__Debt ratio %",
+            "mul__Total debt/Total net worth__x__Liability to Equity",
+            "mul__Total debt/Total net worth__x__ROA(A) before interest and % after tax",
+            "mul__Total debt/Total net worth__x__ROA(B) before interest and depreciation after tax",
+            "poly__Borrowing dependency__pow2",
+            "poly__Continuous interest rate (after tax)__pow2",
+            "poly__Debt ratio %__pow2",
+            "poly__Liability to Equity__pow2",
+            "poly__ROA(A) before interest and % after tax__pow2",
+            "ratio__Borrowing dependency__over__Debt ratio %",
+            "ratio__Borrowing dependency__over__Net worth/Assets",
+            "ratio__Net Income to Stockholder's Equity__over__Net worth/Assets",
+            "ratio__Total debt/Total net worth__over__Net worth/Assets"
+          ],
+          "removed_vif": [
+            "Current Liability to Assets",
+            "diff__Borrowing dependency__minus__Continuous interest rate (after tax)",
+            "mul__Net Income to Stockholder's Equity__x__Net Income to Total Assets",
+            "Current Assets/Total Assets",
+            "poly__Total debt/Total net worth__pow2",
+            "Current Liabilities/Equity",
+            "diff__Borrowing dependency__minus__Liability to Equity",
+            "ratio__Net Income to Stockholder's Equity__over__ROA(B) before interest and depreciation after tax",
+            "log__Operating Profit Rate",
+            "mul__Total debt/Total net worth__x__Net Income to Total Assets",
+            "Working Capital to Total Assets",
+            "mul__Net Income to Stockholder's Equity__x__Debt ratio %",
+            "CFO to Assets",
+            "diff__Net Income to Stockholder's Equity__minus__After-tax net Interest Rate",
+            "Cash Flow to Total Assets",
+            "log__After-tax Net Profit Growth Rate",
+            "mul__Total debt/Total net worth__x__Net worth/Assets",
+            "diff__Net Income to Stockholder's Equity__minus__ROA(A) before interest and % after tax",
+            "mul__Borrowing dependency__x__Net worth/Assets",
+            "mul__Borrowing dependency__x__Net Income to Total Assets",
+            "Total Asset Turnover",
+            "poly__Net Income to Stockholder's Equity__pow2",
+            "mul__Net Income to Stockholder's Equity__x__Retained Earnings to Total Assets",
+            "Equity to Liability",
+            "log__Revenue Per Share (Yuan \u00a5)",
+            "log__Realized Sales Gross Profit Growth Rate",
+            "Persistent EPS in the Last Four Seasons",
+            "log__Continuous interest rate (after tax)",
+            "log__Cash flow rate",
+            "poly__Net Income to Total Assets__pow2",
+            "mul__Total debt/Total net worth__x__Retained Earnings to Total Assets",
+            "Inventory and accounts receivable/Net value"
+          ],
+          "final_max_vif": 8.736581670644064
+        }
+      },
+      {
+        "order": 3,
+        "step": "selection",
+        "status": "applied",
+        "skip_reason": null,
+        "cols_before": 108,
+        "cols_after": 16,
+        "cols_delta": -92,
+        "n_generated": 0,
+        "n_removed": 92,
+        "stats": {
+          "variance_threshold": {
+            "n_removed": 2,
+            "removed": [
+              "Liability-Assets Flag",
+              "Net Income Flag"
+            ]
+          },
+          "correlation": {
+            "n_removed": 0,
+            "removed": []
+          },
+          "statistical_vote": {
+            "voters": {
+              "mutual_information": 40,
+              "anova": 40,
+              "chi_square": 40
+            },
+            "min_votes": 2,
+            "n_removed": 68,
+            "n_kept": 37
+          },
+          "rfe": {
+            "n_removed": 7,
+            "removed": [
+              "Total Asset Return Growth Rate Ratio",
+              "Total expense/Assets",
+              "Equity to Long-term Liability",
+              "Current Liability to Current Assets",
+              "mul__Borrowing dependency__x__Retained Earnings to Total Assets",
+              "poly__Retained Earnings to Total Assets__pow2",
+              "poly__After-tax net Interest Rate__pow2"
+            ]
+          },
+          "model_based": {
+            "n_removed": 15,
+            "removed": [
+              "Operating Profit Rate",
+              "Current Ratio",
+              "Operating profit per person",
+              "Working Capital/Equity",
+              "Net Income to Stockholder's Equity",
+              "log__Operating Gross Margin",
+              "log__Tax rate (A)",
+              "log__Net Value Per Share (A)",
+              "log__Operating Profit Per Share (Yuan \u00a5)",
+              "mul__Net Income to Stockholder's Equity__x__Continuous interest rate (after tax)",
+              "mul__Borrowing dependency__x__Continuous interest rate (after tax)",
+              "diff__Net Income to Stockholder's Equity__minus__Net Income to Total Assets",
+              "diff__Net Income to Stockholder's Equity__minus__ROA(B) before interest and depreciation after tax",
+              "poly__ROA(B) before interest and depreciation after tax__pow2",
+              "poly__Net worth/Assets__pow2"
+            ]
+          }
+        }
+      },
+      {
+        "order": 4,
+        "step": "reduction",
+        "status": "applied",
+        "skip_reason": null,
+        "cols_before": 16,
+        "cols_after": 23,
+        "cols_delta": 7,
+        "n_generated": 7,
+        "n_removed": 0,
+        "stats": {
+          "n_components": 7,
+          "explained_variance": 0.9586913523288526,
+          "explained_variance_ratio": [
+            0.57049,
+            0.18226,
+            0.07677,
+            0.04428,
+            0.03575,
+            0.03022,
+            0.01892
+          ]
+        }
+      },
+      {
+        "order": 5,
+        "step": "importance",
+        "status": "applied",
+        "skip_reason": null,
+        "cols_before": 23,
+        "cols_after": 23,
+        "cols_delta": 0,
+        "n_generated": 0,
+        "n_removed": 0,
+        "stats": {
+          "methods": [
+            "random_forest",
+            "xgboost",
+            "shap"
+          ],
+          "n_features_scored": 22,
+          "top_features": [
+            {
+              "feature": "pca__1",
+              "random_forest": 0.145,
+              "xgboost": 0.60861,
+              "shap": 0.16522
+            },
+            {
+              "feature": "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+              "random_forest": 0.11962,
+              "xgboost": 0.08566,
+              "shap": 0.12871
+            },
+            {
+              "feature": "Total debt/Total net worth",
+              "random_forest": 0.04573,
+              "xgboost": 0.01707,
+              "shap": 0.07428
+            },
+            {
+              "feature": "Allocation rate per person",
+              "random_forest": 0.02691,
+              "xgboost": 0.02234,
+              "shap": 0.05172
+            },
+            {
+              "feature": "Retained Earnings to Total Assets",
+              "random_forest": 0.03708,
+              "xgboost": 0.01588,
+              "shap": 0.0449
+            },
+            {
+              "feature": "log__Net Value Growth Rate",
+              "random_forest": 0.0332,
+              "xgboost": 0.02162,
+              "shap": 0.03987
+            },
+            {
+              "feature": "ROA(B) before interest and depreciation after tax",
+              "random_forest": 0.02547,
+              "xgboost": 0.01575,
+              "shap": 0.07942
+            },
+            {
+              "feature": "Borrowing dependency",
+              "random_forest": 0.05656,
+              "xgboost": 0.01431,
+              "shap": 0.02664
+            },
+            {
+              "feature": "Total income/Total expense",
+              "random_forest": 0.03768,
+              "xgboost": 0.01315,
+              "shap": 0.04334
+            },
+            {
+              "feature": "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+              "random_forest": 0.1047,
+              "xgboost": 0.01332,
+              "shap": 0.03112
+            },
+            {
+              "feature": "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+              "random_forest": 0.03504,
+              "xgboost": 0.02596,
+              "shap": 0.01631
+            },
+            {
+              "feature": "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+              "random_forest": 0.0263,
+              "xgboost": 0.02126,
+              "shap": 0.01935
+            },
+            {
+              "feature": "Non-industry income and expenditure/revenue",
+              "random_forest": 0.02567,
+              "xgboost": 0.01351,
+              "shap": 0.04685
+            },
+            {
+              "feature": "pca__7",
+              "random_forest": 0.01859,
+              "xgboost": 0.01382,
+              "shap": 0.04892
+            },
+            {
+              "feature": "pca__4",
+              "random_forest": 0.01932,
+              "xgboost": 0.01492,
+              "shap": 0.03948
+            },
+            {
+              "feature": "pca__5",
+              "random_forest": 0.01945,
+              "xgboost": 0.01567,
+              "shap": 0.03382
+            },
+            {
+              "feature": "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+              "random_forest": 0.0996,
+              "xgboost": 0.00861,
+              "shap": 0.01714
+            },
+            {
+              "feature": "Debt ratio %",
+              "random_forest": 0.03573,
+              "xgboost": 0.01448,
+              "shap": 0.00478
+            },
+            {
+              "feature": "pca__2",
+              "random_forest": 0.02039,
+              "xgboost": 0.01233,
+              "shap": 0.03913
+            },
+            {
+              "feature": "Net Income to Total Assets",
+              "random_forest": 0.03673,
+              "xgboost": 0.01103,
+              "shap": 0.0078
+            },
+            {
+              "feature": "pca__6",
+              "random_forest": 0.01623,
+              "xgboost": 0.01085,
+              "shap": 0.02469
+            },
+            {
+              "feature": "pca__3",
+              "random_forest": 0.015,
+              "xgboost": 0.00986,
+              "shap": 0.01651
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "config": {
+    "fail_fast": true,
+    "eda_report_path": "reports/eda/eda_report.json",
+    "generation": {
+      "enabled": true,
+      "log_transform": true,
+      "log_skew_threshold": 1.0,
+      "ratios": true,
+      "max_ratio_pairs": 30,
+      "interactions": true,
+      "max_interaction_pairs": 30,
+      "differences": true,
+      "max_difference_pairs": 20,
+      "polynomial": true,
+      "polynomial_degree": 2,
+      "base_top_k": 12,
+      "rolling": false,
+      "entity_aggregates": false,
+      "entity_col": null,
+      "date_col": null
+    },
+    "multicollinearity": {
+      "enabled": true,
+      "correlation_filter": true,
+      "correlation_threshold": 0.95,
+      "vif_filter": true,
+      "vif_threshold": 10.0,
+      "vif_max_iterations": 50
+    },
+    "selection": {
+      "enabled": true,
+      "variance_threshold": 1e-08,
+      "correlation": true,
+      "correlation_floor": 0.0,
+      "mutual_information": true,
+      "anova": true,
+      "chi_square": true,
+      "top_k": 40,
+      "min_votes": 2,
+      "rfe": true,
+      "rfe_n_features": 30,
+      "rfe_step": 0.1,
+      "model_based": true,
+      "model_n_estimators": 200,
+      "model_threshold": "median",
+      "random_state": 42
+    },
+    "reduction": {
+      "enabled": true,
+      "method": "pca",
+      "mode": "append",
+      "explained_variance": 0.95,
+      "n_components": null,
+      "random_state": 42
+    },
+    "importance": {
+      "enabled": true,
+      "random_forest": true,
+      "xgboost": true,
+      "shap": true,
+      "n_estimators": 300,
+      "shap_max_samples": 500,
+      "report_top_n": 25,
+      "random_state": 42
+    },
+    "store": {
+      "enabled": true,
+      "dir": "data/features"
+    }
+  }
+}

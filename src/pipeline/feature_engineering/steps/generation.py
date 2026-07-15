@@ -184,6 +184,7 @@ class FeatureGeneration(FeatureStep):
 
         generated += self._apply_rolling(df, out, p)
         generated += self._apply_entity(df, out, p)
+        out = out.copy()   # defragment after many column inserts
 
         # Any divisions/log of odd values may introduce NaNs — fill with the
         # train medians captured at fit time (leak-safe on val/test).

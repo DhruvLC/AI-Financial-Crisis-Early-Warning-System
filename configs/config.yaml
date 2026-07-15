@@ -100,6 +100,74 @@ eda:
     projection: true
     scree_components: 30
 
+# Stage 7 — Feature Engineering (src/pipeline/feature_engineering).
+# Fit on the processed train split, applied leak-safe to val/test; engineered
+# splits are versioned into data/features/ and reported under
+# reports/feature_engineering/.
+feature_engineering:
+  fail_fast: true            # raise on the first step failure (false = continue)
+  eda_report_path: "reports/eda/eda_report.json"   # seeds hints (best-effort)
+  generation:
+    enabled: true
+    log_transform: true
+    log_skew_threshold: 1.0
+    ratios: true
+    max_ratio_pairs: 30
+    interactions: true
+    max_interaction_pairs: 30
+    differences: true
+    max_difference_pairs: 20
+    polynomial: true
+    polynomial_degree: 2
+    base_top_k: 12           # bounded base set for pairwise generation
+    rolling: false           # needs entity_col/date_col (time-series data)
+    entity_aggregates: false # needs entity_col
+    entity_col: null
+    date_col: null
+  multicollinearity:
+    enabled: true
+    correlation_filter: true
+    correlation_threshold: 0.95
+    vif_filter: true
+    vif_threshold: 10.0
+    vif_max_iterations: 50
+  selection:
+    enabled: true
+    variance_threshold: 1.0e-8
+    correlation: true
+    correlation_floor: 0.0   # 0 disables the |corr(x,y)| floor
+    mutual_information: true
+    anova: true
+    chi_square: true
+    top_k: 40                # each statistical voter nominates its top-k
+    min_votes: 2             # feature survives with >= this many votes
+    rfe: true
+    rfe_n_features: 30
+    rfe_step: 0.1
+    model_based: true
+    model_n_estimators: 200
+    model_threshold: median
+    random_state: 42
+  reduction:
+    enabled: true
+    method: pca              # pca | svd | none
+    mode: append             # append components | replace original features
+    explained_variance: 0.95 # target when n_components is unset
+    n_components: null
+    random_state: 42
+  importance:
+    enabled: true
+    random_forest: true
+    xgboost: true
+    shap: true
+    n_estimators: 300
+    shap_max_samples: 500
+    report_top_n: 25
+    random_state: 42
+  store:
+    enabled: true
+    dir: "data/features"
+
 split:
   test_size: 0.15
   val_size: 0.15
