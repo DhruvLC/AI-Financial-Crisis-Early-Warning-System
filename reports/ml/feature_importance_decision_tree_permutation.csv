@@ -1,0 +1,23 @@
+feature,importance,std
+pca__1,0.2585399449035812,0.023098246267129013
+ROA(B) before interest and depreciation after tax,0.19063973063973055,0.03526454373566686
+Debt ratio %,0.18490970309152127,0.012779665640753701
+mul__Net Income to Stockholder's Equity__x__Borrowing dependency,0.14938475665748382,0.01988520207167192
+Non-industry income and expenditure/revenue,0.1156504438322619,0.032049883734185464
+mul__Total debt/Total net worth__x__After-tax net Interest Rate,0.06454239363330269,0.012793746483208695
+log__Net Value Growth Rate,0.06263238445056626,0.025207178585301894
+Retained Earnings to Total Assets,0.03292317110498928,0.015023714566174896
+pca__6,0.02740740740740737,0.005849669804629527
+pca__4,0.011408019589837814,0.007698760583571974
+Borrowing dependency,0.0030303030303030056,0.0006734006734006925
+Net Income to Total Assets,0.002525252525252486,0.0007528848409090415
+diff__Net Income to Stockholder's Equity__minus__Borrowing dependency,0.0,0.0
+Total debt/Total net worth,0.0,0.0
+pca__2,0.0,0.0
+pca__3,0.0,0.0
+pca__5,0.0,0.0
+diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth,-0.0005050505050505194,0.0004123720105695703
+diff__Borrowing dependency__minus__Retained Earnings to Total Assets,-0.006856443220079634,0.006884324188420454
+Allocation rate per person,-0.013853688399143005,0.0057473742566726965
+Total income/Total expense,-0.01524028160391806,0.009645372771923379
+pca__7,-0.032858891949801114,0.010972898323605288

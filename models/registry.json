@@ -1,0 +1,782 @@
+{
+  "models": [
+    {
+      "model_version": "v001",
+      "algorithm": "logistic_regression",
+      "artefact": "models/logistic_regression_v001.joblib",
+      "hyperparameters": {
+        "C": 1.0,
+        "max_iter": 2000,
+        "class_weight": "balanced",
+        "solver": "lbfgs"
+      },
+      "tuning": {},
+      "cv_scores": {
+        "scoring": "roc_auc",
+        "scores": [
+          0.9127565982404693,
+          0.9405111018014243,
+          0.923264907135875,
+          0.9465367965367966,
+          0.9100408905043162
+        ],
+        "mean": 0.9266220588437764,
+        "std": 0.014614779509075252
+      },
+      "threshold": 0.39932543688142896,
+      "threshold_method": "youden",
+      "metrics": {
+        "val": {
+          "accuracy": 0.8240469208211144,
+          "precision": 0.14832535885167464,
+          "recall": 0.9393939393939394,
+          "f1": 0.256198347107438,
+          "roc_auc": 0.9385062748699113,
+          "pr_auc": 0.3878845387676389,
+          "balanced_accuracy": 0.8797979797979798,
+          "mcc": 0.3328678628980221,
+          "cohen_kappa": 0.21230942970073396,
+          "log_loss": 0.3270564085541032,
+          "brier_score": 0.10016106868104224
+        },
+        "test": {
+          "accuracy": 0.8132942326490714,
+          "precision": 0.1308411214953271,
+          "recall": 0.8484848484848485,
+          "f1": 0.22672064777327935,
+          "roc_auc": 0.9240893786348332,
+          "pr_auc": 0.2831191272899656,
+          "balanced_accuracy": 0.8303030303030303,
+          "mcc": 0.28696965359550547,
+          "cohen_kappa": 0.18093788905796093,
+          "log_loss": 0.36678301486403575,
+          "brier_score": 0.10791403171012913
+        }
+      },
+      "training_timestamp": "2026-07-16T08:46:23.582161+00:00",
+      "train_seconds": 6.326,
+      "feature_schema": {
+        "target_col": "Bankrupt?",
+        "n_features": 22,
+        "features": [
+          "ROA(B) before interest and depreciation after tax",
+          "Non-industry income and expenditure/revenue",
+          "Total debt/Total net worth",
+          "Debt ratio %",
+          "Borrowing dependency",
+          "Allocation rate per person",
+          "Retained Earnings to Total Assets",
+          "Total income/Total expense",
+          "Net Income to Total Assets",
+          "log__Net Value Growth Rate",
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+          "pca__1",
+          "pca__2",
+          "pca__3",
+          "pca__4",
+          "pca__5",
+          "pca__6",
+          "pca__7"
+        ]
+      },
+      "dataset_version": "v001"
+    },
+    {
+      "model_version": "v002",
+      "algorithm": "decision_tree",
+      "artefact": "models/decision_tree_v002.joblib",
+      "hyperparameters": {
+        "max_depth": 8,
+        "min_samples_leaf": 5,
+        "class_weight": "balanced"
+      },
+      "tuning": {},
+      "cv_scores": {
+        "scoring": "roc_auc",
+        "scores": [
+          0.7702660242982824,
+          0.8550481776288228,
+          0.7766547968160871,
+          0.8490620490620491,
+          0.8082864432251073
+        ],
+        "mean": 0.8118634982060697,
+        "std": 0.035302822929747915
+      },
+      "threshold": 0.8300089847259638,
+      "threshold_method": "youden",
+      "metrics": {
+        "val": {
+          "accuracy": 0.9198435972629521,
+          "precision": 0.23655913978494625,
+          "recall": 0.6666666666666666,
+          "f1": 0.3492063492063492,
+          "roc_auc": 0.8011172329354147,
+          "pr_auc": 0.24700994767408427,
+          "balanced_accuracy": 0.7974747474747474,
+          "mcc": 0.365655170486763,
+          "cohen_kappa": 0.31666666666666665,
+          "log_loss": 0.582855800629215,
+          "brier_score": 0.07468202558181787
+        },
+        "test": {
+          "accuracy": 0.9090909090909091,
+          "precision": 0.20588235294117646,
+          "recall": 0.6363636363636364,
+          "f1": 0.3111111111111111,
+          "roc_auc": 0.8109121518212428,
+          "pr_auc": 0.22627893061985277,
+          "balanced_accuracy": 0.7772727272727273,
+          "mcc": 0.3270256489217506,
+          "cohen_kappa": 0.2758100979653353,
+          "log_loss": 0.5807209943711545,
+          "brier_score": 0.0831549123201247
+        }
+      },
+      "training_timestamp": "2026-07-16T08:46:23.583377+00:00",
+      "train_seconds": 0.213,
+      "feature_schema": {
+        "target_col": "Bankrupt?",
+        "n_features": 22,
+        "features": [
+          "ROA(B) before interest and depreciation after tax",
+          "Non-industry income and expenditure/revenue",
+          "Total debt/Total net worth",
+          "Debt ratio %",
+          "Borrowing dependency",
+          "Allocation rate per person",
+          "Retained Earnings to Total Assets",
+          "Total income/Total expense",
+          "Net Income to Total Assets",
+          "log__Net Value Growth Rate",
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+          "pca__1",
+          "pca__2",
+          "pca__3",
+          "pca__4",
+          "pca__5",
+          "pca__6",
+          "pca__7"
+        ]
+      },
+      "dataset_version": "v001"
+    },
+    {
+      "model_version": "v003",
+      "algorithm": "random_forest",
+      "artefact": "models/random_forest_v003.joblib",
+      "hyperparameters": {
+        "n_estimators": 400,
+        "max_depth": null,
+        "min_samples_leaf": 2,
+        "class_weight": "balanced",
+        "n_jobs": -1
+      },
+      "tuning": {},
+      "cv_scores": {
+        "scoring": "roc_auc",
+        "scores": [
+          0.8856479541963413,
+          0.928763440860215,
+          0.9449448401061304,
+          0.9383116883116883,
+          0.9058819417747178
+        ],
+        "mean": 0.9207099730498186,
+        "std": 0.021960069138083783
+      },
+      "threshold": 0.04126875758011726,
+      "threshold_method": "youden",
+      "metrics": {
+        "val": {
+          "accuracy": 0.8514173998044966,
+          "precision": 0.16759776536312848,
+          "recall": 0.9090909090909091,
+          "f1": 0.2830188679245283,
+          "roc_auc": 0.9248086929905113,
+          "pr_auc": 0.407464152285949,
+          "balanced_accuracy": 0.8792929292929292,
+          "mcc": 0.35276181695744774,
+          "cohen_kappa": 0.24171226263276469,
+          "log_loss": 0.11670268373366684,
+          "brier_score": 0.023940810993064127
+        },
+        "test": {
+          "accuracy": 0.8318670576735093,
+          "precision": 0.14358974358974358,
+          "recall": 0.8484848484848485,
+          "f1": 0.24561403508771928,
+          "roc_auc": 0.9378022650749923,
+          "pr_auc": 0.40538538031303056,
+          "balanced_accuracy": 0.8398989898989899,
+          "mcc": 0.30578907329650784,
+          "cohen_kappa": 0.2015573525007488,
+          "log_loss": 0.08778965752653493,
+          "brier_score": 0.02420611987462057
+        }
+      },
+      "training_timestamp": "2026-07-16T08:46:23.659422+00:00",
+      "train_seconds": 8.812,
+      "feature_schema": {
+        "target_col": "Bankrupt?",
+        "n_features": 22,
+        "features": [
+          "ROA(B) before interest and depreciation after tax",
+          "Non-industry income and expenditure/revenue",
+          "Total debt/Total net worth",
+          "Debt ratio %",
+          "Borrowing dependency",
+          "Allocation rate per person",
+          "Retained Earnings to Total Assets",
+          "Total income/Total expense",
+          "Net Income to Total Assets",
+          "log__Net Value Growth Rate",
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+          "pca__1",
+          "pca__2",
+          "pca__3",
+          "pca__4",
+          "pca__5",
+          "pca__6",
+          "pca__7"
+        ]
+      },
+      "dataset_version": "v001"
+    },
+    {
+      "model_version": "v004",
+      "algorithm": "extra_trees",
+      "artefact": "models/extra_trees_v004.joblib",
+      "hyperparameters": {
+        "n_estimators": 400,
+        "max_depth": null,
+        "min_samples_leaf": 2,
+        "class_weight": "balanced",
+        "n_jobs": -1
+      },
+      "tuning": {},
+      "cv_scores": {
+        "scoring": "roc_auc",
+        "scores": [
+          0.9034178187403994,
+          0.9225666806311967,
+          0.9566750453847228,
+          0.9345959595959596,
+          0.9021773319819663
+        ],
+        "mean": 0.923886567266849,
+        "std": 0.020404793774843735
+      },
+      "threshold": 0.19038833143173758,
+      "threshold_method": "youden",
+      "metrics": {
+        "val": {
+          "accuracy": 0.9325513196480938,
+          "precision": 0.3,
+          "recall": 0.8181818181818182,
+          "f1": 0.43902439024390244,
+          "roc_auc": 0.9359044995408632,
+          "pr_auc": 0.4571791901321037,
+          "balanced_accuracy": 0.8772727272727273,
+          "mcc": 0.4706498210127064,
+          "cohen_kappa": 0.4112303881090008,
+          "log_loss": 0.09225899450770786,
+          "brier_score": 0.025026430263101068
+        },
+        "test": {
+          "accuracy": 0.9178885630498533,
+          "precision": 0.24752475247524752,
+          "recall": 0.7575757575757576,
+          "f1": 0.373134328358209,
+          "roc_auc": 0.9395163758800122,
+          "pr_auc": 0.4379569290099973,
+          "balanced_accuracy": 0.8404040404040404,
+          "mcc": 0.4032488353588726,
+          "cohen_kappa": 0.3410931174089068,
+          "log_loss": 0.09841851594502635,
+          "brier_score": 0.02798490433199615
+        }
+      },
+      "training_timestamp": "2026-07-16T08:46:23.737925+00:00",
+      "train_seconds": 15.488,
+      "feature_schema": {
+        "target_col": "Bankrupt?",
+        "n_features": 22,
+        "features": [
+          "ROA(B) before interest and depreciation after tax",
+          "Non-industry income and expenditure/revenue",
+          "Total debt/Total net worth",
+          "Debt ratio %",
+          "Borrowing dependency",
+          "Allocation rate per person",
+          "Retained Earnings to Total Assets",
+          "Total income/Total expense",
+          "Net Income to Total Assets",
+          "log__Net Value Growth Rate",
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+          "pca__1",
+          "pca__2",
+          "pca__3",
+          "pca__4",
+          "pca__5",
+          "pca__6",
+          "pca__7"
+        ]
+      },
+      "dataset_version": "v001"
+    },
+    {
+      "model_version": "v005",
+      "algorithm": "xgboost",
+      "artefact": "models/xgboost_v005.joblib",
+      "hyperparameters": {
+        "n_estimators": 600,
+        "max_depth": 6,
+        "learning_rate": 0.05,
+        "subsample": 0.9,
+        "colsample_bytree": 0.9,
+        "scale_pos_weight": 29.993506493506494,
+        "eval_metric": "logloss",
+        "n_jobs": -1
+      },
+      "tuning": {},
+      "cv_scores": {
+        "scoring": "roc_auc",
+        "scores": [
+          0.8673718754363916,
+          0.9138388493227203,
+          0.941767909509845,
+          0.9194805194805193,
+          0.895397197078251
+        ],
+        "mean": 0.9075712701655455,
+        "std": 0.02495885535158559
+      },
+      "threshold": 0.002682063262909651,
+      "threshold_method": "youden",
+      "metrics": {
+        "val": {
+          "accuracy": 0.852394916911046,
+          "precision": 0.16477272727272727,
+          "recall": 0.8787878787878788,
+          "f1": 0.27751196172248804,
+          "roc_auc": 0.9312519130700949,
+          "pr_auc": 0.4584019734216755,
+          "balanced_accuracy": 0.8651515151515152,
+          "mcc": 0.3418846725629513,
+          "cohen_kappa": 0.23600456993634722,
+          "log_loss": 0.10717458867285168,
+          "brier_score": 0.02373809310584825
+        },
+        "test": {
+          "accuracy": 0.8357771260997068,
+          "precision": 0.14659685863874344,
+          "recall": 0.8484848484848485,
+          "f1": 0.25,
+          "roc_auc": 0.9349250076522804,
+          "pr_auc": 0.39695360161802157,
+          "balanced_accuracy": 0.841919191919192,
+          "mcc": 0.31006282140107777,
+          "cohen_kappa": 0.20633953063090527,
+          "log_loss": 0.11544939446546637,
+          "brier_score": 0.0284570767172205
+        }
+      },
+      "training_timestamp": "2026-07-16T08:46:23.741608+00:00",
+      "train_seconds": 1.922,
+      "feature_schema": {
+        "target_col": "Bankrupt?",
+        "n_features": 22,
+        "features": [
+          "ROA(B) before interest and depreciation after tax",
+          "Non-industry income and expenditure/revenue",
+          "Total debt/Total net worth",
+          "Debt ratio %",
+          "Borrowing dependency",
+          "Allocation rate per person",
+          "Retained Earnings to Total Assets",
+          "Total income/Total expense",
+          "Net Income to Total Assets",
+          "log__Net Value Growth Rate",
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+          "pca__1",
+          "pca__2",
+          "pca__3",
+          "pca__4",
+          "pca__5",
+          "pca__6",
+          "pca__7"
+        ]
+      },
+      "dataset_version": "v001"
+    },
+    {
+      "model_version": "v006",
+      "algorithm": "svm",
+      "artefact": "models/svm_v006.joblib",
+      "hyperparameters": {
+        "C": 1.0,
+        "kernel": "rbf",
+        "gamma": "scale",
+        "class_weight": "balanced",
+        "probability": true
+      },
+      "tuning": {},
+      "cv_scores": {
+        "scoring": "roc_auc",
+        "scores": [
+          0.8785784108364754,
+          0.9132104454685099,
+          0.8909719312945119,
+          0.9225468975468977,
+          0.8701639115087546
+        ],
+        "mean": 0.89509431933103,
+        "std": 0.019965633611966918
+      },
+      "threshold": 0.02774236573973507,
+      "threshold_method": "youden",
+      "metrics": {
+        "val": {
+          "accuracy": 0.8240469208211144,
+          "precision": 0.14492753623188406,
+          "recall": 0.9090909090909091,
+          "f1": 0.25,
+          "roc_auc": 0.8988062442607897,
+          "pr_auc": 0.2409131218173652,
+          "balanced_accuracy": 0.8651515151515151,
+          "mcc": 0.3211792042973657,
+          "cohen_kappa": 0.20580700256191287,
+          "log_loss": 0.10121451272725439,
+          "brier_score": 0.02717313528318165
+        },
+        "test": {
+          "accuracy": 0.8269794721407625,
+          "precision": 0.14705882352941177,
+          "recall": 0.9090909090909091,
+          "f1": 0.25316455696202533,
+          "roc_auc": 0.9100091827364554,
+          "pr_auc": 0.2696628426936489,
+          "balanced_accuracy": 0.8666666666666667,
+          "mcc": 0.3242790998024684,
+          "cohen_kappa": 0.2092520536100302,
+          "log_loss": 0.10117901696157756,
+          "brier_score": 0.02677642581310897
+        }
+      },
+      "training_timestamp": "2026-07-16T08:46:23.743868+00:00",
+      "train_seconds": 1336.334,
+      "feature_schema": {
+        "target_col": "Bankrupt?",
+        "n_features": 22,
+        "features": [
+          "ROA(B) before interest and depreciation after tax",
+          "Non-industry income and expenditure/revenue",
+          "Total debt/Total net worth",
+          "Debt ratio %",
+          "Borrowing dependency",
+          "Allocation rate per person",
+          "Retained Earnings to Total Assets",
+          "Total income/Total expense",
+          "Net Income to Total Assets",
+          "log__Net Value Growth Rate",
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+          "pca__1",
+          "pca__2",
+          "pca__3",
+          "pca__4",
+          "pca__5",
+          "pca__6",
+          "pca__7"
+        ]
+      },
+      "dataset_version": "v001"
+    },
+    {
+      "model_version": "v007",
+      "algorithm": "knn",
+      "artefact": "models/knn_v007.joblib",
+      "hyperparameters": {
+        "n_neighbors": 15,
+        "weights": "distance",
+        "n_jobs": -1
+      },
+      "tuning": {},
+      "cv_scores": {
+        "scoring": "roc_auc",
+        "scores": [
+          0.8440161988549085,
+          0.8498289345063539,
+          0.929130009775171,
+          0.8867243867243867,
+          0.8682067591654143
+        ],
+        "mean": 0.8755812578052471,
+        "std": 0.030677537357692054
+      },
+      "threshold": 0.0559085666739849,
+      "threshold_method": "youden",
+      "metrics": {
+        "val": {
+          "accuracy": 0.8592375366568915,
+          "precision": 0.16363636363636364,
+          "recall": 0.8181818181818182,
+          "f1": 0.2727272727272727,
+          "roc_auc": 0.8661157024793388,
+          "pr_auc": 0.38009837715640543,
+          "balanced_accuracy": 0.8393939393939394,
+          "mcc": 0.32607914956672285,
+          "cohen_kappa": 0.23140495867768607,
+          "log_loss": 0.2728511428537729,
+          "brier_score": 0.024647735829155915
+        },
+        "test": {
+          "accuracy": 0.8660801564027371,
+          "precision": 0.16666666666666666,
+          "recall": 0.7878787878787878,
+          "f1": 0.2751322751322751,
+          "roc_auc": 0.8533976124885214,
+          "pr_auc": 0.30477367845836145,
+          "balanced_accuracy": 0.8282828282828283,
+          "mcc": 0.32268656304136434,
+          "cohen_kappa": 0.2343609158103479,
+          "log_loss": 0.3089767770112295,
+          "brier_score": 0.02643469754767666
+        }
+      },
+      "training_timestamp": "2026-07-16T08:46:23.745282+00:00",
+      "train_seconds": 193.229,
+      "feature_schema": {
+        "target_col": "Bankrupt?",
+        "n_features": 22,
+        "features": [
+          "ROA(B) before interest and depreciation after tax",
+          "Non-industry income and expenditure/revenue",
+          "Total debt/Total net worth",
+          "Debt ratio %",
+          "Borrowing dependency",
+          "Allocation rate per person",
+          "Retained Earnings to Total Assets",
+          "Total income/Total expense",
+          "Net Income to Total Assets",
+          "log__Net Value Growth Rate",
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+          "pca__1",
+          "pca__2",
+          "pca__3",
+          "pca__4",
+          "pca__5",
+          "pca__6",
+          "pca__7"
+        ]
+      },
+      "dataset_version": "v001"
+    },
+    {
+      "model_version": "v008",
+      "algorithm": "naive_bayes",
+      "artefact": "models/naive_bayes_v008.joblib",
+      "hyperparameters": {
+        "var_smoothing": 1e-09
+      },
+      "tuning": {},
+      "cv_scores": {
+        "scoring": "roc_auc",
+        "scores": [
+          0.8987920681469068,
+          0.9368803239770982,
+          0.9486978075687753,
+          0.9275974025974025,
+          0.8917624855834761
+        ],
+        "mean": 0.9207460175747318,
+        "std": 0.021957144194330303
+      },
+      "threshold": 2.150711062983006e-05,
+      "threshold_method": "youden",
+      "metrics": {
+        "val": {
+          "accuracy": 0.8641251221896383,
+          "precision": 0.17682926829268292,
+          "recall": 0.8787878787878788,
+          "f1": 0.29441624365482233,
+          "roc_auc": 0.9345423936333027,
+          "pr_auc": 0.3900223945500706,
+          "balanced_accuracy": 0.8712121212121212,
+          "mcc": 0.3575264739715955,
+          "cohen_kappa": 0.25436926803945326,
+          "log_loss": 1.2455911747702317,
+          "brier_score": 0.07689900691901595
+        },
+        "test": {
+          "accuracy": 0.8582600195503421,
+          "precision": 0.15853658536585366,
+          "recall": 0.7878787878787878,
+          "f1": 0.2639593908629442,
+          "roc_auc": 0.9152433425160698,
+          "pr_auc": 0.23520796117740636,
+          "balanced_accuracy": 0.8242424242424242,
+          "mcc": 0.3122884303262099,
+          "cohen_kappa": 0.22218376881813473,
+          "log_loss": 1.6051378351866838,
+          "brier_score": 0.08365373391815634
+        }
+      },
+      "training_timestamp": "2026-07-16T08:46:23.746481+00:00",
+      "train_seconds": 6.91,
+      "feature_schema": {
+        "target_col": "Bankrupt?",
+        "n_features": 22,
+        "features": [
+          "ROA(B) before interest and depreciation after tax",
+          "Non-industry income and expenditure/revenue",
+          "Total debt/Total net worth",
+          "Debt ratio %",
+          "Borrowing dependency",
+          "Allocation rate per person",
+          "Retained Earnings to Total Assets",
+          "Total income/Total expense",
+          "Net Income to Total Assets",
+          "log__Net Value Growth Rate",
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+          "pca__1",
+          "pca__2",
+          "pca__3",
+          "pca__4",
+          "pca__5",
+          "pca__6",
+          "pca__7"
+        ]
+      },
+      "dataset_version": "v001"
+    },
+    {
+      "model_version": "v009",
+      "algorithm": "mlp",
+      "artefact": "models/mlp_v009.joblib",
+      "hyperparameters": {
+        "hidden_layer_sizes": [
+          64,
+          32
+        ],
+        "activation": "relu",
+        "alpha": 0.001,
+        "learning_rate_init": 0.001,
+        "max_iter": 500,
+        "early_stopping": true
+      },
+      "tuning": {},
+      "cv_scores": {
+        "scoring": "roc_auc",
+        "scores": [
+          0.8861541684122329,
+          0.8003770423125263,
+          0.8828725038402458,
+          0.7144300144300144,
+          0.9192325166882187
+        ],
+        "mean": 0.8406132491366476,
+        "std": 0.0742724312615889
+      },
+      "threshold": 0.06584420484604037,
+      "threshold_method": "youden",
+      "metrics": {
+        "val": {
+          "accuracy": 0.8778103616813294,
+          "precision": 0.176056338028169,
+          "recall": 0.7575757575757576,
+          "f1": 0.2857142857142857,
+          "roc_auc": 0.8919804101622284,
+          "pr_auc": 0.29571574422284036,
+          "balanced_accuracy": 0.8196969696969697,
+          "mcc": 0.3267465090288974,
+          "cohen_kappa": 0.24625559229721838,
+          "log_loss": 0.10121852657297382,
+          "brier_score": 0.026112396249434257
+        },
+        "test": {
+          "accuracy": 0.8758553274682307,
+          "precision": 0.1780821917808219,
+          "recall": 0.7878787878787878,
+          "f1": 0.2905027932960894,
+          "roc_auc": 0.9045607591062137,
+          "pr_auc": 0.29244991231787976,
+          "balanced_accuracy": 0.8333333333333333,
+          "mcc": 0.3367495961833807,
+          "cohen_kappa": 0.251093779722275,
+          "log_loss": 0.1011069635412291,
+          "brier_score": 0.027060019588891763
+        }
+      },
+      "training_timestamp": "2026-07-16T08:46:23.748756+00:00",
+      "train_seconds": 8.09,
+      "feature_schema": {
+        "target_col": "Bankrupt?",
+        "n_features": 22,
+        "features": [
+          "ROA(B) before interest and depreciation after tax",
+          "Non-industry income and expenditure/revenue",
+          "Total debt/Total net worth",
+          "Debt ratio %",
+          "Borrowing dependency",
+          "Allocation rate per person",
+          "Retained Earnings to Total Assets",
+          "Total income/Total expense",
+          "Net Income to Total Assets",
+          "log__Net Value Growth Rate",
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+          "pca__1",
+          "pca__2",
+          "pca__3",
+          "pca__4",
+          "pca__5",
+          "pca__6",
+          "pca__7"
+        ]
+      },
+      "dataset_version": "v001"
+    }
+  ],
+  "best_model": {
+    "algorithm": "extra_trees",
+    "model_version": "v004",
+    "artefact": "models/best_model.joblib"
+  },
+  "updated_at": "2026-07-16T08:46:23.826960+00:00"
+}

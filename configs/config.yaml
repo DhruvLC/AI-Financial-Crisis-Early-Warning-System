@@ -168,6 +168,66 @@ feature_engineering:
     enabled: true
     dir: "data/features"
 
+# Stage 8 — Machine Learning (src/pipeline/ml).
+# Trains every enabled algorithm on the latest feature-store version,
+# evaluates on val/test, compares on a ROC-AUC leaderboard, explains, and
+# registers each model (best one separately) under models/.
+ml:
+  fail_fast: false           # false = a failing model is logged & skipped
+  random_state: 42
+  # Enabled algorithms (keys of pipeline.ml.models.MODEL_REGISTRY).
+  # Optional back-ends (lightgbm, catboost) are skipped if not installed.
+  algorithms:
+    - logistic_regression
+    - decision_tree
+    - random_forest
+    - extra_trees
+    - xgboost
+    - lightgbm
+    - catboost
+    - svm
+    - knn
+    - naive_bayes
+    - mlp
+  cross_validation:
+    enabled: true
+    strategy: stratified_kfold   # stratified_kfold | time_series
+    n_splits: 5
+  tuning:
+    enabled: false           # true = Grid/Random search before final fit
+    method: random           # grid | random
+    scoring: roc_auc
+    n_iter: 15               # random-search budget per model
+    # search_spaces:         # optional per-model overrides, e.g.:
+    #   random_forest: {n_estimators: [200, 400], max_depth: [null, 10]}
+  metrics:                   # evaluation suite (pipeline.ml.evaluation)
+    - accuracy
+    - precision
+    - recall
+    - f1
+    - roc_auc
+    - pr_auc
+    - balanced_accuracy
+    - mcc
+    - cohen_kappa
+    - log_loss
+    - brier_score
+  threshold_optimization:
+    enabled: true
+    method: youden           # youden | max_f1 | custom
+    custom_threshold: 0.5
+  explainability:
+    shap: true               # skipped gracefully if shap is not installed
+    shap_max_samples: 500
+    permutation_repeats: 5
+    report_top_n: 25
+  # model_params:            # optional per-model hyperparameter overrides
+  #   random_forest: {n_estimators: 600}
+  output:
+    models_dir: "models"
+    reports_dir: "reports/ml"
+    figures_dir: "reports/ml/figures"
+
 split:
   test_size: 0.15
   val_size: 0.15
