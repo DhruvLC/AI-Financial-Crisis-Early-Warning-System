@@ -1,0 +1,29 @@
+{
+  "dataset_version": "v001",
+  "target_col": "Bankrupt?",
+  "n_features": 22,
+  "features": [
+    "ROA(B) before interest and depreciation after tax",
+    "Non-industry income and expenditure/revenue",
+    "Total debt/Total net worth",
+    "Debt ratio %",
+    "Borrowing dependency",
+    "Allocation rate per person",
+    "Retained Earnings to Total Assets",
+    "Total income/Total expense",
+    "Net Income to Total Assets",
+    "log__Net Value Growth Rate",
+    "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+    "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+    "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+    "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+    "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+    "pca__1",
+    "pca__2",
+    "pca__3",
+    "pca__4",
+    "pca__5",
+    "pca__6",
+    "pca__7"
+  ]
+}

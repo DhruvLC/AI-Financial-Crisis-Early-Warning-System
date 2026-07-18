@@ -316,6 +316,97 @@ deep_learning:
     reports_dir: "reports/deep_learning"
     figures_dir: "reports/deep_learning/figures"
 
+# Stage 10 — Transformer Models (src/pipeline/transformers).
+# Trains every enabled attention-based tabular model on the latest
+# feature-store version, evaluates with the shared ML metric suite,
+# compares on a ROC-AUC leaderboard (and against the ML/DL leaderboards),
+# explains via permutation/SHAP/attention, and registers each model
+# (best one separately) under models/transformers/.
+transformers:
+  fail_fast: false           # false = a failing model is logged & skipped
+  random_state: 42
+  deterministic: true        # seed all RNGs + deterministic torch kernels
+  # Enabled models (keys of pipeline.transformers.models.TRANSFORMER_REGISTRY).
+  models:
+    - ft_transformer
+    - tab_transformer
+    - tabular_encoder
+  data:
+    batch_size: 128
+    shuffle: true
+    num_workers: 0
+  # Per-model architecture overrides (see each model's default_params).
+  model_params:
+    ft_transformer: {embed_dim: 64, n_heads: 8, n_layers: 3,
+                     ff_dim: 128, dropout: 0.1}
+    tab_transformer: {embed_dim: 32, n_heads: 8, n_layers: 3,
+                      ff_dim: 64, dropout: 0.1, mlp_hidden: [128, 64]}
+    tabular_encoder: {embed_dim: 64, n_heads: 4, n_layers: 2,
+                      ff_dim: 128, dropout: 0.1,
+                      positional_embedding: true}
+  loss:
+    name: weighted_bce       # bce | bce_with_logits | weighted_bce | focal
+    # pos_weight: null       # default: computed from train class imbalance
+  optimizer:
+    name: adamw              # adam | adamw | sgd | rmsprop
+    lr: 0.0005
+    weight_decay: 0.0001
+  scheduler:
+    name: cosine             # plateau | cosine | step | exponential | none
+    # t_max: 60              # cosine (default: epochs)
+    # factor: 0.5            # plateau
+    # patience: 5            # plateau
+    # step_size: 10          # step
+    # gamma: 0.5             # step / exponential
+  training:
+    epochs: 60
+    device: auto             # auto | cuda | mps | cpu
+    mixed_precision: true    # used on CUDA only
+    gradient_clip: 1.0
+    log_every: 5
+    # resume_from: models/transformers/ft_transformer_last.pt
+  early_stopping:
+    enabled: true
+    patience: 10
+    min_delta: 0.0001
+  checkpoint:
+    enabled: true
+    dir: "models/transformers"
+  threshold_optimization:
+    enabled: true
+    method: youden           # youden | max_f1 | custom
+    custom_threshold: 0.5
+  evaluation:
+    metrics:
+      - accuracy
+      - precision
+      - recall
+      - f1
+      - roc_auc
+      - pr_auc
+      - balanced_accuracy
+      - mcc
+      - cohen_kappa
+      - log_loss
+      - brier_score
+  explainability:
+    permutation: true
+    permutation_repeats: 3
+    shap: true               # skipped gracefully if shap is not installed
+    shap_max_samples: 100
+    attention: true          # capture + aggregate attention weights
+    attention_max_samples: 256
+  # Prior-stage leaderboards used for the cross-family comparison.
+  comparison:
+    ml_leaderboard: "reports/ml/leaderboard.csv"
+    dl_leaderboard: "reports/deep_learning/leaderboard.csv"
+  visualization:
+    dpi: 150
+  output:
+    models_dir: "models/transformers"
+    reports_dir: "reports/transformers"
+    figures_dir: "reports/transformers/figures"
+
 split:
   test_size: 0.15
   val_size: 0.15

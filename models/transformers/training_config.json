@@ -1,0 +1,219 @@
+{
+  "best_model": {
+    "model_version": "v003",
+    "network": "tabular_encoder",
+    "checkpoints": {
+      "last": "models/transformers/tabular_encoder_last.pt",
+      "best": "models/transformers/tabular_encoder_best.pt"
+    },
+    "architecture": {
+      "network": "tabular_encoder",
+      "n_features": 22,
+      "embed_dim": 64,
+      "n_heads": 4,
+      "n_layers": 2,
+      "ff_dim": 128,
+      "dropout": 0.1,
+      "positional_embedding": true
+    },
+    "hyperparameters": {
+      "data": {
+        "batch_size": 128
+      },
+      "optimizer": {
+        "name": "adamw",
+        "lr": 0.0005,
+        "weight_decay": 0.0001
+      },
+      "scheduler": {
+        "name": "cosine"
+      },
+      "loss": {
+        "name": "weighted_bce"
+      },
+      "training": {
+        "epochs": 60,
+        "device": "auto",
+        "mixed_precision": true,
+        "gradient_clip": 1.0,
+        "log_every": 5
+      }
+    },
+    "n_parameters": 71361,
+    "device": "cpu",
+    "threshold": 0.675885796546936,
+    "threshold_method": "youden",
+    "metrics": {
+      "val": {
+        "accuracy": 0.9159335288367546,
+        "precision": 0.26126126126126126,
+        "recall": 0.8787878787878788,
+        "f1": 0.4027777777777778,
+        "roc_auc": 0.9436792164064891,
+        "pr_auc": 0.4242678459817027,
+        "balanced_accuracy": 0.897979797979798,
+        "mcc": 0.4521751398451003,
+        "cohen_kappa": 0.37152286657237155,
+        "log_loss": 0.2802561362920077,
+        "brier_score": 0.08993390288756782
+      },
+      "test": {
+        "accuracy": 0.895405669599218,
+        "precision": 0.2109375,
+        "recall": 0.8181818181818182,
+        "f1": 0.33540372670807456,
+        "roc_auc": 0.9393021120293847,
+        "pr_auc": 0.41122075975451156,
+        "balanced_accuracy": 0.8580808080808081,
+        "mcc": 0.38244510383686386,
+        "cohen_kappa": 0.2994720168954593,
+        "log_loss": 0.3119865158527518,
+        "brier_score": 0.1008586505290756
+      }
+    },
+    "best_epoch": 14,
+    "epochs_trained": 24,
+    "training_timestamp": "2026-07-18T12:01:04.386037+00:00",
+    "train_seconds": 318.166,
+    "feature_schema": {
+      "target_col": "Bankrupt?",
+      "n_features": 22,
+      "features": [
+        "ROA(B) before interest and depreciation after tax",
+        "Non-industry income and expenditure/revenue",
+        "Total debt/Total net worth",
+        "Debt ratio %",
+        "Borrowing dependency",
+        "Allocation rate per person",
+        "Retained Earnings to Total Assets",
+        "Total income/Total expense",
+        "Net Income to Total Assets",
+        "log__Net Value Growth Rate",
+        "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+        "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+        "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+        "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+        "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+        "pca__1",
+        "pca__2",
+        "pca__3",
+        "pca__4",
+        "pca__5",
+        "pca__6",
+        "pca__7"
+      ]
+    },
+    "dataset_version": "v001",
+    "artefact": "models/transformers/best_model.pt"
+  },
+  "config": {
+    "fail_fast": false,
+    "random_state": 42,
+    "deterministic": true,
+    "models": [
+      "ft_transformer",
+      "tab_transformer",
+      "tabular_encoder"
+    ],
+    "data": {
+      "batch_size": 128,
+      "shuffle": true,
+      "num_workers": 0
+    },
+    "model_params": {
+      "ft_transformer": {
+        "embed_dim": 64,
+        "n_heads": 8,
+        "n_layers": 3,
+        "ff_dim": 128,
+        "dropout": 0.1
+      },
+      "tab_transformer": {
+        "embed_dim": 32,
+        "n_heads": 8,
+        "n_layers": 3,
+        "ff_dim": 64,
+        "dropout": 0.1,
+        "mlp_hidden": [
+          128,
+          64
+        ]
+      },
+      "tabular_encoder": {
+        "embed_dim": 64,
+        "n_heads": 4,
+        "n_layers": 2,
+        "ff_dim": 128,
+        "dropout": 0.1,
+        "positional_embedding": true
+      }
+    },
+    "loss": {
+      "name": "weighted_bce"
+    },
+    "optimizer": {
+      "name": "adamw",
+      "lr": 0.0005,
+      "weight_decay": 0.0001
+    },
+    "scheduler": {
+      "name": "cosine"
+    },
+    "training": {
+      "epochs": 60,
+      "device": "auto",
+      "mixed_precision": true,
+      "gradient_clip": 1.0,
+      "log_every": 5
+    },
+    "early_stopping": {
+      "enabled": true,
+      "patience": 10,
+      "min_delta": 0.0001
+    },
+    "checkpoint": {
+      "enabled": true,
+      "dir": "models/transformers"
+    },
+    "threshold_optimization": {
+      "enabled": true,
+      "method": "youden",
+      "custom_threshold": 0.5
+    },
+    "evaluation": {
+      "metrics": [
+        "accuracy",
+        "precision",
+        "recall",
+        "f1",
+        "roc_auc",
+        "pr_auc",
+        "balanced_accuracy",
+        "mcc",
+        "cohen_kappa",
+        "log_loss",
+        "brier_score"
+      ]
+    },
+    "explainability": {
+      "permutation": true,
+      "permutation_repeats": 3,
+      "shap": true,
+      "shap_max_samples": 100,
+      "attention": true,
+      "attention_max_samples": 256
+    },
+    "comparison": {
+      "ml_leaderboard": "reports/ml/leaderboard.csv",
+      "dl_leaderboard": "reports/deep_learning/leaderboard.csv"
+    },
+    "visualization": {
+      "dpi": 150
+    },
+    "output": {
+      "models_dir": "models/transformers",
+      "reports_dir": "reports/transformers",
+      "figures_dir": "reports/transformers/figures"
+    }
+  }
+}

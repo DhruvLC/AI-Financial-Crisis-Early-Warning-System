@@ -1,0 +1,1374 @@
+{
+  "generated_at": "2026-07-18T12:01:04.391169+00:00",
+  "dataset_version": "v001",
+  "target_col": "Bankrupt?",
+  "n_features": 22,
+  "splits": {
+    "train": 4773,
+    "val": 1023,
+    "test": 1023
+  },
+  "models": [
+    {
+      "name": "ft_transformer",
+      "status": "trained",
+      "error": null,
+      "architecture": {
+        "network": "ft_transformer",
+        "n_features": 22,
+        "embed_dim": 64,
+        "n_heads": 8,
+        "n_layers": 3,
+        "ff_dim": 128,
+        "dropout": 0.1
+      },
+      "hyperparameters": {
+        "data": {
+          "batch_size": 128
+        },
+        "optimizer": {
+          "name": "adamw",
+          "lr": 0.0005,
+          "weight_decay": 0.0001
+        },
+        "scheduler": {
+          "name": "cosine"
+        },
+        "loss": {
+          "name": "weighted_bce"
+        },
+        "training": {
+          "epochs": 60,
+          "device": "auto",
+          "mixed_precision": true,
+          "gradient_clip": 1.0,
+          "log_every": 5
+        }
+      },
+      "n_parameters": 103489,
+      "device": "mps",
+      "threshold": 0.512583315372467,
+      "threshold_method": "youden",
+      "train_seconds": 396.338,
+      "history": {
+        "epochs": [
+          {
+            "epoch": 1,
+            "train_loss": 1.3529725507847699,
+            "val_loss": 1.4914973033837908,
+            "val_metrics": {
+              "roc_auc": 0.162105907560453,
+              "f1": 0.02254791431792559,
+              "accuracy": 0.15249266862170088
+            },
+            "lr": 0.0004996573836886434,
+            "seconds": 1.621
+          },
+          {
+            "epoch": 2,
+            "train_loss": 1.362697948856022,
+            "val_loss": 1.4583514099130417,
+            "val_metrics": {
+              "roc_auc": 0.224058769513315,
+              "f1": 0.06273764258555133,
+              "accuracy": 0.03616813294232649
+            },
+            "lr": 0.0004986304738420682,
+            "seconds": 1.216
+          },
+          {
+            "epoch": 3,
+            "train_loss": 1.3637149049355104,
+            "val_loss": 1.257930663498965,
+            "val_metrics": {
+              "roc_auc": 0.808631772268136,
+              "f1": 0.11764705882352941,
+              "accuracy": 0.530791788856305
+            },
+            "lr": 0.0004969220851487844,
+            "seconds": 1.266
+          },
+          {
+            "epoch": 4,
+            "train_loss": 1.3505201811763492,
+            "val_loss": 1.3325856526110063,
+            "val_metrics": {
+              "roc_auc": 0.5496479951025406,
+              "f1": 0.07058823529411765,
+              "accuracy": 0.15053763440860216
+            },
+            "lr": 0.0004945369001834514,
+            "seconds": 1.192
+          },
+          {
+            "epoch": 5,
+            "train_loss": 1.3480685457053385,
+            "val_loss": 1.4014784241002327,
+            "val_metrics": {
+              "roc_auc": 0.37731864095500456,
+              "f1": 0.06273764258555133,
+              "accuracy": 0.03616813294232649
+            },
+            "lr": 0.0004914814565722671,
+            "seconds": 1.188
+          },
+          {
+            "epoch": 6,
+            "train_loss": 1.3521205061840207,
+            "val_loss": 1.4019210645064115,
+            "val_metrics": {
+              "roc_auc": 0.39519436792164064,
+              "f1": 0.06255924170616113,
+              "accuracy": 0.033235581622678395
+            },
+            "lr": 0.00048776412907378846,
+            "seconds": 1.164
+          },
+          {
+            "epoch": 7,
+            "train_loss": 1.3475694330688195,
+            "val_loss": 1.405392453467741,
+            "val_metrics": {
+              "roc_auc": 0.3266911539638813,
+              "f1": 0.06255924170616113,
+              "accuracy": 0.033235581622678395
+            },
+            "lr": 0.00048339510662430044,
+            "seconds": 1.174
+          },
+          {
+            "epoch": 8,
+            "train_loss": 1.3440248670254318,
+            "val_loss": 1.386887726546033,
+            "val_metrics": {
+              "roc_auc": 0.3909703091521273,
+              "f1": 0.06267806267806268,
+              "accuracy": 0.03519061583577713
+            },
+            "lr": 0.0004783863644106502,
+            "seconds": 1.171
+          },
+          {
+            "epoch": 9,
+            "train_loss": 1.3472406231780085,
+            "val_loss": 1.3831946425657002,
+            "val_metrics": {
+              "roc_auc": 0.4187021732476277,
+              "f1": 0.06267806267806268,
+              "accuracy": 0.03519061583577713
+            },
+            "lr": 0.00047275163104709196,
+            "seconds": 1.159
+          },
+          {
+            "epoch": 10,
+            "train_loss": 1.3500656496671768,
+            "val_loss": 1.4134908415821408,
+            "val_metrics": {
+              "roc_auc": 0.24490358126721765,
+              "f1": 0.0625,
+              "accuracy": 0.03225806451612903
+            },
+            "lr": 0.00046650635094610973,
+            "seconds": 1.178
+          },
+          {
+            "epoch": 11,
+            "train_loss": 1.3419489287341038,
+            "val_loss": 1.4012855407895697,
+            "val_metrics": {
+              "roc_auc": 0.4110192837465565,
+              "f1": 0.06267806267806268,
+              "accuracy": 0.03519061583577713
+            },
+            "lr": 0.00045966764198635603,
+            "seconds": 1.182
+          },
+          {
+            "epoch": 12,
+            "train_loss": 1.3321556551461946,
+            "val_loss": 1.4430712983522014,
+            "val_metrics": {
+              "roc_auc": 0.2667891031527395,
+              "f1": 0.0625,
+              "accuracy": 0.03225806451612903
+            },
+            "lr": 0.0004522542485937369,
+            "seconds": 1.17
+          },
+          {
+            "epoch": 13,
+            "train_loss": 1.342631535287326,
+            "val_loss": 1.4108809927225345,
+            "val_metrics": {
+              "roc_auc": 0.3606060606060606,
+              "f1": 0.06279733587059944,
+              "accuracy": 0.03714565004887586
+            },
+            "lr": 0.00044428649036424276,
+            "seconds": 1.158
+          }
+        ],
+        "best_epoch": 3,
+        "best_val_loss": 1.257930663498965,
+        "stopped_early": true,
+        "total_seconds": 15.93
+      },
+      "checkpoints": {
+        "last": "models/transformers/ft_transformer_last.pt",
+        "best": "models/transformers/ft_transformer_best.pt"
+      },
+      "evaluations": {
+        "val": {
+          "model": "ft_transformer",
+          "split": "val",
+          "threshold": 0.512583315372467,
+          "metrics": {
+            "accuracy": 0.624633431085044,
+            "precision": 0.07506053268765134,
+            "recall": 0.9393939393939394,
+            "f1": 0.13901345291479822,
+            "roc_auc": 0.808631772268136,
+            "pr_auc": 0.12698429708533016,
+            "balanced_accuracy": 0.7767676767676768,
+            "mcc": 0.19933336019397185,
+            "cohen_kappa": 0.0843076923076923,
+            "log_loss": 0.6706948097275489,
+            "brier_score": 0.23890621601239512
+          },
+          "confusion_matrix": [
+            [
+              608,
+              382
+            ],
+            [
+              2,
+              31
+            ]
+          ],
+          "notes": []
+        },
+        "test": {
+          "model": "ft_transformer",
+          "split": "test",
+          "threshold": 0.512583315372467,
+          "metrics": {
+            "accuracy": 0.6256109481915934,
+            "precision": 0.07524271844660194,
+            "recall": 0.9393939393939394,
+            "f1": 0.1393258426966292,
+            "roc_auc": 0.8241812059993878,
+            "pr_auc": 0.09386067524833469,
+            "balanced_accuracy": 0.7772727272727273,
+            "mcc": 0.19977562772190532,
+            "cohen_kappa": 0.08465037391103225,
+            "log_loss": 0.6707122640321177,
+            "brier_score": 0.2389065485758106
+          },
+          "confusion_matrix": [
+            [
+              609,
+              381
+            ],
+            [
+              2,
+              31
+            ]
+          ],
+          "notes": []
+        }
+      },
+      "attention": {
+        "n_samples": 256,
+        "feature_attention": {
+          "pca__7": 0.04425229325874091,
+          "pca__2": 0.044208736202141365,
+          "Borrowing dependency": 0.044145345998623416,
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets": 0.04396362756444327,
+          "Total debt/Total net worth": 0.04386806656607339,
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth": 0.04383452131425156,
+          "pca__1": 0.04370778807967419,
+          "pca__3": 0.043686259874527386,
+          "Net Income to Total Assets": 0.043659252754034664,
+          "pca__6": 0.04362772110197102,
+          "Allocation rate per person": 0.043577255027164516,
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency": 0.04355338491997985,
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency": 0.043461009871849005,
+          "Retained Earnings to Total Assets": 0.04342885421151616,
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate": 0.04335715845166081,
+          "pca__5": 0.04329100654138238,
+          "log__Net Value Growth Rate": 0.04301820242962213,
+          "Total income/Total expense": 0.04293649072032945,
+          "Debt ratio %": 0.042916682931494164,
+          "Non-industry income and expenditure/revenue": 0.04288542930979916,
+          "pca__4": 0.042872899645548045,
+          "ROA(B) before interest and depreciation after tax": 0.042595092242835024
+        },
+        "entropy_per_layer": {
+          "layer_1": 3.123076776999699,
+          "layer_2": 3.133419663999741,
+          "layer_3": 3.1352425164278817
+        }
+      }
+    },
+    {
+      "name": "tab_transformer",
+      "status": "trained",
+      "error": null,
+      "architecture": {
+        "network": "tab_transformer",
+        "n_features": 22,
+        "embed_dim": 32,
+        "n_heads": 8,
+        "n_layers": 3,
+        "ff_dim": 64,
+        "dropout": 0.1,
+        "mlp_hidden": [
+          128,
+          64
+        ]
+      },
+      "hyperparameters": {
+        "data": {
+          "batch_size": 128
+        },
+        "optimizer": {
+          "name": "adamw",
+          "lr": 0.0005,
+          "weight_decay": 0.0001
+        },
+        "scheduler": {
+          "name": "cosine"
+        },
+        "loss": {
+          "name": "weighted_bce"
+        },
+        "training": {
+          "epochs": 60,
+          "device": "auto",
+          "mixed_precision": true,
+          "gradient_clip": 1.0,
+          "log_every": 5
+        }
+      },
+      "n_parameters": 128461,
+      "device": "cpu",
+      "threshold": 0.46946021914482117,
+      "threshold_method": "youden",
+      "train_seconds": 496.299,
+      "history": {
+        "epochs": [
+          {
+            "epoch": 1,
+            "train_loss": 0.8493771393194705,
+            "val_loss": 0.6694108946640354,
+            "val_metrics": {
+              "roc_auc": 0.9388735843281298,
+              "f1": 0.3576158940397351,
+              "accuracy": 0.9051808406647116
+            },
+            "lr": 0.0004996573836886434,
+            "seconds": 1.833
+          },
+          {
+            "epoch": 2,
+            "train_loss": 0.6727431038003934,
+            "val_loss": 0.6794770234432854,
+            "val_metrics": {
+              "roc_auc": 0.9376186103458831,
+              "f1": 0.23134328358208955,
+              "accuracy": 0.7986314760508308
+            },
+            "lr": 0.0004986304738420682,
+            "seconds": 1.865
+          },
+          {
+            "epoch": 3,
+            "train_loss": 0.7782656708254195,
+            "val_loss": 0.6382216148129423,
+            "val_metrics": {
+              "roc_auc": 0.9422711968166513,
+              "f1": 0.34394904458598724,
+              "accuracy": 0.8993157380254154
+            },
+            "lr": 0.0004969220851487844,
+            "seconds": 1.903
+          },
+          {
+            "epoch": 4,
+            "train_loss": 0.7140824988830922,
+            "val_loss": 0.7439998548517945,
+            "val_metrics": {
+              "roc_auc": 0.9376492194674013,
+              "f1": 0.37037037037037035,
+              "accuracy": 0.916911045943304
+            },
+            "lr": 0.0004945369001834514,
+            "seconds": 1.944
+          },
+          {
+            "epoch": 5,
+            "train_loss": 0.6132406413605097,
+            "val_loss": 0.8332589516308767,
+            "val_metrics": {
+              "roc_auc": 0.9393021120293847,
+              "f1": 0.3472222222222222,
+              "accuracy": 0.9081133919843597
+            },
+            "lr": 0.0004914814565722671,
+            "seconds": 1.892
+          },
+          {
+            "epoch": 6,
+            "train_loss": 0.736468861099249,
+            "val_loss": 0.7078440489715379,
+            "val_metrics": {
+              "roc_auc": 0.9417814508723601,
+              "f1": 0.37681159420289856,
+              "accuracy": 0.9159335288367546
+            },
+            "lr": 0.00048776412907378846,
+            "seconds": 1.859
+          },
+          {
+            "epoch": 7,
+            "train_loss": 0.6331496343107161,
+            "val_loss": 0.6733913178376322,
+            "val_metrics": {
+              "roc_auc": 0.9377104377104377,
+              "f1": 0.2857142857142857,
+              "accuracy": 0.8582600195503421
+            },
+            "lr": 0.00048339510662430044,
+            "seconds": 1.842
+          },
+          {
+            "epoch": 8,
+            "train_loss": 0.598349359180726,
+            "val_loss": 0.7436093269088984,
+            "val_metrics": {
+              "roc_auc": 0.9390572390572391,
+              "f1": 0.3333333333333333,
+              "accuracy": 0.8944281524926686
+            },
+            "lr": 0.0004783863644106502,
+            "seconds": 1.854
+          },
+          {
+            "epoch": 9,
+            "train_loss": 0.5782207732627208,
+            "val_loss": 0.8750911515537478,
+            "val_metrics": {
+              "roc_auc": 0.9353229262320171,
+              "f1": 0.33112582781456956,
+              "accuracy": 0.9012707722385142
+            },
+            "lr": 0.00047275163104709196,
+            "seconds": 1.904
+          },
+          {
+            "epoch": 10,
+            "train_loss": 0.7008913109294029,
+            "val_loss": 0.7810848976684805,
+            "val_metrics": {
+              "roc_auc": 0.9397306397306397,
+              "f1": 0.38571428571428573,
+              "accuracy": 0.9159335288367546
+            },
+            "lr": 0.00046650635094610973,
+            "seconds": 2.042
+          },
+          {
+            "epoch": 11,
+            "train_loss": 0.5624312723354801,
+            "val_loss": 0.8217291671451352,
+            "val_metrics": {
+              "roc_auc": 0.9374043464952556,
+              "f1": 0.3333333333333333,
+              "accuracy": 0.8944281524926686
+            },
+            "lr": 0.00045966764198635603,
+            "seconds": 1.878
+          },
+          {
+            "epoch": 12,
+            "train_loss": 0.5998054939622077,
+            "val_loss": 0.8411922756353082,
+            "val_metrics": {
+              "roc_auc": 0.9407407407407409,
+              "f1": 0.3870967741935484,
+              "accuracy": 0.9257086999022482
+            },
+            "lr": 0.0004522542485937369,
+            "seconds": 1.869
+          },
+          {
+            "epoch": 13,
+            "train_loss": 0.6020851781876263,
+            "val_loss": 1.4105341830095122,
+            "val_metrics": {
+              "roc_auc": 0.9351392715029079,
+              "f1": 0.39215686274509803,
+              "accuracy": 0.9393939393939394
+            },
+            "lr": 0.00044428649036424276,
+            "seconds": 2.035
+          }
+        ],
+        "best_epoch": 3,
+        "best_val_loss": 0.6382216148129423,
+        "stopped_early": true,
+        "total_seconds": 24.732
+      },
+      "checkpoints": {
+        "last": "models/transformers/tab_transformer_last.pt",
+        "best": "models/transformers/tab_transformer_best.pt"
+      },
+      "evaluations": {
+        "val": {
+          "model": "tab_transformer",
+          "split": "val",
+          "threshold": 0.46946021914482117,
+          "metrics": {
+            "accuracy": 0.8905180840664711,
+            "precision": 0.2158273381294964,
+            "recall": 0.9090909090909091,
+            "f1": 0.3488372093023256,
+            "roc_auc": 0.9422711968166513,
+            "pr_auc": 0.3873735583210461,
+            "balanced_accuracy": 0.8994949494949495,
+            "mcc": 0.41198587222045935,
+            "cohen_kappa": 0.31301939058171757,
+            "log_loss": 0.34988469007591716,
+            "brier_score": 0.0976705094972485
+          },
+          "confusion_matrix": [
+            [
+              881,
+              109
+            ],
+            [
+              3,
+              30
+            ]
+          ],
+          "notes": []
+        },
+        "test": {
+          "model": "tab_transformer",
+          "split": "test",
+          "threshold": 0.46946021914482117,
+          "metrics": {
+            "accuracy": 0.8826979472140762,
+            "precision": 0.19148936170212766,
+            "recall": 0.8181818181818182,
+            "f1": 0.3103448275862069,
+            "roc_auc": 0.9329660238751147,
+            "pr_auc": 0.33675087148559973,
+            "balanced_accuracy": 0.8515151515151516,
+            "mcc": 0.36033360225809186,
+            "cohen_kappa": 0.272300469483568,
+            "log_loss": 0.37262694535241875,
+            "brier_score": 0.10387332460300273
+          },
+          "confusion_matrix": [
+            [
+              876,
+              114
+            ],
+            [
+              6,
+              27
+            ]
+          ],
+          "notes": []
+        }
+      },
+      "attention": {
+        "n_samples": 256,
+        "feature_attention": {
+          "Borrowing dependency": 0.046856804934522545,
+          "Allocation rate per person": 0.04668189646657662,
+          "Debt ratio %": 0.04661819212207885,
+          "pca__2": 0.04648899151156498,
+          "pca__3": 0.046418670973666434,
+          "pca__5": 0.046055270778831044,
+          "ROA(B) before interest and depreciation after tax": 0.04576799294943956,
+          "pca__1": 0.04576162498878231,
+          "pca__6": 0.04550532125435756,
+          "Net Income to Total Assets": 0.0454012209941566,
+          "log__Net Value Growth Rate": 0.04537656498866978,
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency": 0.045337389116784005,
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate": 0.04509254073799997,
+          "pca__7": 0.045060281678602085,
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets": 0.045026598578922196,
+          "pca__4": 0.04498113894783962,
+          "Total income/Total expense": 0.04486106505393047,
+          "Retained Earnings to Total Assets": 0.04484756330213824,
+          "Non-industry income and expenditure/revenue": 0.04484173720343141,
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency": 0.044683009514825026,
+          "Total debt/Total net worth": 0.044283033254473456,
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth": 0.044053090387354714
+        },
+        "entropy_per_layer": {
+          "layer_1": 3.075883745612435,
+          "layer_2": 3.0902629516917646,
+          "layer_3": 3.0908859816342766
+        }
+      }
+    },
+    {
+      "name": "tabular_encoder",
+      "status": "trained",
+      "error": null,
+      "architecture": {
+        "network": "tabular_encoder",
+        "n_features": 22,
+        "embed_dim": 64,
+        "n_heads": 4,
+        "n_layers": 2,
+        "ff_dim": 128,
+        "dropout": 0.1,
+        "positional_embedding": true
+      },
+      "hyperparameters": {
+        "data": {
+          "batch_size": 128
+        },
+        "optimizer": {
+          "name": "adamw",
+          "lr": 0.0005,
+          "weight_decay": 0.0001
+        },
+        "scheduler": {
+          "name": "cosine"
+        },
+        "loss": {
+          "name": "weighted_bce"
+        },
+        "training": {
+          "epochs": 60,
+          "device": "auto",
+          "mixed_precision": true,
+          "gradient_clip": 1.0,
+          "log_every": 5
+        }
+      },
+      "n_parameters": 71361,
+      "device": "cpu",
+      "threshold": 0.675885796546936,
+      "threshold_method": "youden",
+      "train_seconds": 318.166,
+      "history": {
+        "epochs": [
+          {
+            "epoch": 1,
+            "train_loss": 0.7371281965873963,
+            "val_loss": 0.7230014269943927,
+            "val_metrics": {
+              "roc_auc": 0.9404040404040404,
+              "f1": 0.3968253968253968,
+              "accuracy": 0.9257086999022482
+            },
+            "lr": 0.0004996573836886434,
+            "seconds": 1.225
+          },
+          {
+            "epoch": 2,
+            "train_loss": 0.6847634594345052,
+            "val_loss": 0.6340012062096992,
+            "val_metrics": {
+              "roc_auc": 0.9385368839914294,
+              "f1": 0.32335329341317365,
+              "accuracy": 0.8895405669599218
+            },
+            "lr": 0.0004986304738420682,
+            "seconds": 1.281
+          },
+          {
+            "epoch": 3,
+            "train_loss": 0.6269110241589145,
+            "val_loss": 0.8449310657740339,
+            "val_metrics": {
+              "roc_auc": 0.9419651056014693,
+              "f1": 0.41818181818181815,
+              "accuracy": 0.9374389051808406
+            },
+            "lr": 0.0004969220851487844,
+            "seconds": 1.637
+          },
+          {
+            "epoch": 4,
+            "train_loss": 0.8400874267877234,
+            "val_loss": 0.6651240967119427,
+            "val_metrics": {
+              "roc_auc": 0.9377104377104377,
+              "f1": 0.2108843537414966,
+              "accuracy": 0.7732160312805474
+            },
+            "lr": 0.0004945369001834514,
+            "seconds": 1.475
+          },
+          {
+            "epoch": 5,
+            "train_loss": 0.6752724282470061,
+            "val_loss": 0.7354952114127132,
+            "val_metrics": {
+              "roc_auc": 0.9251606978879706,
+              "f1": 0.325,
+              "accuracy": 0.8944281524926686
+            },
+            "lr": 0.0004914814565722671,
+            "seconds": 1.221
+          },
+          {
+            "epoch": 6,
+            "train_loss": 0.6761473064374653,
+            "val_loss": 0.6531923592148872,
+            "val_metrics": {
+              "roc_auc": 0.9367309458218549,
+              "f1": 0.2540983606557377,
+              "accuracy": 0.8220918866080157
+            },
+            "lr": 0.00048776412907378846,
+            "seconds": 1.223
+          },
+          {
+            "epoch": 7,
+            "train_loss": 0.6321396406793804,
+            "val_loss": 0.6455200784716788,
+            "val_metrics": {
+              "roc_auc": 0.9361799816345271,
+              "f1": 0.28717948717948716,
+              "accuracy": 0.8641251221896383
+            },
+            "lr": 0.00048339510662430044,
+            "seconds": 1.214
+          },
+          {
+            "epoch": 8,
+            "train_loss": 0.6474844353387073,
+            "val_loss": 0.7174448566119809,
+            "val_metrics": {
+              "roc_auc": 0.9349556167737985,
+              "f1": 0.3312883435582822,
+              "accuracy": 0.8934506353861192
+            },
+            "lr": 0.0004783863644106502,
+            "seconds": 1.228
+          },
+          {
+            "epoch": 9,
+            "train_loss": 0.6002578853112258,
+            "val_loss": 0.7021436171855628,
+            "val_metrics": {
+              "roc_auc": 0.9370982552800735,
+              "f1": 0.33532934131736525,
+              "accuracy": 0.8914956011730205
+            },
+            "lr": 0.00047275163104709196,
+            "seconds": 1.22
+          },
+          {
+            "epoch": 10,
+            "train_loss": 0.659028770056706,
+            "val_loss": 0.6184781603333072,
+            "val_metrics": {
+              "roc_auc": 0.9363330272421182,
+              "f1": 0.2857142857142857,
+              "accuracy": 0.8582600195503421
+            },
+            "lr": 0.00046650635094610973,
+            "seconds": 1.217
+          },
+          {
+            "epoch": 11,
+            "train_loss": 0.62454603461944,
+            "val_loss": 0.6765896444330001,
+            "val_metrics": {
+              "roc_auc": 0.9362411998775635,
+              "f1": 0.34838709677419355,
+              "accuracy": 0.9012707722385142
+            },
+            "lr": 0.00045966764198635603,
+            "seconds": 1.19
+          },
+          {
+            "epoch": 12,
+            "train_loss": 0.5927756006159973,
+            "val_loss": 0.7914324944378227,
+            "val_metrics": {
+              "roc_auc": 0.9307927762473217,
+              "f1": 0.33783783783783783,
+              "accuracy": 0.9042033235581622
+            },
+            "lr": 0.0004522542485937369,
+            "seconds": 1.191
+          },
+          {
+            "epoch": 13,
+            "train_loss": 0.5963878773703856,
+            "val_loss": 0.9432829103686593,
+            "val_metrics": {
+              "roc_auc": 0.9297826752372207,
+              "f1": 0.42016806722689076,
+              "accuracy": 0.9325513196480938
+            },
+            "lr": 0.00044428649036424276,
+            "seconds": 1.201
+          },
+          {
+            "epoch": 14,
+            "train_loss": 0.6110301329895758,
+            "val_loss": 0.5986415175457038,
+            "val_metrics": {
+              "roc_auc": 0.9436792164064891,
+              "f1": 0.3157894736842105,
+              "accuracy": 0.8729227761485826
+            },
+            "lr": 0.0004357862063693486,
+            "seconds": 1.197
+          },
+          {
+            "epoch": 15,
+            "train_loss": 0.6327570588810874,
+            "val_loss": 0.7763378051776924,
+            "val_metrics": {
+              "roc_auc": 0.929690847872666,
+              "f1": 0.3561643835616438,
+              "accuracy": 0.9081133919843597
+            },
+            "lr": 0.00042677669529663696,
+            "seconds": 1.203
+          },
+          {
+            "epoch": 16,
+            "train_loss": 0.5931530286999536,
+            "val_loss": 1.0324424324613628,
+            "val_metrics": {
+              "roc_auc": 0.9166513621059076,
+              "f1": 0.3382352941176471,
+              "accuracy": 0.9120234604105572
+            },
+            "lr": 0.0004172826515897146,
+            "seconds": 1.196
+          },
+          {
+            "epoch": 17,
+            "train_loss": 0.5789698845163072,
+            "val_loss": 0.7067016893934062,
+            "val_metrics": {
+              "roc_auc": 0.9342516069788798,
+              "f1": 0.32142857142857145,
+              "accuracy": 0.8885630498533724
+            },
+            "lr": 0.00040733009776245933,
+            "seconds": 1.196
+          },
+          {
+            "epoch": 18,
+            "train_loss": 0.5742834724771534,
+            "val_loss": 1.2536927283625916,
+            "val_metrics": {
+              "roc_auc": 0.9062442607897154,
+              "f1": 0.39215686274509803,
+              "accuracy": 0.9393939393939394
+            },
+            "lr": 0.00039694631307311834,
+            "seconds": 1.185
+          },
+          {
+            "epoch": 19,
+            "train_loss": 0.5576314777729023,
+            "val_loss": 0.6542922277313057,
+            "val_metrics": {
+              "roc_auc": 0.9395775941230488,
+              "f1": 0.3312883435582822,
+              "accuracy": 0.8934506353861192
+            },
+            "lr": 0.0003861597587537568,
+            "seconds": 1.197
+          },
+          {
+            "epoch": 20,
+            "train_loss": 0.5881932924597013,
+            "val_loss": 0.8307705664914374,
+            "val_metrics": {
+              "roc_auc": 0.9250382614018977,
+              "f1": 0.352112676056338,
+              "accuracy": 0.9100684261974584
+            },
+            "lr": 0.000375,
+            "seconds": 1.201
+          },
+          {
+            "epoch": 21,
+            "train_loss": 0.5774931876184355,
+            "val_loss": 0.7484533824645646,
+            "val_metrics": {
+              "roc_auc": 0.9326905417814508,
+              "f1": 0.359375,
+              "accuracy": 0.9198435972629521
+            },
+            "lr": 0.00036349762493488667,
+            "seconds": 1.205
+          },
+          {
+            "epoch": 22,
+            "train_loss": 0.5411179893463381,
+            "val_loss": 0.7569563752103994,
+            "val_metrics": {
+              "roc_auc": 0.9292011019283747,
+              "f1": 0.3673469387755102,
+              "accuracy": 0.9090909090909091
+            },
+            "lr": 0.0003516841607689501,
+            "seconds": 1.21
+          },
+          {
+            "epoch": 23,
+            "train_loss": 0.5508215977239979,
+            "val_loss": 0.8844557205835978,
+            "val_metrics": {
+              "roc_auc": 0.9304560759106213,
+              "f1": 0.38028169014084506,
+              "accuracy": 0.9139784946236559
+            },
+            "lr": 0.00033959198738632514,
+            "seconds": 1.202
+          },
+          {
+            "epoch": 24,
+            "train_loss": 0.5654496631356573,
+            "val_loss": 0.9839441848815011,
+            "val_metrics": {
+              "roc_auc": 0.9117232935414754,
+              "f1": 0.3548387096774194,
+              "accuracy": 0.9217986314760508
+            },
+            "lr": 0.00032725424859373687,
+            "seconds": 1.256
+          }
+        ],
+        "best_epoch": 14,
+        "best_val_loss": 0.5986415175457038,
+        "stopped_early": true,
+        "total_seconds": 29.786
+      },
+      "checkpoints": {
+        "last": "models/transformers/tabular_encoder_last.pt",
+        "best": "models/transformers/tabular_encoder_best.pt"
+      },
+      "evaluations": {
+        "val": {
+          "model": "tabular_encoder",
+          "split": "val",
+          "threshold": 0.675885796546936,
+          "metrics": {
+            "accuracy": 0.9159335288367546,
+            "precision": 0.26126126126126126,
+            "recall": 0.8787878787878788,
+            "f1": 0.4027777777777778,
+            "roc_auc": 0.9436792164064891,
+            "pr_auc": 0.4242678459817027,
+            "balanced_accuracy": 0.897979797979798,
+            "mcc": 0.4521751398451003,
+            "cohen_kappa": 0.37152286657237155,
+            "log_loss": 0.2802561362920077,
+            "brier_score": 0.08993390288756782
+          },
+          "confusion_matrix": [
+            [
+              908,
+              82
+            ],
+            [
+              4,
+              29
+            ]
+          ],
+          "notes": []
+        },
+        "test": {
+          "model": "tabular_encoder",
+          "split": "test",
+          "threshold": 0.675885796546936,
+          "metrics": {
+            "accuracy": 0.895405669599218,
+            "precision": 0.2109375,
+            "recall": 0.8181818181818182,
+            "f1": 0.33540372670807456,
+            "roc_auc": 0.9393021120293847,
+            "pr_auc": 0.41122075975451156,
+            "balanced_accuracy": 0.8580808080808081,
+            "mcc": 0.38244510383686386,
+            "cohen_kappa": 0.2994720168954593,
+            "log_loss": 0.3119865158527518,
+            "brier_score": 0.1008586505290756
+          },
+          "confusion_matrix": [
+            [
+              889,
+              101
+            ],
+            [
+              6,
+              27
+            ]
+          ],
+          "notes": []
+        }
+      },
+      "attention": {
+        "n_samples": 256,
+        "feature_attention": {
+          "Allocation rate per person": 0.0695686256034688,
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets": 0.06061600086964476,
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth": 0.058158422745815515,
+          "pca__5": 0.05421960975114747,
+          "pca__1": 0.05364075258247877,
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency": 0.05116691683402182,
+          "Retained Earnings to Total Assets": 0.05079830997130392,
+          "Borrowing dependency": 0.04847829192716414,
+          "Total debt/Total net worth": 0.04466180917634946,
+          "pca__6": 0.043614826444271865,
+          "Debt ratio %": 0.04179617309447084,
+          "pca__2": 0.04174353694576315,
+          "ROA(B) before interest and depreciation after tax": 0.04130235410651618,
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency": 0.04000485702363221,
+          "Non-industry income and expenditure/revenue": 0.039050317159597565,
+          "Total income/Total expense": 0.03862731678327691,
+          "pca__7": 0.037896044355709986,
+          "pca__3": 0.03763240193881178,
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate": 0.03732279444048717,
+          "Net Income to Total Assets": 0.03714727986433983,
+          "log__Net Value Growth Rate": 0.03667783757327925,
+          "pca__4": 0.03587552065602557
+        },
+        "entropy_per_layer": {
+          "layer_1": 2.9291172624169133,
+          "layer_2": 3.017651494915667
+        }
+      }
+    }
+  ],
+  "failed": {},
+  "leaderboard": [
+    {
+      "rank": 1,
+      "model": "tabular_encoder",
+      "threshold": 0.675885796546936,
+      "n_parameters": 71361,
+      "best_epoch": 14,
+      "train_seconds": 318.17,
+      "roc_auc": 0.9393021120293847,
+      "f1": 0.33540372670807456,
+      "recall": 0.8181818181818182,
+      "precision": 0.2109375,
+      "pr_auc": 0.41122075975451156,
+      "accuracy": 0.895405669599218,
+      "balanced_accuracy": 0.8580808080808081,
+      "mcc": 0.38244510383686386
+    },
+    {
+      "rank": 2,
+      "model": "tab_transformer",
+      "threshold": 0.46946021914482117,
+      "n_parameters": 128461,
+      "best_epoch": 3,
+      "train_seconds": 496.3,
+      "roc_auc": 0.9329660238751147,
+      "f1": 0.3103448275862069,
+      "recall": 0.8181818181818182,
+      "precision": 0.19148936170212766,
+      "pr_auc": 0.33675087148559973,
+      "accuracy": 0.8826979472140762,
+      "balanced_accuracy": 0.8515151515151516,
+      "mcc": 0.36033360225809186
+    },
+    {
+      "rank": 3,
+      "model": "ft_transformer",
+      "threshold": 0.512583315372467,
+      "n_parameters": 103489,
+      "best_epoch": 3,
+      "train_seconds": 396.34,
+      "roc_auc": 0.8241812059993878,
+      "f1": 0.1393258426966292,
+      "recall": 0.9393939393939394,
+      "precision": 0.07524271844660194,
+      "pr_auc": 0.09386067524833469,
+      "accuracy": 0.6256109481915934,
+      "balanced_accuracy": 0.7772727272727273,
+      "mcc": 0.19977562772190532
+    }
+  ],
+  "best_model": "tabular_encoder",
+  "figures": [
+    "reports/transformers/figures/loss_ft_transformer.png",
+    "reports/transformers/figures/accuracy_ft_transformer.png",
+    "reports/transformers/figures/lr_ft_transformer.png",
+    "reports/transformers/figures/roc_ft_transformer.png",
+    "reports/transformers/figures/pr_ft_transformer.png",
+    "reports/transformers/figures/confusion_ft_transformer.png",
+    "reports/transformers/figures/calibration_ft_transformer.png",
+    "reports/transformers/figures/pred_dist_ft_transformer.png",
+    "reports/transformers/figures/importance_ft_transformer.png",
+    "reports/transformers/figures/attention_heatmap_ft_transformer.png",
+    "reports/transformers/figures/attention_features_ft_transformer.png",
+    "reports/transformers/figures/loss_tab_transformer.png",
+    "reports/transformers/figures/accuracy_tab_transformer.png",
+    "reports/transformers/figures/lr_tab_transformer.png",
+    "reports/transformers/figures/roc_tab_transformer.png",
+    "reports/transformers/figures/pr_tab_transformer.png",
+    "reports/transformers/figures/confusion_tab_transformer.png",
+    "reports/transformers/figures/calibration_tab_transformer.png",
+    "reports/transformers/figures/pred_dist_tab_transformer.png",
+    "reports/transformers/figures/importance_tab_transformer.png",
+    "reports/transformers/figures/attention_heatmap_tab_transformer.png",
+    "reports/transformers/figures/attention_features_tab_transformer.png",
+    "reports/transformers/figures/loss_tabular_encoder.png",
+    "reports/transformers/figures/accuracy_tabular_encoder.png",
+    "reports/transformers/figures/lr_tabular_encoder.png",
+    "reports/transformers/figures/roc_tabular_encoder.png",
+    "reports/transformers/figures/pr_tabular_encoder.png",
+    "reports/transformers/figures/confusion_tabular_encoder.png",
+    "reports/transformers/figures/calibration_tabular_encoder.png",
+    "reports/transformers/figures/pred_dist_tabular_encoder.png",
+    "reports/transformers/figures/importance_tabular_encoder.png",
+    "reports/transformers/figures/attention_heatmap_tabular_encoder.png",
+    "reports/transformers/figures/attention_features_tabular_encoder.png",
+    "reports/transformers/figures/comparison_roc_auc.png",
+    "reports/transformers/figures/comparison_f1.png",
+    "reports/transformers/figures/comparison_recall.png",
+    "reports/transformers/figures/comparison_pr_auc.png",
+    "reports/transformers/figures/cross_family_roc_auc.png"
+  ],
+  "attention": {
+    "ft_transformer": {
+      "n_samples": 256,
+      "feature_attention": {
+        "pca__7": 0.04425229325874091,
+        "pca__2": 0.044208736202141365,
+        "Borrowing dependency": 0.044145345998623416,
+        "diff__Borrowing dependency__minus__Retained Earnings to Total Assets": 0.04396362756444327,
+        "Total debt/Total net worth": 0.04386806656607339,
+        "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth": 0.04383452131425156,
+        "pca__1": 0.04370778807967419,
+        "pca__3": 0.043686259874527386,
+        "Net Income to Total Assets": 0.043659252754034664,
+        "pca__6": 0.04362772110197102,
+        "Allocation rate per person": 0.043577255027164516,
+        "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency": 0.04355338491997985,
+        "mul__Net Income to Stockholder's Equity__x__Borrowing dependency": 0.043461009871849005,
+        "Retained Earnings to Total Assets": 0.04342885421151616,
+        "mul__Total debt/Total net worth__x__After-tax net Interest Rate": 0.04335715845166081,
+        "pca__5": 0.04329100654138238,
+        "log__Net Value Growth Rate": 0.04301820242962213,
+        "Total income/Total expense": 0.04293649072032945,
+        "Debt ratio %": 0.042916682931494164,
+        "Non-industry income and expenditure/revenue": 0.04288542930979916,
+        "pca__4": 0.042872899645548045,
+        "ROA(B) before interest and depreciation after tax": 0.042595092242835024
+      },
+      "entropy_per_layer": {
+        "layer_1": 3.123076776999699,
+        "layer_2": 3.133419663999741,
+        "layer_3": 3.1352425164278817
+      }
+    },
+    "tab_transformer": {
+      "n_samples": 256,
+      "feature_attention": {
+        "Borrowing dependency": 0.046856804934522545,
+        "Allocation rate per person": 0.04668189646657662,
+        "Debt ratio %": 0.04661819212207885,
+        "pca__2": 0.04648899151156498,
+        "pca__3": 0.046418670973666434,
+        "pca__5": 0.046055270778831044,
+        "ROA(B) before interest and depreciation after tax": 0.04576799294943956,
+        "pca__1": 0.04576162498878231,
+        "pca__6": 0.04550532125435756,
+        "Net Income to Total Assets": 0.0454012209941566,
+        "log__Net Value Growth Rate": 0.04537656498866978,
+        "mul__Net Income to Stockholder's Equity__x__Borrowing dependency": 0.045337389116784005,
+        "mul__Total debt/Total net worth__x__After-tax net Interest Rate": 0.04509254073799997,
+        "pca__7": 0.045060281678602085,
+        "diff__Borrowing dependency__minus__Retained Earnings to Total Assets": 0.045026598578922196,
+        "pca__4": 0.04498113894783962,
+        "Total income/Total expense": 0.04486106505393047,
+        "Retained Earnings to Total Assets": 0.04484756330213824,
+        "Non-industry income and expenditure/revenue": 0.04484173720343141,
+        "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency": 0.044683009514825026,
+        "Total debt/Total net worth": 0.044283033254473456,
+        "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth": 0.044053090387354714
+      },
+      "entropy_per_layer": {
+        "layer_1": 3.075883745612435,
+        "layer_2": 3.0902629516917646,
+        "layer_3": 3.0908859816342766
+      }
+    },
+    "tabular_encoder": {
+      "n_samples": 256,
+      "feature_attention": {
+        "Allocation rate per person": 0.0695686256034688,
+        "diff__Borrowing dependency__minus__Retained Earnings to Total Assets": 0.06061600086964476,
+        "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth": 0.058158422745815515,
+        "pca__5": 0.05421960975114747,
+        "pca__1": 0.05364075258247877,
+        "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency": 0.05116691683402182,
+        "Retained Earnings to Total Assets": 0.05079830997130392,
+        "Borrowing dependency": 0.04847829192716414,
+        "Total debt/Total net worth": 0.04466180917634946,
+        "pca__6": 0.043614826444271865,
+        "Debt ratio %": 0.04179617309447084,
+        "pca__2": 0.04174353694576315,
+        "ROA(B) before interest and depreciation after tax": 0.04130235410651618,
+        "mul__Net Income to Stockholder's Equity__x__Borrowing dependency": 0.04000485702363221,
+        "Non-industry income and expenditure/revenue": 0.039050317159597565,
+        "Total income/Total expense": 0.03862731678327691,
+        "pca__7": 0.037896044355709986,
+        "pca__3": 0.03763240193881178,
+        "mul__Total debt/Total net worth__x__After-tax net Interest Rate": 0.03732279444048717,
+        "Net Income to Total Assets": 0.03714727986433983,
+        "log__Net Value Growth Rate": 0.03667783757327925,
+        "pca__4": 0.03587552065602557
+      },
+      "entropy_per_layer": {
+        "layer_1": 2.9291172624169133,
+        "layer_2": 3.017651494915667
+      }
+    }
+  },
+  "cross_family_comparison": [
+    {
+      "family": "machine_learning",
+      "model": "extra_trees",
+      "roc_auc": 0.9395163758800122,
+      "f1": 0.373134328358209,
+      "recall": 0.7575757575757576,
+      "pr_auc": 0.4379569290099973
+    },
+    {
+      "family": "transformers",
+      "model": "tabular_encoder",
+      "roc_auc": 0.9393021120293847,
+      "f1": 0.33540372670807456,
+      "recall": 0.8181818181818182,
+      "pr_auc": 0.41122075975451156
+    },
+    {
+      "family": "machine_learning",
+      "model": "random_forest",
+      "roc_auc": 0.9378022650749924,
+      "f1": 0.2456140350877192,
+      "recall": 0.8484848484848485,
+      "pr_auc": 0.4053853803130305
+    },
+    {
+      "family": "deep_learning",
+      "model": "wide_deep",
+      "roc_auc": 0.9370064279155188,
+      "f1": 0.3448275862068966,
+      "recall": 0.7575757575757576,
+      "pr_auc": 0.3585010997520177
+    },
+    {
+      "family": "machine_learning",
+      "model": "xgboost",
+      "roc_auc": 0.9349250076522804,
+      "f1": 0.25,
+      "recall": 0.8484848484848485,
+      "pr_auc": 0.3969536016180215
+    },
+    {
+      "family": "transformers",
+      "model": "tab_transformer",
+      "roc_auc": 0.9329660238751147,
+      "f1": 0.3103448275862069,
+      "recall": 0.8181818181818182,
+      "pr_auc": 0.33675087148559973
+    },
+    {
+      "family": "deep_learning",
+      "model": "mlp",
+      "roc_auc": 0.932139577594123,
+      "f1": 0.3086419753086419,
+      "recall": 0.7575757575757576,
+      "pr_auc": 0.3218810562686383
+    },
+    {
+      "family": "deep_learning",
+      "model": "deep_fc",
+      "roc_auc": 0.9309458218549128,
+      "f1": 0.3058823529411765,
+      "recall": 0.7878787878787878,
+      "pr_auc": 0.3388371341826092
+    },
+    {
+      "family": "deep_learning",
+      "model": "residual",
+      "roc_auc": 0.927670645852464,
+      "f1": 0.2626262626262626,
+      "recall": 0.7878787878787878,
+      "pr_auc": 0.3286880881714508
+    },
+    {
+      "family": "machine_learning",
+      "model": "logistic_regression",
+      "roc_auc": 0.9240893786348332,
+      "f1": 0.2267206477732793,
+      "recall": 0.8484848484848485,
+      "pr_auc": 0.2831191272899656
+    },
+    {
+      "family": "machine_learning",
+      "model": "naive_bayes",
+      "roc_auc": 0.9152433425160698,
+      "f1": 0.2639593908629442,
+      "recall": 0.7878787878787878,
+      "pr_auc": 0.2352079611774063
+    },
+    {
+      "family": "machine_learning",
+      "model": "svm",
+      "roc_auc": 0.9100091827364554,
+      "f1": 0.2531645569620253,
+      "recall": 0.9090909090909092,
+      "pr_auc": 0.2696628426936489
+    },
+    {
+      "family": "machine_learning",
+      "model": "mlp",
+      "roc_auc": 0.9045607591062136,
+      "f1": 0.2905027932960894,
+      "recall": 0.7878787878787878,
+      "pr_auc": 0.2924499123178797
+    },
+    {
+      "family": "machine_learning",
+      "model": "knn",
+      "roc_auc": 0.8533976124885214,
+      "f1": 0.2751322751322751,
+      "recall": 0.7878787878787878,
+      "pr_auc": 0.3047736784583614
+    },
+    {
+      "family": "transformers",
+      "model": "ft_transformer",
+      "roc_auc": 0.8241812059993878,
+      "f1": 0.1393258426966292,
+      "recall": 0.9393939393939394,
+      "pr_auc": 0.09386067524833469
+    },
+    {
+      "family": "machine_learning",
+      "model": "decision_tree",
+      "roc_auc": 0.8109121518212428,
+      "f1": 0.3111111111111111,
+      "recall": 0.6363636363636364,
+      "pr_auc": 0.2262789306198527
+    }
+  ]
+}

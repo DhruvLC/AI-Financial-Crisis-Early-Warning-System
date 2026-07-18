@@ -1,0 +1,323 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><title>Deep Learning Report</title><style>body{font-family:sans-serif;margin:2em;max-width:960px}table{border-collapse:collapse;margin:1em 0}th,td{border:1px solid #ccc;padding:4px 10px;text-align:left}th{background:#f0f0f0}</style></head><body><h1>Transformer Models Report</h1>
+<p>Generated: 2026-07-18T12:01:04.395644+00:00</p>
+<p>Dataset: feature store v001 (target `Bankrupt?`, 22 features)</p>
+<h2>Training summary</h2>
+<table>
+<tr><th>Model</th><th>Status</th><th>Params</th><th>Device</th><th>Epochs</th><th>Best epoch</th><th>Train (s)</th><th>Threshold</th></tr>
+<tr><td>ft_transformer</td><td>trained</td><td>103,489</td><td>mps</td><td>13</td><td>3</td><td>396.34</td><td>0.513 (youden)</td></tr>
+<tr><td>tab_transformer</td><td>trained</td><td>128,461</td><td>cpu</td><td>13</td><td>3</td><td>496.30</td><td>0.469 (youden)</td></tr>
+<tr><td>tabular_encoder</td><td>trained</td><td>71,361</td><td>cpu</td><td>24</td><td>14</td><td>318.17</td><td>0.676 (youden)</td></tr>
+</table>
+<h2>ft_transformer</h2>
+<h3>Architecture</h3>
+<p>`{&#x27;network&#x27;: &#x27;ft_transformer&#x27;, &#x27;n_features&#x27;: 22, &#x27;embed_dim&#x27;: 64, &#x27;n_heads&#x27;: 8, &#x27;n_layers&#x27;: 3, &#x27;ff_dim&#x27;: 128, &#x27;dropout&#x27;: 0.1}`</p>
+<h3>Hyperparameters</h3>
+<p>`{&#x27;data&#x27;: {&#x27;batch_size&#x27;: 128}, &#x27;optimizer&#x27;: {&#x27;name&#x27;: &#x27;adamw&#x27;, &#x27;lr&#x27;: 0.0005, &#x27;weight_decay&#x27;: 0.0001}, &#x27;scheduler&#x27;: {&#x27;name&#x27;: &#x27;cosine&#x27;}, &#x27;loss&#x27;: {&#x27;name&#x27;: &#x27;weighted_bce&#x27;}, &#x27;training&#x27;: {&#x27;epochs&#x27;: 60, &#x27;device&#x27;: &#x27;auto&#x27;, &#x27;mixed_precision&#x27;: True, &#x27;gradient_clip&#x27;: 1.0, &#x27;log_every&#x27;: 5}}`</p>
+<h3>Metrics — val (threshold 0.513)</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>accuracy</td><td>0.6246</td></tr>
+<tr><td>precision</td><td>0.0751</td></tr>
+<tr><td>recall</td><td>0.9394</td></tr>
+<tr><td>f1</td><td>0.1390</td></tr>
+<tr><td>roc_auc</td><td>0.8086</td></tr>
+<tr><td>pr_auc</td><td>0.1270</td></tr>
+<tr><td>balanced_accuracy</td><td>0.7768</td></tr>
+<tr><td>mcc</td><td>0.1993</td></tr>
+<tr><td>cohen_kappa</td><td>0.0843</td></tr>
+<tr><td>log_loss</td><td>0.6707</td></tr>
+<tr><td>brier_score</td><td>0.2389</td></tr>
+</table>
+<p>Confusion: TN=608 FP=382 FN=2 TP=31</p>
+<h3>Metrics — test (threshold 0.513)</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>accuracy</td><td>0.6256</td></tr>
+<tr><td>precision</td><td>0.0752</td></tr>
+<tr><td>recall</td><td>0.9394</td></tr>
+<tr><td>f1</td><td>0.1393</td></tr>
+<tr><td>roc_auc</td><td>0.8242</td></tr>
+<tr><td>pr_auc</td><td>0.0939</td></tr>
+<tr><td>balanced_accuracy</td><td>0.7773</td></tr>
+<tr><td>mcc</td><td>0.1998</td></tr>
+<tr><td>cohen_kappa</td><td>0.0847</td></tr>
+<tr><td>log_loss</td><td>0.6707</td></tr>
+<tr><td>brier_score</td><td>0.2389</td></tr>
+</table>
+<p>Confusion: TN=609 FP=381 FN=2 TP=31</p>
+<h3>Top features (permutation)</h3>
+<table>
+<tr><th>feature</th><th>importance</th><th>std</th><th></th><th>---</th><th>---</th><th>---</th><th></th><th>diff__Net Income to Stockholder&#x27;s Equity__minus__Total debt/Total net worth</th><th>0.0204</th><th>0.0105</th><th></th><th>Non-industry income and expenditure/revenue</th><th>0.0180</th><th>0.0052</th><th></th><th>mul__Total debt/Total net worth__x__After-tax net Interest Rate</th><th>0.0143</th><th>0.0047</th><th></th><th>diff__Net Income to Stockholder&#x27;s Equity__minus__Borrowing dependency</th><th>0.0136</th><th>0.0057</th><th></th><th>diff__Borrowing dependency__minus__Retained Earnings to Total Assets</th><th>0.0103</th><th>0.0051</th><th></th><th>mul__Net Income to Stockholder&#x27;s Equity__x__Borrowing dependency</th><th>0.0093</th><th>0.0015</th><th></th><th>Total income/Total expense</th><th>0.0037</th><th>0.0047</th><th></th><th>Allocation rate per person</th><th>-0.0002</th><th>0.0055</th><th></th><th>pca__3</th><th>-0.0026</th><th>0.0020</th><th></th><th>Total debt/Total net worth</th><th>-0.0032</th><th>0.0026</th><th></th><th>pca__5</th><th>-0.0038</th><th>0.0029</th><th></th><th>pca__4</th><th>-0.0050</th><th>0.0064</th><th></th><th>Retained Earnings to Total Assets</th><th>-0.0098</th><th>0.0008</th><th></th><th>log__Net Value Growth Rate</th><th>-0.0142</th><th>0.0025</th><th></th><th>pca__6</th><th>-0.0178</th><th>0.0039</th></tr>
+</table>
+<h3>Top features (SHAP)</h3>
+<table>
+<tr><th>Feature</th><th>mean abs SHAP</th></tr>
+<tr><td>pca__2</td><td>0.0121</td></tr>
+<tr><td>Allocation rate per person</td><td>0.0111</td></tr>
+<tr><td>diff__Net Income to Stockholder&#x27;s Equity__minus__Total debt/Total net worth</td><td>0.0093</td></tr>
+<tr><td>Total income/Total expense</td><td>0.0082</td></tr>
+<tr><td>pca__7</td><td>0.0073</td></tr>
+<tr><td>pca__5</td><td>0.0069</td></tr>
+<tr><td>diff__Borrowing dependency__minus__Retained Earnings to Total Assets</td><td>0.0062</td></tr>
+<tr><td>ROA(B) before interest and depreciation after tax</td><td>0.0054</td></tr>
+<tr><td>log__Net Value Growth Rate</td><td>0.0053</td></tr>
+<tr><td>Borrowing dependency</td><td>0.0049</td></tr>
+<tr><td>Total debt/Total net worth</td><td>0.0041</td></tr>
+<tr><td>mul__Total debt/Total net worth__x__After-tax net Interest Rate</td><td>0.0034</td></tr>
+<tr><td>Non-industry income and expenditure/revenue</td><td>0.0032</td></tr>
+<tr><td>mul__Net Income to Stockholder&#x27;s Equity__x__Borrowing dependency</td><td>0.0030</td></tr>
+<tr><td>pca__4</td><td>0.0029</td></tr>
+</table>
+<h2>tab_transformer</h2>
+<h3>Architecture</h3>
+<p>`{&#x27;network&#x27;: &#x27;tab_transformer&#x27;, &#x27;n_features&#x27;: 22, &#x27;embed_dim&#x27;: 32, &#x27;n_heads&#x27;: 8, &#x27;n_layers&#x27;: 3, &#x27;ff_dim&#x27;: 64, &#x27;dropout&#x27;: 0.1, &#x27;mlp_hidden&#x27;: [128, 64]}`</p>
+<h3>Hyperparameters</h3>
+<p>`{&#x27;data&#x27;: {&#x27;batch_size&#x27;: 128}, &#x27;optimizer&#x27;: {&#x27;name&#x27;: &#x27;adamw&#x27;, &#x27;lr&#x27;: 0.0005, &#x27;weight_decay&#x27;: 0.0001}, &#x27;scheduler&#x27;: {&#x27;name&#x27;: &#x27;cosine&#x27;}, &#x27;loss&#x27;: {&#x27;name&#x27;: &#x27;weighted_bce&#x27;}, &#x27;training&#x27;: {&#x27;epochs&#x27;: 60, &#x27;device&#x27;: &#x27;auto&#x27;, &#x27;mixed_precision&#x27;: True, &#x27;gradient_clip&#x27;: 1.0, &#x27;log_every&#x27;: 5}}`</p>
+<h3>Metrics — val (threshold 0.469)</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>accuracy</td><td>0.8905</td></tr>
+<tr><td>precision</td><td>0.2158</td></tr>
+<tr><td>recall</td><td>0.9091</td></tr>
+<tr><td>f1</td><td>0.3488</td></tr>
+<tr><td>roc_auc</td><td>0.9423</td></tr>
+<tr><td>pr_auc</td><td>0.3874</td></tr>
+<tr><td>balanced_accuracy</td><td>0.8995</td></tr>
+<tr><td>mcc</td><td>0.4120</td></tr>
+<tr><td>cohen_kappa</td><td>0.3130</td></tr>
+<tr><td>log_loss</td><td>0.3499</td></tr>
+<tr><td>brier_score</td><td>0.0977</td></tr>
+</table>
+<p>Confusion: TN=881 FP=109 FN=3 TP=30</p>
+<h3>Metrics — test (threshold 0.469)</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>accuracy</td><td>0.8827</td></tr>
+<tr><td>precision</td><td>0.1915</td></tr>
+<tr><td>recall</td><td>0.8182</td></tr>
+<tr><td>f1</td><td>0.3103</td></tr>
+<tr><td>roc_auc</td><td>0.9330</td></tr>
+<tr><td>pr_auc</td><td>0.3368</td></tr>
+<tr><td>balanced_accuracy</td><td>0.8515</td></tr>
+<tr><td>mcc</td><td>0.3603</td></tr>
+<tr><td>cohen_kappa</td><td>0.2723</td></tr>
+<tr><td>log_loss</td><td>0.3726</td></tr>
+<tr><td>brier_score</td><td>0.1039</td></tr>
+</table>
+<p>Confusion: TN=876 FP=114 FN=6 TP=27</p>
+<h3>Top features (permutation)</h3>
+<table>
+<tr><th>feature</th><th>importance</th><th>std</th><th></th><th>---</th><th>---</th><th>---</th><th></th><th>pca__1</th><th>0.0052</th><th>0.0022</th><th></th><th>diff__Borrowing dependency__minus__Retained Earnings to Total Assets</th><th>0.0050</th><th>0.0037</th><th></th><th>Retained Earnings to Total Assets</th><th>0.0046</th><th>0.0013</th><th></th><th>Net Income to Total Assets</th><th>0.0039</th><th>0.0011</th><th></th><th>pca__6</th><th>0.0037</th><th>0.0012</th><th></th><th>Non-industry income and expenditure/revenue</th><th>0.0031</th><th>0.0010</th><th></th><th>ROA(B) before interest and depreciation after tax</th><th>0.0027</th><th>0.0009</th><th></th><th>Allocation rate per person</th><th>0.0027</th><th>0.0017</th><th></th><th>diff__Net Income to Stockholder&#x27;s Equity__minus__Total debt/Total net worth</th><th>0.0018</th><th>0.0024</th><th></th><th>pca__2</th><th>0.0016</th><th>0.0003</th><th></th><th>Total income/Total expense</th><th>0.0015</th><th>0.0003</th><th></th><th>diff__Net Income to Stockholder&#x27;s Equity__minus__Borrowing dependency</th><th>0.0012</th><th>0.0008</th><th></th><th>pca__5</th><th>0.0008</th><th>0.0007</th><th></th><th>pca__3</th><th>0.0007</th><th>0.0006</th><th></th><th>log__Net Value Growth Rate</th><th>0.0005</th><th>0.0003</th></tr>
+</table>
+<h3>Top features (SHAP)</h3>
+<table>
+<tr><th>Feature</th><th>mean abs SHAP</th></tr>
+<tr><td>Borrowing dependency</td><td>0.0269</td></tr>
+<tr><td>pca__1</td><td>0.0257</td></tr>
+<tr><td>diff__Borrowing dependency__minus__Retained Earnings to Total Assets</td><td>0.0216</td></tr>
+<tr><td>Allocation rate per person</td><td>0.0208</td></tr>
+<tr><td>diff__Net Income to Stockholder&#x27;s Equity__minus__Total debt/Total net worth</td><td>0.0184</td></tr>
+<tr><td>Net Income to Total Assets</td><td>0.0152</td></tr>
+<tr><td>Debt ratio %</td><td>0.0138</td></tr>
+<tr><td>Retained Earnings to Total Assets</td><td>0.0129</td></tr>
+<tr><td>pca__2</td><td>0.0117</td></tr>
+<tr><td>diff__Net Income to Stockholder&#x27;s Equity__minus__Borrowing dependency</td><td>0.0110</td></tr>
+<tr><td>Total debt/Total net worth</td><td>0.0110</td></tr>
+<tr><td>mul__Total debt/Total net worth__x__After-tax net Interest Rate</td><td>0.0086</td></tr>
+<tr><td>Non-industry income and expenditure/revenue</td><td>0.0079</td></tr>
+<tr><td>pca__6</td><td>0.0075</td></tr>
+<tr><td>pca__3</td><td>0.0068</td></tr>
+</table>
+<h2>tabular_encoder</h2>
+<h3>Architecture</h3>
+<p>`{&#x27;network&#x27;: &#x27;tabular_encoder&#x27;, &#x27;n_features&#x27;: 22, &#x27;embed_dim&#x27;: 64, &#x27;n_heads&#x27;: 4, &#x27;n_layers&#x27;: 2, &#x27;ff_dim&#x27;: 128, &#x27;dropout&#x27;: 0.1, &#x27;positional_embedding&#x27;: True}`</p>
+<h3>Hyperparameters</h3>
+<p>`{&#x27;data&#x27;: {&#x27;batch_size&#x27;: 128}, &#x27;optimizer&#x27;: {&#x27;name&#x27;: &#x27;adamw&#x27;, &#x27;lr&#x27;: 0.0005, &#x27;weight_decay&#x27;: 0.0001}, &#x27;scheduler&#x27;: {&#x27;name&#x27;: &#x27;cosine&#x27;}, &#x27;loss&#x27;: {&#x27;name&#x27;: &#x27;weighted_bce&#x27;}, &#x27;training&#x27;: {&#x27;epochs&#x27;: 60, &#x27;device&#x27;: &#x27;auto&#x27;, &#x27;mixed_precision&#x27;: True, &#x27;gradient_clip&#x27;: 1.0, &#x27;log_every&#x27;: 5}}`</p>
+<h3>Metrics — val (threshold 0.676)</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>accuracy</td><td>0.9159</td></tr>
+<tr><td>precision</td><td>0.2613</td></tr>
+<tr><td>recall</td><td>0.8788</td></tr>
+<tr><td>f1</td><td>0.4028</td></tr>
+<tr><td>roc_auc</td><td>0.9437</td></tr>
+<tr><td>pr_auc</td><td>0.4243</td></tr>
+<tr><td>balanced_accuracy</td><td>0.8980</td></tr>
+<tr><td>mcc</td><td>0.4522</td></tr>
+<tr><td>cohen_kappa</td><td>0.3715</td></tr>
+<tr><td>log_loss</td><td>0.2803</td></tr>
+<tr><td>brier_score</td><td>0.0899</td></tr>
+</table>
+<p>Confusion: TN=908 FP=82 FN=4 TP=29</p>
+<h3>Metrics — test (threshold 0.676)</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>accuracy</td><td>0.8954</td></tr>
+<tr><td>precision</td><td>0.2109</td></tr>
+<tr><td>recall</td><td>0.8182</td></tr>
+<tr><td>f1</td><td>0.3354</td></tr>
+<tr><td>roc_auc</td><td>0.9393</td></tr>
+<tr><td>pr_auc</td><td>0.4112</td></tr>
+<tr><td>balanced_accuracy</td><td>0.8581</td></tr>
+<tr><td>mcc</td><td>0.3824</td></tr>
+<tr><td>cohen_kappa</td><td>0.2995</td></tr>
+<tr><td>log_loss</td><td>0.3120</td></tr>
+<tr><td>brier_score</td><td>0.1009</td></tr>
+</table>
+<p>Confusion: TN=889 FP=101 FN=6 TP=27</p>
+<h3>Top features (permutation)</h3>
+<table>
+<tr><th>feature</th><th>importance</th><th>std</th><th></th><th>---</th><th>---</th><th>---</th><th></th><th>diff__Borrowing dependency__minus__Retained Earnings to Total Assets</th><th>0.0206</th><th>0.0084</th><th></th><th>pca__6</th><th>0.0174</th><th>0.0049</th><th></th><th>pca__1</th><th>0.0147</th><th>0.0042</th><th></th><th>diff__Net Income to Stockholder&#x27;s Equity__minus__Total debt/Total net worth</th><th>0.0120</th><th>0.0036</th><th></th><th>ROA(B) before interest and depreciation after tax</th><th>0.0090</th><th>0.0036</th><th></th><th>diff__Net Income to Stockholder&#x27;s Equity__minus__Borrowing dependency</th><th>0.0081</th><th>0.0043</th><th></th><th>Retained Earnings to Total Assets</th><th>0.0045</th><th>0.0007</th><th></th><th>Total income/Total expense</th><th>0.0041</th><th>0.0022</th><th></th><th>Net Income to Total Assets</th><th>0.0041</th><th>0.0007</th><th></th><th>pca__5</th><th>0.0030</th><th>0.0033</th><th></th><th>pca__7</th><th>0.0028</th><th>0.0005</th><th></th><th>Allocation rate per person</th><th>0.0017</th><th>0.0025</th><th></th><th>mul__Total debt/Total net worth__x__After-tax net Interest Rate</th><th>0.0007</th><th>0.0007</th><th></th><th>log__Net Value Growth Rate</th><th>0.0001</th><th>0.0005</th><th></th><th>Total debt/Total net worth</th><th>0.0001</th><th>0.0021</th></tr>
+</table>
+<h3>Top features (SHAP)</h3>
+<table>
+<tr><th>Feature</th><th>mean abs SHAP</th></tr>
+<tr><td>diff__Borrowing dependency__minus__Retained Earnings to Total Assets</td><td>0.0378</td></tr>
+<tr><td>Allocation rate per person</td><td>0.0295</td></tr>
+<tr><td>pca__1</td><td>0.0259</td></tr>
+<tr><td>diff__Net Income to Stockholder&#x27;s Equity__minus__Total debt/Total net worth</td><td>0.0238</td></tr>
+<tr><td>Borrowing dependency</td><td>0.0191</td></tr>
+<tr><td>Total debt/Total net worth</td><td>0.0178</td></tr>
+<tr><td>diff__Net Income to Stockholder&#x27;s Equity__minus__Borrowing dependency</td><td>0.0175</td></tr>
+<tr><td>pca__5</td><td>0.0135</td></tr>
+<tr><td>pca__6</td><td>0.0118</td></tr>
+<tr><td>Debt ratio %</td><td>0.0117</td></tr>
+<tr><td>Retained Earnings to Total Assets</td><td>0.0110</td></tr>
+<tr><td>ROA(B) before interest and depreciation after tax</td><td>0.0100</td></tr>
+<tr><td>mul__Net Income to Stockholder&#x27;s Equity__x__Borrowing dependency</td><td>0.0100</td></tr>
+<tr><td>Total income/Total expense</td><td>0.0086</td></tr>
+<tr><td>Net Income to Total Assets</td><td>0.0078</td></tr>
+</table>
+<h2>Leaderboard (test)</h2>
+<table>
+<tr><th>rank</th><th>model</th><th>threshold</th><th>n_parameters</th><th>best_epoch</th><th>train_seconds</th><th>roc_auc</th><th>f1</th><th>recall</th><th>precision</th><th>pr_auc</th><th>accuracy</th><th>balanced_accuracy</th><th>mcc</th><th></th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th></th><th>1</th><th>tabular_encoder</th><th>0.6759</th><th>71361</th><th>14</th><th>318.1700</th><th>0.9393</th><th>0.3354</th><th>0.8182</th><th>0.2109</th><th>0.4112</th><th>0.8954</th><th>0.8581</th><th>0.3824</th><th></th><th>2</th><th>tab_transformer</th><th>0.4695</th><th>128461</th><th>3</th><th>496.3000</th><th>0.9330</th><th>0.3103</th><th>0.8182</th><th>0.1915</th><th>0.3368</th><th>0.8827</th><th>0.8515</th><th>0.3603</th><th></th><th>3</th><th>ft_transformer</th><th>0.5126</th><th>103489</th><th>3</th><th>396.3400</th><th>0.8242</th><th>0.1393</th><th>0.9394</th><th>0.0752</th><th>0.0939</th><th>0.6256</th><th>0.7773</th><th>0.1998</th></tr>
+</table>
+<h2>Best model</h2>
+<li>**Network**: tabular_encoder</li>
+<li>**Best epoch**: 14</li>
+<li>**Test ROC-AUC**: 0.9393</li>
+<li>**Threshold**: 0.676 (youden)</li>
+<h2>Figures</h2>
+<li>`reports/transformers/figures/loss_ft_transformer.png`</li>
+<li>`reports/transformers/figures/accuracy_ft_transformer.png`</li>
+<li>`reports/transformers/figures/lr_ft_transformer.png`</li>
+<li>`reports/transformers/figures/roc_ft_transformer.png`</li>
+<li>`reports/transformers/figures/pr_ft_transformer.png`</li>
+<li>`reports/transformers/figures/confusion_ft_transformer.png`</li>
+<li>`reports/transformers/figures/calibration_ft_transformer.png`</li>
+<li>`reports/transformers/figures/pred_dist_ft_transformer.png`</li>
+<li>`reports/transformers/figures/importance_ft_transformer.png`</li>
+<li>`reports/transformers/figures/attention_heatmap_ft_transformer.png`</li>
+<li>`reports/transformers/figures/attention_features_ft_transformer.png`</li>
+<li>`reports/transformers/figures/loss_tab_transformer.png`</li>
+<li>`reports/transformers/figures/accuracy_tab_transformer.png`</li>
+<li>`reports/transformers/figures/lr_tab_transformer.png`</li>
+<li>`reports/transformers/figures/roc_tab_transformer.png`</li>
+<li>`reports/transformers/figures/pr_tab_transformer.png`</li>
+<li>`reports/transformers/figures/confusion_tab_transformer.png`</li>
+<li>`reports/transformers/figures/calibration_tab_transformer.png`</li>
+<li>`reports/transformers/figures/pred_dist_tab_transformer.png`</li>
+<li>`reports/transformers/figures/importance_tab_transformer.png`</li>
+<li>`reports/transformers/figures/attention_heatmap_tab_transformer.png`</li>
+<li>`reports/transformers/figures/attention_features_tab_transformer.png`</li>
+<li>`reports/transformers/figures/loss_tabular_encoder.png`</li>
+<li>`reports/transformers/figures/accuracy_tabular_encoder.png`</li>
+<li>`reports/transformers/figures/lr_tabular_encoder.png`</li>
+<li>`reports/transformers/figures/roc_tabular_encoder.png`</li>
+<li>`reports/transformers/figures/pr_tabular_encoder.png`</li>
+<li>`reports/transformers/figures/confusion_tabular_encoder.png`</li>
+<li>`reports/transformers/figures/calibration_tabular_encoder.png`</li>
+<li>`reports/transformers/figures/pred_dist_tabular_encoder.png`</li>
+<li>`reports/transformers/figures/importance_tabular_encoder.png`</li>
+<li>`reports/transformers/figures/attention_heatmap_tabular_encoder.png`</li>
+<li>`reports/transformers/figures/attention_features_tabular_encoder.png`</li>
+<li>`reports/transformers/figures/comparison_roc_auc.png`</li>
+<li>`reports/transformers/figures/comparison_f1.png`</li>
+<li>`reports/transformers/figures/comparison_recall.png`</li>
+<li>`reports/transformers/figures/comparison_pr_auc.png`</li>
+<li>`reports/transformers/figures/cross_family_roc_auc.png`</li>
+<h2>Attention analysis — ft_transformer</h2>
+<p>Aggregated over 256 validation samples (mean over heads, layers, and queries).</p>
+<table>
+<tr><th>Layer</th><th>Mean attention entropy</th></tr>
+<tr><td>layer_1</td><td>3.1231</td></tr>
+<tr><td>layer_2</td><td>3.1334</td></tr>
+<tr><td>layer_3</td><td>3.1352</td></tr>
+</table>
+<h3>Top features by attention received</h3>
+<table>
+<tr><th>Feature</th><th>Mean attention</th></tr>
+<tr><td>pca__7</td><td>0.0443</td></tr>
+<tr><td>pca__2</td><td>0.0442</td></tr>
+<tr><td>Borrowing dependency</td><td>0.0441</td></tr>
+<tr><td>diff__Borrowing dependency__minus__Retained Earnings to Total Assets</td><td>0.0440</td></tr>
+<tr><td>Total debt/Total net worth</td><td>0.0439</td></tr>
+<tr><td>diff__Net Income to Stockholder&#x27;s Equity__minus__Total debt/Total net worth</td><td>0.0438</td></tr>
+<tr><td>pca__1</td><td>0.0437</td></tr>
+<tr><td>pca__3</td><td>0.0437</td></tr>
+<tr><td>Net Income to Total Assets</td><td>0.0437</td></tr>
+<tr><td>pca__6</td><td>0.0436</td></tr>
+<tr><td>Allocation rate per person</td><td>0.0436</td></tr>
+<tr><td>diff__Net Income to Stockholder&#x27;s Equity__minus__Borrowing dependency</td><td>0.0436</td></tr>
+<tr><td>mul__Net Income to Stockholder&#x27;s Equity__x__Borrowing dependency</td><td>0.0435</td></tr>
+<tr><td>Retained Earnings to Total Assets</td><td>0.0434</td></tr>
+<tr><td>mul__Total debt/Total net worth__x__After-tax net Interest Rate</td><td>0.0434</td></tr>
+</table>
+<h2>Attention analysis — tab_transformer</h2>
+<p>Aggregated over 256 validation samples (mean over heads, layers, and queries).</p>
+<table>
+<tr><th>Layer</th><th>Mean attention entropy</th></tr>
+<tr><td>layer_1</td><td>3.0759</td></tr>
+<tr><td>layer_2</td><td>3.0903</td></tr>
+<tr><td>layer_3</td><td>3.0909</td></tr>
+</table>
+<h3>Top features by attention received</h3>
+<table>
+<tr><th>Feature</th><th>Mean attention</th></tr>
+<tr><td>Borrowing dependency</td><td>0.0469</td></tr>
+<tr><td>Allocation rate per person</td><td>0.0467</td></tr>
+<tr><td>Debt ratio %</td><td>0.0466</td></tr>
+<tr><td>pca__2</td><td>0.0465</td></tr>
+<tr><td>pca__3</td><td>0.0464</td></tr>
+<tr><td>pca__5</td><td>0.0461</td></tr>
+<tr><td>ROA(B) before interest and depreciation after tax</td><td>0.0458</td></tr>
+<tr><td>pca__1</td><td>0.0458</td></tr>
+<tr><td>pca__6</td><td>0.0455</td></tr>
+<tr><td>Net Income to Total Assets</td><td>0.0454</td></tr>
+<tr><td>log__Net Value Growth Rate</td><td>0.0454</td></tr>
+<tr><td>mul__Net Income to Stockholder&#x27;s Equity__x__Borrowing dependency</td><td>0.0453</td></tr>
+<tr><td>mul__Total debt/Total net worth__x__After-tax net Interest Rate</td><td>0.0451</td></tr>
+<tr><td>pca__7</td><td>0.0451</td></tr>
+<tr><td>diff__Borrowing dependency__minus__Retained Earnings to Total Assets</td><td>0.0450</td></tr>
+</table>
+<h2>Attention analysis — tabular_encoder</h2>
+<p>Aggregated over 256 validation samples (mean over heads, layers, and queries).</p>
+<table>
+<tr><th>Layer</th><th>Mean attention entropy</th></tr>
+<tr><td>layer_1</td><td>2.9291</td></tr>
+<tr><td>layer_2</td><td>3.0177</td></tr>
+</table>
+<h3>Top features by attention received</h3>
+<table>
+<tr><th>Feature</th><th>Mean attention</th></tr>
+<tr><td>Allocation rate per person</td><td>0.0696</td></tr>
+<tr><td>diff__Borrowing dependency__minus__Retained Earnings to Total Assets</td><td>0.0606</td></tr>
+<tr><td>diff__Net Income to Stockholder&#x27;s Equity__minus__Total debt/Total net worth</td><td>0.0582</td></tr>
+<tr><td>pca__5</td><td>0.0542</td></tr>
+<tr><td>pca__1</td><td>0.0536</td></tr>
+<tr><td>diff__Net Income to Stockholder&#x27;s Equity__minus__Borrowing dependency</td><td>0.0512</td></tr>
+<tr><td>Retained Earnings to Total Assets</td><td>0.0508</td></tr>
+<tr><td>Borrowing dependency</td><td>0.0485</td></tr>
+<tr><td>Total debt/Total net worth</td><td>0.0447</td></tr>
+<tr><td>pca__6</td><td>0.0436</td></tr>
+<tr><td>Debt ratio %</td><td>0.0418</td></tr>
+<tr><td>pca__2</td><td>0.0417</td></tr>
+<tr><td>ROA(B) before interest and depreciation after tax</td><td>0.0413</td></tr>
+<tr><td>mul__Net Income to Stockholder&#x27;s Equity__x__Borrowing dependency</td><td>0.0400</td></tr>
+<tr><td>Non-industry income and expenditure/revenue</td><td>0.0391</td></tr>
+</table>
+<h2>Comparison with previous ML and DL models</h2>
+<p>Test-set metrics of every registered model across the classical ML, deep-learning, and transformer stages:</p>
+<table>
+<tr><th>family</th><th>model</th><th>roc_auc</th><th>f1</th><th>recall</th><th>pr_auc</th><th></th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th></th><th>machine_learning</th><th>extra_trees</th><th>0.9395</th><th>0.3731</th><th>0.7576</th><th>0.4380</th><th></th><th>transformers</th><th>tabular_encoder</th><th>0.9393</th><th>0.3354</th><th>0.8182</th><th>0.4112</th><th></th><th>machine_learning</th><th>random_forest</th><th>0.9378</th><th>0.2456</th><th>0.8485</th><th>0.4054</th><th></th><th>deep_learning</th><th>wide_deep</th><th>0.9370</th><th>0.3448</th><th>0.7576</th><th>0.3585</th><th></th><th>machine_learning</th><th>xgboost</th><th>0.9349</th><th>0.2500</th><th>0.8485</th><th>0.3970</th><th></th><th>transformers</th><th>tab_transformer</th><th>0.9330</th><th>0.3103</th><th>0.8182</th><th>0.3368</th><th></th><th>deep_learning</th><th>mlp</th><th>0.9321</th><th>0.3086</th><th>0.7576</th><th>0.3219</th><th></th><th>deep_learning</th><th>deep_fc</th><th>0.9309</th><th>0.3059</th><th>0.7879</th><th>0.3388</th><th></th><th>deep_learning</th><th>residual</th><th>0.9277</th><th>0.2626</th><th>0.7879</th><th>0.3287</th><th></th><th>machine_learning</th><th>logistic_regression</th><th>0.9241</th><th>0.2267</th><th>0.8485</th><th>0.2831</th><th></th><th>machine_learning</th><th>naive_bayes</th><th>0.9152</th><th>0.2640</th><th>0.7879</th><th>0.2352</th><th></th><th>machine_learning</th><th>svm</th><th>0.9100</th><th>0.2532</th><th>0.9091</th><th>0.2697</th><th></th><th>machine_learning</th><th>mlp</th><th>0.9046</th><th>0.2905</th><th>0.7879</th><th>0.2924</th><th></th><th>machine_learning</th><th>knn</th><th>0.8534</th><th>0.2751</th><th>0.7879</th><th>0.3048</th><th></th><th>transformers</th><th>ft_transformer</th><th>0.8242</th><th>0.1393</th><th>0.9394</th><th>0.0939</th><th></th><th>machine_learning</th><th>decision_tree</th><th>0.8109</th><th>0.3111</th><th>0.6364</th><th>0.2263</th></tr>
+</table></body></html>
