@@ -13,6 +13,7 @@ fredapi>=0.5         # optional; FRED works via CSV fallback without it
 
 # Models
 xgboost>=2.0
+torch>=2.1           # deep-learning stage (src/pipeline/deep_learning)
 
 # Explainability
 shap>=0.44
@@ -21,8 +22,7 @@ shap>=0.44
 matplotlib>=3.7
 seaborn>=0.12
 
-# --- Phase 2 (uncomment when you build the deep-learning stages) ---
-# torch>=2.1
+# --- Later phases (uncomment when you build them) ---
 # transformers>=4.40
 # yfinance>=0.2      # market data (stage 2)
 # fredapi>=0.5       # macro data (stage 2)

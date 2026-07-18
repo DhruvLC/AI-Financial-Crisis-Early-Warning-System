@@ -228,6 +228,94 @@ ml:
     reports_dir: "reports/ml"
     figures_dir: "reports/ml/figures"
 
+# Stage 9 — Deep Learning (src/pipeline/deep_learning).
+# Trains every enabled PyTorch network on the latest feature-store version,
+# evaluates on val/test with the ML metric suite, compares on a ROC-AUC
+# leaderboard, explains, and registers each network (best one separately)
+# under models/deep_learning/.
+deep_learning:
+  fail_fast: false           # false = a failing network is logged & skipped
+  random_state: 42
+  deterministic: true        # seed all RNGs + deterministic torch kernels
+  # Enabled networks (keys of pipeline.deep_learning.models.NETWORK_REGISTRY).
+  networks:
+    - mlp
+    - deep_fc
+    - residual
+    - wide_deep
+  data:
+    batch_size: 128
+    shuffle: true
+    num_workers: 0
+  # Per-network architecture overrides (see each network's default_params).
+  model_params:
+    mlp: {hidden_layers: [64, 32], activation: relu, dropout: 0.2,
+          batch_norm: true, initialization: kaiming}
+    deep_fc: {hidden_layers: [256, 128, 64, 32], activation: gelu,
+              dropout: 0.3, batch_norm: true, initialization: kaiming}
+    residual: {width: 128, n_blocks: 3, activation: relu, dropout: 0.2,
+               batch_norm: true, initialization: kaiming}
+    wide_deep: {hidden_layers: [128, 64], activation: relu, dropout: 0.2,
+                batch_norm: true, initialization: kaiming}
+  loss:
+    name: weighted_bce       # bce | bce_with_logits | weighted_bce | focal
+    # pos_weight: null       # default: computed from train class imbalance
+    gamma: 2.0               # focal only
+    alpha: 0.25              # focal only
+  optimizer:
+    name: adamw              # adam | adamw | sgd | rmsprop
+    lr: 0.001
+    weight_decay: 0.0001
+  scheduler:
+    name: plateau            # plateau | cosine | step | exponential | none
+    factor: 0.5
+    patience: 5
+    # t_max: 50              # cosine
+    # step_size: 10          # step
+    # gamma: 0.5             # step / exponential
+  training:
+    epochs: 60
+    device: auto             # auto | cuda | mps | cpu
+    mixed_precision: true    # used on CUDA only
+    gradient_clip: 1.0
+    log_every: 5
+    # resume_from: models/deep_learning/mlp_last.pt
+  early_stopping:
+    enabled: true
+    patience: 10
+    min_delta: 0.0001
+  checkpoint:
+    enabled: true
+    dir: "models/deep_learning"
+  threshold_optimization:
+    enabled: true
+    method: youden           # youden | max_f1 | custom
+    custom_threshold: 0.5
+  evaluation:
+    metrics:
+      - accuracy
+      - precision
+      - recall
+      - f1
+      - roc_auc
+      - pr_auc
+      - balanced_accuracy
+      - mcc
+      - cohen_kappa
+      - log_loss
+      - brier_score
+  explainability:
+    permutation: true
+    permutation_repeats: 3
+    shap: true               # skipped gracefully if shap is not installed
+    shap_max_samples: 100
+  visualization:
+    dpi: 150
+  output:
+    models_dir: "models/deep_learning"
+    reports_dir: "reports/deep_learning"
+    figures_dir: "reports/deep_learning/figures"
+
 split:
   test_size: 0.15
   val_size: 0.15

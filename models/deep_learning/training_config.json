@@ -1,0 +1,238 @@
+{
+  "best_model": {
+    "model_version": "v004",
+    "network": "wide_deep",
+    "checkpoints": {
+      "last": "models/deep_learning/wide_deep_last.pt",
+      "best": "models/deep_learning/wide_deep_best.pt"
+    },
+    "architecture": {
+      "network": "wide_deep",
+      "n_features": 22,
+      "hidden_layers": [
+        128,
+        64
+      ],
+      "activation": "relu",
+      "dropout": 0.2,
+      "batch_norm": true,
+      "initialization": "kaiming"
+    },
+    "hyperparameters": {
+      "data": {
+        "batch_size": 128
+      },
+      "optimizer": {
+        "name": "adamw",
+        "lr": 0.001,
+        "weight_decay": 0.0001
+      },
+      "scheduler": {
+        "name": "plateau",
+        "factor": 0.5,
+        "patience": 5
+      },
+      "loss": {
+        "name": "weighted_bce",
+        "gamma": 2.0,
+        "alpha": 0.25
+      },
+      "training": {
+        "epochs": 60,
+        "device": "auto",
+        "mixed_precision": true,
+        "gradient_clip": 1.0,
+        "log_every": 5
+      }
+    },
+    "n_parameters": 11672,
+    "device": "mps",
+    "threshold": 0.6532968878746033,
+    "threshold_method": "youden",
+    "metrics": {
+      "val": {
+        "accuracy": 0.9188660801564027,
+        "precision": 0.2641509433962264,
+        "recall": 0.8484848484848485,
+        "f1": 0.4028776978417266,
+        "roc_auc": 0.938904193449648,
+        "pr_auc": 0.39539611377102285,
+        "balanced_accuracy": 0.8848484848484849,
+        "mcc": 0.4462279234695618,
+        "cohen_kappa": 0.3719794971930681,
+        "log_loss": 0.2910289386184956,
+        "brier_score": 0.08773078501325246
+      },
+      "test": {
+        "accuracy": 0.9071358748778103,
+        "precision": 0.22321428571428573,
+        "recall": 0.7575757575757576,
+        "f1": 0.3448275862068966,
+        "roc_auc": 0.9370064279155188,
+        "pr_auc": 0.3585010997520177,
+        "balanced_accuracy": 0.8348484848484848,
+        "mcc": 0.3789524343073431,
+        "cohen_kappa": 0.3104659330367596,
+        "log_loss": 0.31780879392763584,
+        "brier_score": 0.09315821294891527
+      }
+    },
+    "best_epoch": 8,
+    "epochs_trained": 18,
+    "training_timestamp": "2026-07-18T09:02:56.950460+00:00",
+    "train_seconds": 12.383,
+    "feature_schema": {
+      "target_col": "Bankrupt?",
+      "n_features": 22,
+      "features": [
+        "ROA(B) before interest and depreciation after tax",
+        "Non-industry income and expenditure/revenue",
+        "Total debt/Total net worth",
+        "Debt ratio %",
+        "Borrowing dependency",
+        "Allocation rate per person",
+        "Retained Earnings to Total Assets",
+        "Total income/Total expense",
+        "Net Income to Total Assets",
+        "log__Net Value Growth Rate",
+        "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+        "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+        "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+        "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+        "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+        "pca__1",
+        "pca__2",
+        "pca__3",
+        "pca__4",
+        "pca__5",
+        "pca__6",
+        "pca__7"
+      ]
+    },
+    "dataset_version": "v001",
+    "artefact": "models/deep_learning/best_model.pt"
+  },
+  "config": {
+    "fail_fast": false,
+    "random_state": 42,
+    "deterministic": true,
+    "networks": [
+      "mlp",
+      "deep_fc",
+      "residual",
+      "wide_deep"
+    ],
+    "data": {
+      "batch_size": 128,
+      "shuffle": true,
+      "num_workers": 0
+    },
+    "model_params": {
+      "mlp": {
+        "hidden_layers": [
+          64,
+          32
+        ],
+        "activation": "relu",
+        "dropout": 0.2,
+        "batch_norm": true,
+        "initialization": "kaiming"
+      },
+      "deep_fc": {
+        "hidden_layers": [
+          256,
+          128,
+          64,
+          32
+        ],
+        "activation": "gelu",
+        "dropout": 0.3,
+        "batch_norm": true,
+        "initialization": "kaiming"
+      },
+      "residual": {
+        "width": 128,
+        "n_blocks": 3,
+        "activation": "relu",
+        "dropout": 0.2,
+        "batch_norm": true,
+        "initialization": "kaiming"
+      },
+      "wide_deep": {
+        "hidden_layers": [
+          128,
+          64
+        ],
+        "activation": "relu",
+        "dropout": 0.2,
+        "batch_norm": true,
+        "initialization": "kaiming"
+      }
+    },
+    "loss": {
+      "name": "weighted_bce",
+      "gamma": 2.0,
+      "alpha": 0.25
+    },
+    "optimizer": {
+      "name": "adamw",
+      "lr": 0.001,
+      "weight_decay": 0.0001
+    },
+    "scheduler": {
+      "name": "plateau",
+      "factor": 0.5,
+      "patience": 5
+    },
+    "training": {
+      "epochs": 60,
+      "device": "auto",
+      "mixed_precision": true,
+      "gradient_clip": 1.0,
+      "log_every": 5
+    },
+    "early_stopping": {
+      "enabled": true,
+      "patience": 10,
+      "min_delta": 0.0001
+    },
+    "checkpoint": {
+      "enabled": true,
+      "dir": "models/deep_learning"
+    },
+    "threshold_optimization": {
+      "enabled": true,
+      "method": "youden",
+      "custom_threshold": 0.5
+    },
+    "evaluation": {
+      "metrics": [
+        "accuracy",
+        "precision",
+        "recall",
+        "f1",
+        "roc_auc",
+        "pr_auc",
+        "balanced_accuracy",
+        "mcc",
+        "cohen_kappa",
+        "log_loss",
+        "brier_score"
+      ]
+    },
+    "explainability": {
+      "permutation": true,
+      "permutation_repeats": 3,
+      "shap": true,
+      "shap_max_samples": 100
+    },
+    "visualization": {
+      "dpi": 150
+    },
+    "output": {
+      "models_dir": "models/deep_learning",
+      "reports_dir": "reports/deep_learning",
+      "figures_dir": "reports/deep_learning/figures"
+    }
+  }
+}
