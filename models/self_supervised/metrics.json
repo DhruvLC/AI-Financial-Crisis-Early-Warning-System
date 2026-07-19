@@ -1,0 +1,60 @@
+{
+  "val": {
+    "model": "transformer_linear_probe",
+    "split": "val",
+    "threshold": 0.5725696018876861,
+    "metrics": {
+      "accuracy": 0.8768328445747801,
+      "precision": 0.19205298013245034,
+      "recall": 0.8787878787878788,
+      "f1": 0.31521739130434784,
+      "roc_auc": 0.9357820630547904,
+      "pr_auc": 0.3630427582697913,
+      "balanced_accuracy": 0.8777777777777778,
+      "mcc": 0.3763520226168586,
+      "cohen_kappa": 0.2769344687152906,
+      "log_loss": 0.3189249086935001,
+      "brier_score": 0.10313388591019308
+    },
+    "confusion_matrix": [
+      [
+        868,
+        122
+      ],
+      [
+        4,
+        29
+      ]
+    ],
+    "notes": []
+  },
+  "test": {
+    "model": "transformer_linear_probe",
+    "split": "test",
+    "threshold": 0.5725696018876861,
+    "metrics": {
+      "accuracy": 0.8748778103616813,
+      "precision": 0.18543046357615894,
+      "recall": 0.8484848484848485,
+      "f1": 0.30434782608695654,
+      "roc_auc": 0.938475665748393,
+      "pr_auc": 0.3228658737948002,
+      "balanced_accuracy": 0.8621212121212121,
+      "mcc": 0.3607545457437,
+      "cohen_kappa": 0.2654572380599778,
+      "log_loss": 0.3383569341734032,
+      "brier_score": 0.10904427027828445
+    },
+    "confusion_matrix": [
+      [
+        867,
+        123
+      ],
+      [
+        5,
+        28
+      ]
+    ],
+    "notes": []
+  }
+}

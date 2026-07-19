@@ -1,0 +1,132 @@
+{
+  "generated_at": "2026-07-19T07:25:12.506080+00:00",
+  "dataset_version": "v001",
+  "representations": [
+    {
+      "encoder": "mlp",
+      "model_version": "v001",
+      "embedding_dim": 64,
+      "paths": {
+        "train": "models/self_supervised/representations/mlp_train.parquet",
+        "val": "models/self_supervised/representations/mlp_val.parquet",
+        "test": "models/self_supervised/representations/mlp_test.parquet"
+      },
+      "embedding_stats": {
+        "train": {
+          "n_samples": 4773,
+          "dim": 64,
+          "mean": 0.017247073195819917,
+          "std": 0.9849324025645394,
+          "min": -9.700406074523926,
+          "max": 11.659423828125,
+          "mean_l2_norm": 6.346011402204324,
+          "std_l2_norm": 4.672585411636357
+        },
+        "val": {
+          "n_samples": 1023,
+          "dim": 64,
+          "mean": 0.013253380412190856,
+          "std": 0.9863719001026308,
+          "min": -7.421026706695557,
+          "max": 10.161588668823242,
+          "mean_l2_norm": 6.431754600191136,
+          "std_l2_norm": 4.572883566941468
+        },
+        "test": {
+          "n_samples": 1023,
+          "dim": 64,
+          "mean": 0.01303606130148561,
+          "std": 1.0215764383036883,
+          "min": -9.345293998718262,
+          "max": 10.9100923538208,
+          "mean_l2_norm": 6.533562544074858,
+          "std_l2_norm": 4.9107041660965915
+        }
+      }
+    },
+    {
+      "encoder": "residual",
+      "model_version": "v002",
+      "embedding_dim": 64,
+      "paths": {
+        "train": "models/self_supervised/representations/residual_train.parquet",
+        "val": "models/self_supervised/representations/residual_val.parquet",
+        "test": "models/self_supervised/representations/residual_test.parquet"
+      },
+      "embedding_stats": {
+        "train": {
+          "n_samples": 4773,
+          "dim": 64,
+          "mean": -0.019422452514903477,
+          "std": 0.8783320133842258,
+          "min": -8.772022247314453,
+          "max": 10.581252098083496,
+          "mean_l2_norm": 6.501142793031028,
+          "std_l2_norm": 2.670801613382534
+        },
+        "val": {
+          "n_samples": 1023,
+          "dim": 64,
+          "mean": -0.021257707136737646,
+          "std": 0.87343923783939,
+          "min": -7.944026947021484,
+          "max": 10.428461074829102,
+          "mean_l2_norm": 6.51144253332674,
+          "std_l2_norm": 2.5407454896219086
+        },
+        "test": {
+          "n_samples": 1023,
+          "dim": 64,
+          "mean": -0.020877151696272817,
+          "std": 0.9011561402710413,
+          "min": -8.764937400817871,
+          "max": 10.504990577697754,
+          "mean_l2_norm": 6.595136876382158,
+          "std_l2_norm": 2.916391132358239
+        }
+      }
+    },
+    {
+      "encoder": "transformer",
+      "model_version": "v003",
+      "embedding_dim": 64,
+      "paths": {
+        "train": "models/self_supervised/representations/transformer_train.parquet",
+        "val": "models/self_supervised/representations/transformer_val.parquet",
+        "test": "models/self_supervised/representations/transformer_test.parquet"
+      },
+      "embedding_stats": {
+        "train": {
+          "n_samples": 4773,
+          "dim": 64,
+          "mean": -0.10860540463797992,
+          "std": 0.6581378058039684,
+          "min": -2.044283390045166,
+          "max": 2.0116634368896484,
+          "mean_l2_norm": 5.320492514978207,
+          "std_l2_norm": 0.41055053299625216
+        },
+        "val": {
+          "n_samples": 1023,
+          "dim": 64,
+          "mean": -0.10906408979247006,
+          "std": 0.6597304659780939,
+          "min": -2.0738000869750977,
+          "max": 1.973858118057251,
+          "mean_l2_norm": 5.334022275441111,
+          "std_l2_norm": 0.40634864845565016
+        },
+        "test": {
+          "n_samples": 1023,
+          "dim": 64,
+          "mean": -0.10635871771244804,
+          "std": 0.6580165621366638,
+          "min": -2.0180957317352295,
+          "max": 2.0286262035369873,
+          "mean_l2_norm": 5.315197219798057,
+          "std_l2_norm": 0.42865928071695064
+        }
+      }
+    }
+  ]
+}

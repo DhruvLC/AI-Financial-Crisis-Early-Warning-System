@@ -407,6 +407,110 @@ transformers:
     reports_dir: "reports/transformers"
     figures_dir: "reports/transformers/figures"
 
+# Stage 11 — Self-Supervised Learning (src/pipeline/self_supervised).
+# Pretrains every enabled encoder on the latest feature-store version with
+# contrastive learning (SimCLR NT-Xent by default) over configurable
+# tabular augmentations, exports latent representations for downstream
+# modules, evaluates each encoder with a frozen linear probe (+ optional
+# KNN), and registers each encoder (best one separately, as
+# best_encoder.pt) under models/self_supervised/.
+self_supervised:
+  fail_fast: false           # false = a failing encoder is logged & skipped
+  random_state: 42
+  deterministic: true        # seed all RNGs + deterministic torch kernels
+  # Enabled encoders (keys of pipeline.self_supervised.encoder.ENCODER_REGISTRY).
+  encoders:
+    - mlp
+    - residual
+    - transformer
+  data:
+    batch_size: 256          # larger batches = more negatives for NT-Xent
+    shuffle: true
+    num_workers: 0
+  # Per-encoder architecture overrides (see each encoder's default_params).
+  encoder_params:
+    mlp: {hidden_dims: [256, 128], embedding_dim: 64,
+          activation: relu, dropout: 0.1, batch_norm: true}
+    residual: {width: 256, n_blocks: 3, embedding_dim: 64,
+               activation: relu, dropout: 0.1}
+    transformer: {embed_dim: 32, n_heads: 4, n_layers: 2, ff_dim: 64,
+                  dropout: 0.1, embedding_dim: 64,
+                  positional_embedding: true}
+  projection_head:
+    hidden_dims: [128]
+    projection_dim: 64
+    activation: relu
+    batch_norm: true
+  loss:
+    name: nt_xent            # nt_xent | barlow_twins | vicreg
+    temperature: 0.5         # nt_xent
+    # lambda_offdiag: 0.005  # barlow_twins
+    # sim_weight: 25.0       # vicreg
+    # var_weight: 25.0       # vicreg
+    # cov_weight: 1.0        # vicreg
+  # Positive pairs = two independent passes of this pipeline per sample.
+  augmentations:
+    - {name: feature_masking, ratio: 0.15}
+    - {name: gaussian_noise, sigma: 0.1}
+    # - {name: feature_dropout, p: 0.1}
+    # - {name: random_corruption, ratio: 0.1, scale: 1.0}
+    # - {name: column_shuffle, ratio: 0.1}
+    # - {name: mixup, alpha: 0.2}
+  optimizer:
+    name: adamw              # adam | adamw | sgd | rmsprop
+    lr: 0.001
+    weight_decay: 0.0001
+  scheduler:
+    name: cosine             # plateau | cosine | step | exponential | none
+  training:
+    epochs: 100
+    device: auto             # auto | cuda | mps | cpu
+    mixed_precision: true    # used on CUDA only
+    gradient_clip: 1.0
+    log_every: 5
+    # resume_from: models/self_supervised/mlp_last.pt
+  early_stopping:
+    enabled: true
+    patience: 15
+    min_delta: 0.0001
+  checkpoint:
+    enabled: true
+    dir: "models/self_supervised"
+  threshold_optimization:
+    enabled: true
+    method: youden           # youden | max_f1 | custom
+    custom_threshold: 0.5
+  evaluation:
+    linear_probe:            # logistic regression on frozen embeddings
+      max_iter: 1000
+      C: 1.0
+      class_weight: balanced
+    knn:
+      enabled: true
+      k: 15
+    metrics:
+      - accuracy
+      - precision
+      - recall
+      - f1
+      - roc_auc
+      - pr_auc
+      - balanced_accuracy
+      - mcc
+      - cohen_kappa
+      - log_loss
+      - brier_score
+  visualization:
+    dpi: 150
+    projections: [pca, tsne, umap]   # umap skipped if not installed
+    projection_max_samples: 2000
+    similarity_max_samples: 200
+  output:
+    models_dir: "models/self_supervised"
+    reports_dir: "reports/self_supervised"
+    figures_dir: "reports/self_supervised/figures"
+    representations_dir: "models/self_supervised/representations"
+
 split:
   test_size: 0.15
   val_size: 0.15

@@ -1,0 +1,582 @@
+{
+  "models": [
+    {
+      "model_version": "v001",
+      "network": "mlp",
+      "checkpoints": {
+        "last": "models/self_supervised/mlp_last.pt",
+        "best": "models/self_supervised/mlp_best.pt"
+      },
+      "architecture": {
+        "encoder": "mlp",
+        "n_features": 22,
+        "hidden_dims": [
+          256,
+          128
+        ],
+        "embedding_dim": 64,
+        "activation": "relu",
+        "dropout": 0.1,
+        "batch_norm": true
+      },
+      "hyperparameters": {
+        "data": {
+          "batch_size": 256
+        },
+        "projection_head": {
+          "hidden_dims": [
+            128
+          ],
+          "projection_dim": 64,
+          "activation": "relu",
+          "batch_norm": true
+        },
+        "loss": {
+          "name": "nt_xent",
+          "temperature": 0.5
+        },
+        "augmentations": [
+          {
+            "name": "feature_masking",
+            "ratio": 0.15
+          },
+          {
+            "name": "gaussian_noise",
+            "sigma": 0.1
+          }
+        ],
+        "optimizer": {
+          "name": "adamw",
+          "lr": 0.001,
+          "weight_decay": 0.0001
+        },
+        "scheduler": {
+          "name": "cosine"
+        },
+        "training": {
+          "epochs": 30,
+          "device": "auto",
+          "mixed_precision": true,
+          "gradient_clip": 1.0,
+          "log_every": 5
+        }
+      },
+      "n_parameters": 47808,
+      "device": "mps",
+      "threshold": 0.6229417941310518,
+      "threshold_method": "youden",
+      "metrics": {
+        "val": {
+          "accuracy": 0.9012707722385142,
+          "precision": 0.22580645161290322,
+          "recall": 0.8484848484848485,
+          "f1": 0.35668789808917195,
+          "roc_auc": 0.9340067340067341,
+          "pr_auc": 0.38480687542733877,
+          "balanced_accuracy": 0.8757575757575757,
+          "mcc": 0.4068381021724862,
+          "cohen_kappa": 0.3221476510067114,
+          "log_loss": 0.2994343070035453,
+          "brier_score": 0.09636507613165576
+        },
+        "test": {
+          "accuracy": 0.8885630498533724,
+          "precision": 0.19548872180451127,
+          "recall": 0.7878787878787878,
+          "f1": 0.3132530120481928,
+          "roc_auc": 0.9336700336700336,
+          "pr_auc": 0.3009876902757475,
+          "balanced_accuracy": 0.8398989898989899,
+          "mcc": 0.3571359859663987,
+          "cohen_kappa": 0.27581967213114766,
+          "log_loss": 0.32852175726450955,
+          "brier_score": 0.10352608138742461
+        }
+      },
+      "best_epoch": 26,
+      "epochs_trained": 30,
+      "training_timestamp": "2026-07-19T07:25:12.502593+00:00",
+      "train_seconds": 11.839,
+      "feature_schema": {
+        "target_col": "Bankrupt?",
+        "n_features": 22,
+        "features": [
+          "ROA(B) before interest and depreciation after tax",
+          "Non-industry income and expenditure/revenue",
+          "Total debt/Total net worth",
+          "Debt ratio %",
+          "Borrowing dependency",
+          "Allocation rate per person",
+          "Retained Earnings to Total Assets",
+          "Total income/Total expense",
+          "Net Income to Total Assets",
+          "log__Net Value Growth Rate",
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+          "pca__1",
+          "pca__2",
+          "pca__3",
+          "pca__4",
+          "pca__5",
+          "pca__6",
+          "pca__7"
+        ]
+      },
+      "dataset_version": "v001",
+      "representations": {
+        "train": "models/self_supervised/representations/mlp_train.parquet",
+        "val": "models/self_supervised/representations/mlp_val.parquet",
+        "test": "models/self_supervised/representations/mlp_test.parquet"
+      },
+      "embedding_stats": {
+        "train": {
+          "n_samples": 4773,
+          "dim": 64,
+          "mean": 0.017247073195819917,
+          "std": 0.9849324025645394,
+          "min": -9.700406074523926,
+          "max": 11.659423828125,
+          "mean_l2_norm": 6.346011402204324,
+          "std_l2_norm": 4.672585411636357
+        },
+        "val": {
+          "n_samples": 1023,
+          "dim": 64,
+          "mean": 0.013253380412190856,
+          "std": 0.9863719001026308,
+          "min": -7.421026706695557,
+          "max": 10.161588668823242,
+          "mean_l2_norm": 6.431754600191136,
+          "std_l2_norm": 4.572883566941468
+        },
+        "test": {
+          "n_samples": 1023,
+          "dim": 64,
+          "mean": 0.01303606130148561,
+          "std": 1.0215764383036883,
+          "min": -9.345293998718262,
+          "max": 10.9100923538208,
+          "mean_l2_norm": 6.533562544074858,
+          "std_l2_norm": 4.9107041660965915
+        }
+      },
+      "knn_metrics": {
+        "val": {
+          "accuracy": 0.967741935483871,
+          "precision": 0.5,
+          "recall": 0.12121212121212122,
+          "f1": 0.1951219512195122,
+          "roc_auc": 0.878818487909397,
+          "pr_auc": 0.3120543936666729,
+          "balanced_accuracy": 0.5585858585858585,
+          "mcc": 0.23502786055720126,
+          "cohen_kappa": 0.1848605577689243,
+          "log_loss": 0.24269779513010362,
+          "brier_score": 0.025106983816661238
+        },
+        "test": {
+          "accuracy": 0.9638318670576735,
+          "precision": 0.35714285714285715,
+          "recall": 0.15151515151515152,
+          "f1": 0.2127659574468085,
+          "roc_auc": 0.8530456075910621,
+          "pr_auc": 0.3018689858224345,
+          "balanced_accuracy": 0.5712121212121213,
+          "mcc": 0.2165952281331787,
+          "cohen_kappa": 0.1973407977606717,
+          "log_loss": 0.30938088358651344,
+          "brier_score": 0.026644944064298903
+        }
+      }
+    },
+    {
+      "model_version": "v002",
+      "network": "residual",
+      "checkpoints": {
+        "last": "models/self_supervised/residual_last.pt",
+        "best": "models/self_supervised/residual_best.pt"
+      },
+      "architecture": {
+        "encoder": "residual",
+        "n_features": 22,
+        "width": 256,
+        "n_blocks": 3,
+        "embedding_dim": 64,
+        "activation": "relu",
+        "dropout": 0.1
+      },
+      "hyperparameters": {
+        "data": {
+          "batch_size": 256
+        },
+        "projection_head": {
+          "hidden_dims": [
+            128
+          ],
+          "projection_dim": 64,
+          "activation": "relu",
+          "batch_norm": true
+        },
+        "loss": {
+          "name": "nt_xent",
+          "temperature": 0.5
+        },
+        "augmentations": [
+          {
+            "name": "feature_masking",
+            "ratio": 0.15
+          },
+          {
+            "name": "gaussian_noise",
+            "sigma": 0.1
+          }
+        ],
+        "optimizer": {
+          "name": "adamw",
+          "lr": 0.001,
+          "weight_decay": 0.0001
+        },
+        "scheduler": {
+          "name": "cosine"
+        },
+        "training": {
+          "epochs": 30,
+          "device": "auto",
+          "mixed_precision": true,
+          "gradient_clip": 1.0,
+          "log_every": 5
+        }
+      },
+      "n_parameters": 420672,
+      "device": "mps",
+      "threshold": 0.7155274454538216,
+      "threshold_method": "youden",
+      "metrics": {
+        "val": {
+          "accuracy": 0.9217986314760508,
+          "precision": 0.26732673267326734,
+          "recall": 0.8181818181818182,
+          "f1": 0.40298507462686567,
+          "roc_auc": 0.924640342822161,
+          "pr_auc": 0.4005379356642788,
+          "balanced_accuracy": 0.8717171717171717,
+          "mcc": 0.44034294187556416,
+          "cohen_kappa": 0.3724696356275303,
+          "log_loss": 0.3130002579710804,
+          "brier_score": 0.10151225459469243
+        },
+        "test": {
+          "accuracy": 0.9100684261974584,
+          "precision": 0.22935779816513763,
+          "recall": 0.7575757575757576,
+          "f1": 0.352112676056338,
+          "roc_auc": 0.9375880012243649,
+          "pr_auc": 0.35528758063422694,
+          "balanced_accuracy": 0.8363636363636364,
+          "mcc": 0.38523634607646434,
+          "cohen_kappa": 0.3183556405353729,
+          "log_loss": 0.3234089290605435,
+          "brier_score": 0.10386784059319058
+        }
+      },
+      "best_epoch": 26,
+      "epochs_trained": 30,
+      "training_timestamp": "2026-07-19T07:25:12.503708+00:00",
+      "train_seconds": 13.963,
+      "feature_schema": {
+        "target_col": "Bankrupt?",
+        "n_features": 22,
+        "features": [
+          "ROA(B) before interest and depreciation after tax",
+          "Non-industry income and expenditure/revenue",
+          "Total debt/Total net worth",
+          "Debt ratio %",
+          "Borrowing dependency",
+          "Allocation rate per person",
+          "Retained Earnings to Total Assets",
+          "Total income/Total expense",
+          "Net Income to Total Assets",
+          "log__Net Value Growth Rate",
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+          "pca__1",
+          "pca__2",
+          "pca__3",
+          "pca__4",
+          "pca__5",
+          "pca__6",
+          "pca__7"
+        ]
+      },
+      "dataset_version": "v001",
+      "representations": {
+        "train": "models/self_supervised/representations/residual_train.parquet",
+        "val": "models/self_supervised/representations/residual_val.parquet",
+        "test": "models/self_supervised/representations/residual_test.parquet"
+      },
+      "embedding_stats": {
+        "train": {
+          "n_samples": 4773,
+          "dim": 64,
+          "mean": -0.019422452514903477,
+          "std": 0.8783320133842258,
+          "min": -8.772022247314453,
+          "max": 10.581252098083496,
+          "mean_l2_norm": 6.501142793031028,
+          "std_l2_norm": 2.670801613382534
+        },
+        "val": {
+          "n_samples": 1023,
+          "dim": 64,
+          "mean": -0.021257707136737646,
+          "std": 0.87343923783939,
+          "min": -7.944026947021484,
+          "max": 10.428461074829102,
+          "mean_l2_norm": 6.51144253332674,
+          "std_l2_norm": 2.5407454896219086
+        },
+        "test": {
+          "n_samples": 1023,
+          "dim": 64,
+          "mean": -0.020877151696272817,
+          "std": 0.9011561402710413,
+          "min": -8.764937400817871,
+          "max": 10.504990577697754,
+          "mean_l2_norm": 6.595136876382158,
+          "std_l2_norm": 2.916391132358239
+        }
+      },
+      "knn_metrics": {
+        "val": {
+          "accuracy": 0.9696969696969697,
+          "precision": 0.625,
+          "recall": 0.15151515151515152,
+          "f1": 0.24390243902439024,
+          "roc_auc": 0.8687940006121826,
+          "pr_auc": 0.34545712677677487,
+          "balanced_accuracy": 0.5742424242424242,
+          "mcc": 0.2978370301888671,
+          "cohen_kappa": 0.2342629482071713,
+          "log_loss": 0.2738256835530328,
+          "brier_score": 0.024850657108721627
+        },
+        "test": {
+          "accuracy": 0.9608993157380255,
+          "precision": 0.26666666666666666,
+          "recall": 0.12121212121212122,
+          "f1": 0.16666666666666666,
+          "roc_auc": 0.8692072237526784,
+          "pr_auc": 0.30384623983388886,
+          "balanced_accuracy": 0.555050505050505,
+          "mcc": 0.1618415298247459,
+          "cohen_kappa": 0.14951989026063095,
+          "log_loss": 0.2754272677538959,
+          "brier_score": 0.025975887911371787
+        }
+      }
+    },
+    {
+      "model_version": "v003",
+      "network": "transformer",
+      "checkpoints": {
+        "last": "models/self_supervised/transformer_last.pt",
+        "best": "models/self_supervised/transformer_best.pt"
+      },
+      "architecture": {
+        "encoder": "transformer",
+        "n_features": 22,
+        "embed_dim": 32,
+        "n_heads": 4,
+        "n_layers": 2,
+        "ff_dim": 64,
+        "dropout": 0.1,
+        "embedding_dim": 64,
+        "positional_embedding": true
+      },
+      "hyperparameters": {
+        "data": {
+          "batch_size": 256
+        },
+        "projection_head": {
+          "hidden_dims": [
+            128
+          ],
+          "projection_dim": 64,
+          "activation": "relu",
+          "batch_norm": true
+        },
+        "loss": {
+          "name": "nt_xent",
+          "temperature": 0.5
+        },
+        "augmentations": [
+          {
+            "name": "feature_masking",
+            "ratio": 0.15
+          },
+          {
+            "name": "gaussian_noise",
+            "sigma": 0.1
+          }
+        ],
+        "optimizer": {
+          "name": "adamw",
+          "lr": 0.001,
+          "weight_decay": 0.0001
+        },
+        "scheduler": {
+          "name": "cosine"
+        },
+        "training": {
+          "epochs": 30,
+          "device": "auto",
+          "mixed_precision": true,
+          "gradient_clip": 1.0,
+          "log_every": 5
+        }
+      },
+      "n_parameters": 21376,
+      "device": "mps",
+      "threshold": 0.5725696018876861,
+      "threshold_method": "youden",
+      "metrics": {
+        "val": {
+          "accuracy": 0.8768328445747801,
+          "precision": 0.19205298013245034,
+          "recall": 0.8787878787878788,
+          "f1": 0.31521739130434784,
+          "roc_auc": 0.9357820630547904,
+          "pr_auc": 0.3630427582697913,
+          "balanced_accuracy": 0.8777777777777778,
+          "mcc": 0.3763520226168586,
+          "cohen_kappa": 0.2769344687152906,
+          "log_loss": 0.3189249086935001,
+          "brier_score": 0.10313388591019308
+        },
+        "test": {
+          "accuracy": 0.8748778103616813,
+          "precision": 0.18543046357615894,
+          "recall": 0.8484848484848485,
+          "f1": 0.30434782608695654,
+          "roc_auc": 0.938475665748393,
+          "pr_auc": 0.3228658737948002,
+          "balanced_accuracy": 0.8621212121212121,
+          "mcc": 0.3607545457437,
+          "cohen_kappa": 0.2654572380599778,
+          "log_loss": 0.3383569341734032,
+          "brier_score": 0.10904427027828445
+        }
+      },
+      "best_epoch": 3,
+      "epochs_trained": 18,
+      "training_timestamp": "2026-07-19T07:25:12.504713+00:00",
+      "train_seconds": 16.871,
+      "feature_schema": {
+        "target_col": "Bankrupt?",
+        "n_features": 22,
+        "features": [
+          "ROA(B) before interest and depreciation after tax",
+          "Non-industry income and expenditure/revenue",
+          "Total debt/Total net worth",
+          "Debt ratio %",
+          "Borrowing dependency",
+          "Allocation rate per person",
+          "Retained Earnings to Total Assets",
+          "Total income/Total expense",
+          "Net Income to Total Assets",
+          "log__Net Value Growth Rate",
+          "mul__Net Income to Stockholder's Equity__x__Borrowing dependency",
+          "mul__Total debt/Total net worth__x__After-tax net Interest Rate",
+          "diff__Net Income to Stockholder's Equity__minus__Borrowing dependency",
+          "diff__Net Income to Stockholder's Equity__minus__Total debt/Total net worth",
+          "diff__Borrowing dependency__minus__Retained Earnings to Total Assets",
+          "pca__1",
+          "pca__2",
+          "pca__3",
+          "pca__4",
+          "pca__5",
+          "pca__6",
+          "pca__7"
+        ]
+      },
+      "dataset_version": "v001",
+      "representations": {
+        "train": "models/self_supervised/representations/transformer_train.parquet",
+        "val": "models/self_supervised/representations/transformer_val.parquet",
+        "test": "models/self_supervised/representations/transformer_test.parquet"
+      },
+      "embedding_stats": {
+        "train": {
+          "n_samples": 4773,
+          "dim": 64,
+          "mean": -0.10860540463797992,
+          "std": 0.6581378058039684,
+          "min": -2.044283390045166,
+          "max": 2.0116634368896484,
+          "mean_l2_norm": 5.320492514978207,
+          "std_l2_norm": 0.41055053299625216
+        },
+        "val": {
+          "n_samples": 1023,
+          "dim": 64,
+          "mean": -0.10906408979247006,
+          "std": 0.6597304659780939,
+          "min": -2.0738000869750977,
+          "max": 1.973858118057251,
+          "mean_l2_norm": 5.334022275441111,
+          "std_l2_norm": 0.40634864845565016
+        },
+        "test": {
+          "n_samples": 1023,
+          "dim": 64,
+          "mean": -0.10635871771244804,
+          "std": 0.6580165621366638,
+          "min": -2.0180957317352295,
+          "max": 2.0286262035369873,
+          "mean_l2_norm": 5.315197219798057,
+          "std_l2_norm": 0.42865928071695064
+        }
+      },
+      "knn_metrics": {
+        "val": {
+          "accuracy": 0.967741935483871,
+          "precision": 0.5,
+          "recall": 0.12121212121212122,
+          "f1": 0.1951219512195122,
+          "roc_auc": 0.8484695439240892,
+          "pr_auc": 0.2849718278453245,
+          "balanced_accuracy": 0.5585858585858585,
+          "mcc": 0.23502786055720126,
+          "cohen_kappa": 0.1848605577689243,
+          "log_loss": 0.309028655971557,
+          "brier_score": 0.025806451612903226
+        },
+        "test": {
+          "accuracy": 0.9638318670576735,
+          "precision": 0.35714285714285715,
+          "recall": 0.15151515151515152,
+          "f1": 0.2127659574468085,
+          "roc_auc": 0.872344658708295,
+          "pr_auc": 0.24175383037186554,
+          "balanced_accuracy": 0.5712121212121213,
+          "mcc": 0.2165952281331787,
+          "cohen_kappa": 0.1973407977606717,
+          "log_loss": 0.24901411452237943,
+          "brier_score": 0.027626805691321827
+        }
+      }
+    }
+  ],
+  "best_model": {
+    "network": "transformer",
+    "model_version": "v003",
+    "artefact": "models/self_supervised/best_encoder.pt"
+  },
+  "updated_at": "2026-07-19T07:25:12.509614+00:00"
+}

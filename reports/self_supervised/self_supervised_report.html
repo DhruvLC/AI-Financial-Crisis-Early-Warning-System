@@ -1,0 +1,200 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><title>Deep Learning Report</title><style>body{font-family:sans-serif;margin:2em;max-width:960px}table{border-collapse:collapse;margin:1em 0}th,td{border:1px solid #ccc;padding:4px 10px;text-align:left}th{background:#f0f0f0}</style></head><body><h1>Self-Supervised Learning Report</h1>
+<p>Generated: 2026-07-19T07:25:12.514874+00:00</p>
+<p>Dataset: feature store v001 (target `Bankrupt?`, 22 features)</p>
+<h2>Training summary</h2>
+<table>
+<tr><th>Model</th><th>Status</th><th>Params</th><th>Device</th><th>Epochs</th><th>Best epoch</th><th>Train (s)</th><th>Threshold</th></tr>
+<tr><td>mlp</td><td>trained</td><td>47,808</td><td>mps</td><td>30</td><td>26</td><td>11.84</td><td>0.623 (youden)</td></tr>
+<tr><td>residual</td><td>trained</td><td>420,672</td><td>mps</td><td>30</td><td>26</td><td>13.96</td><td>0.716 (youden)</td></tr>
+<tr><td>transformer</td><td>trained</td><td>21,376</td><td>mps</td><td>18</td><td>3</td><td>16.87</td><td>0.573 (youden)</td></tr>
+</table>
+<h2>mlp</h2>
+<h3>Architecture</h3>
+<p>`{&#x27;encoder&#x27;: &#x27;mlp&#x27;, &#x27;n_features&#x27;: 22, &#x27;hidden_dims&#x27;: [256, 128], &#x27;embedding_dim&#x27;: 64, &#x27;activation&#x27;: &#x27;relu&#x27;, &#x27;dropout&#x27;: 0.1, &#x27;batch_norm&#x27;: True}`</p>
+<h3>Hyperparameters</h3>
+<p>`{&#x27;data&#x27;: {&#x27;batch_size&#x27;: 256}, &#x27;projection_head&#x27;: {&#x27;hidden_dims&#x27;: [128], &#x27;projection_dim&#x27;: 64, &#x27;activation&#x27;: &#x27;relu&#x27;, &#x27;batch_norm&#x27;: True}, &#x27;loss&#x27;: {&#x27;name&#x27;: &#x27;nt_xent&#x27;, &#x27;temperature&#x27;: 0.5}, &#x27;augmentations&#x27;: [{&#x27;name&#x27;: &#x27;feature_masking&#x27;, &#x27;ratio&#x27;: 0.15}, {&#x27;name&#x27;: &#x27;gaussian_noise&#x27;, &#x27;sigma&#x27;: 0.1}], &#x27;optimizer&#x27;: {&#x27;name&#x27;: &#x27;adamw&#x27;, &#x27;lr&#x27;: 0.001, &#x27;weight_decay&#x27;: 0.0001}, &#x27;scheduler&#x27;: {&#x27;name&#x27;: &#x27;cosine&#x27;}, &#x27;training&#x27;: {&#x27;epochs&#x27;: 30, &#x27;device&#x27;: &#x27;auto&#x27;, &#x27;mixed_precision&#x27;: True, &#x27;gradient_clip&#x27;: 1.0, &#x27;log_every&#x27;: 5}}`</p>
+<h3>Metrics — val (threshold 0.623)</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>accuracy</td><td>0.9013</td></tr>
+<tr><td>precision</td><td>0.2258</td></tr>
+<tr><td>recall</td><td>0.8485</td></tr>
+<tr><td>f1</td><td>0.3567</td></tr>
+<tr><td>roc_auc</td><td>0.9340</td></tr>
+<tr><td>pr_auc</td><td>0.3848</td></tr>
+<tr><td>balanced_accuracy</td><td>0.8758</td></tr>
+<tr><td>mcc</td><td>0.4068</td></tr>
+<tr><td>cohen_kappa</td><td>0.3221</td></tr>
+<tr><td>log_loss</td><td>0.2994</td></tr>
+<tr><td>brier_score</td><td>0.0964</td></tr>
+</table>
+<p>Confusion: TN=894 FP=96 FN=5 TP=28</p>
+<h3>Metrics — test (threshold 0.623)</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>accuracy</td><td>0.8886</td></tr>
+<tr><td>precision</td><td>0.1955</td></tr>
+<tr><td>recall</td><td>0.7879</td></tr>
+<tr><td>f1</td><td>0.3133</td></tr>
+<tr><td>roc_auc</td><td>0.9337</td></tr>
+<tr><td>pr_auc</td><td>0.3010</td></tr>
+<tr><td>balanced_accuracy</td><td>0.8399</td></tr>
+<tr><td>mcc</td><td>0.3571</td></tr>
+<tr><td>cohen_kappa</td><td>0.2758</td></tr>
+<tr><td>log_loss</td><td>0.3285</td></tr>
+<tr><td>brier_score</td><td>0.1035</td></tr>
+</table>
+<p>Confusion: TN=883 FP=107 FN=7 TP=26</p>
+<h2>residual</h2>
+<h3>Architecture</h3>
+<p>`{&#x27;encoder&#x27;: &#x27;residual&#x27;, &#x27;n_features&#x27;: 22, &#x27;width&#x27;: 256, &#x27;n_blocks&#x27;: 3, &#x27;embedding_dim&#x27;: 64, &#x27;activation&#x27;: &#x27;relu&#x27;, &#x27;dropout&#x27;: 0.1}`</p>
+<h3>Hyperparameters</h3>
+<p>`{&#x27;data&#x27;: {&#x27;batch_size&#x27;: 256}, &#x27;projection_head&#x27;: {&#x27;hidden_dims&#x27;: [128], &#x27;projection_dim&#x27;: 64, &#x27;activation&#x27;: &#x27;relu&#x27;, &#x27;batch_norm&#x27;: True}, &#x27;loss&#x27;: {&#x27;name&#x27;: &#x27;nt_xent&#x27;, &#x27;temperature&#x27;: 0.5}, &#x27;augmentations&#x27;: [{&#x27;name&#x27;: &#x27;feature_masking&#x27;, &#x27;ratio&#x27;: 0.15}, {&#x27;name&#x27;: &#x27;gaussian_noise&#x27;, &#x27;sigma&#x27;: 0.1}], &#x27;optimizer&#x27;: {&#x27;name&#x27;: &#x27;adamw&#x27;, &#x27;lr&#x27;: 0.001, &#x27;weight_decay&#x27;: 0.0001}, &#x27;scheduler&#x27;: {&#x27;name&#x27;: &#x27;cosine&#x27;}, &#x27;training&#x27;: {&#x27;epochs&#x27;: 30, &#x27;device&#x27;: &#x27;auto&#x27;, &#x27;mixed_precision&#x27;: True, &#x27;gradient_clip&#x27;: 1.0, &#x27;log_every&#x27;: 5}}`</p>
+<h3>Metrics — val (threshold 0.716)</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>accuracy</td><td>0.9218</td></tr>
+<tr><td>precision</td><td>0.2673</td></tr>
+<tr><td>recall</td><td>0.8182</td></tr>
+<tr><td>f1</td><td>0.4030</td></tr>
+<tr><td>roc_auc</td><td>0.9246</td></tr>
+<tr><td>pr_auc</td><td>0.4005</td></tr>
+<tr><td>balanced_accuracy</td><td>0.8717</td></tr>
+<tr><td>mcc</td><td>0.4403</td></tr>
+<tr><td>cohen_kappa</td><td>0.3725</td></tr>
+<tr><td>log_loss</td><td>0.3130</td></tr>
+<tr><td>brier_score</td><td>0.1015</td></tr>
+</table>
+<p>Confusion: TN=916 FP=74 FN=6 TP=27</p>
+<h3>Metrics — test (threshold 0.716)</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>accuracy</td><td>0.9101</td></tr>
+<tr><td>precision</td><td>0.2294</td></tr>
+<tr><td>recall</td><td>0.7576</td></tr>
+<tr><td>f1</td><td>0.3521</td></tr>
+<tr><td>roc_auc</td><td>0.9376</td></tr>
+<tr><td>pr_auc</td><td>0.3553</td></tr>
+<tr><td>balanced_accuracy</td><td>0.8364</td></tr>
+<tr><td>mcc</td><td>0.3852</td></tr>
+<tr><td>cohen_kappa</td><td>0.3184</td></tr>
+<tr><td>log_loss</td><td>0.3234</td></tr>
+<tr><td>brier_score</td><td>0.1039</td></tr>
+</table>
+<p>Confusion: TN=906 FP=84 FN=8 TP=25</p>
+<h2>transformer</h2>
+<h3>Architecture</h3>
+<p>`{&#x27;encoder&#x27;: &#x27;transformer&#x27;, &#x27;n_features&#x27;: 22, &#x27;embed_dim&#x27;: 32, &#x27;n_heads&#x27;: 4, &#x27;n_layers&#x27;: 2, &#x27;ff_dim&#x27;: 64, &#x27;dropout&#x27;: 0.1, &#x27;embedding_dim&#x27;: 64, &#x27;positional_embedding&#x27;: True}`</p>
+<h3>Hyperparameters</h3>
+<p>`{&#x27;data&#x27;: {&#x27;batch_size&#x27;: 256}, &#x27;projection_head&#x27;: {&#x27;hidden_dims&#x27;: [128], &#x27;projection_dim&#x27;: 64, &#x27;activation&#x27;: &#x27;relu&#x27;, &#x27;batch_norm&#x27;: True}, &#x27;loss&#x27;: {&#x27;name&#x27;: &#x27;nt_xent&#x27;, &#x27;temperature&#x27;: 0.5}, &#x27;augmentations&#x27;: [{&#x27;name&#x27;: &#x27;feature_masking&#x27;, &#x27;ratio&#x27;: 0.15}, {&#x27;name&#x27;: &#x27;gaussian_noise&#x27;, &#x27;sigma&#x27;: 0.1}], &#x27;optimizer&#x27;: {&#x27;name&#x27;: &#x27;adamw&#x27;, &#x27;lr&#x27;: 0.001, &#x27;weight_decay&#x27;: 0.0001}, &#x27;scheduler&#x27;: {&#x27;name&#x27;: &#x27;cosine&#x27;}, &#x27;training&#x27;: {&#x27;epochs&#x27;: 30, &#x27;device&#x27;: &#x27;auto&#x27;, &#x27;mixed_precision&#x27;: True, &#x27;gradient_clip&#x27;: 1.0, &#x27;log_every&#x27;: 5}}`</p>
+<h3>Metrics — val (threshold 0.573)</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>accuracy</td><td>0.8768</td></tr>
+<tr><td>precision</td><td>0.1921</td></tr>
+<tr><td>recall</td><td>0.8788</td></tr>
+<tr><td>f1</td><td>0.3152</td></tr>
+<tr><td>roc_auc</td><td>0.9358</td></tr>
+<tr><td>pr_auc</td><td>0.3630</td></tr>
+<tr><td>balanced_accuracy</td><td>0.8778</td></tr>
+<tr><td>mcc</td><td>0.3764</td></tr>
+<tr><td>cohen_kappa</td><td>0.2769</td></tr>
+<tr><td>log_loss</td><td>0.3189</td></tr>
+<tr><td>brier_score</td><td>0.1031</td></tr>
+</table>
+<p>Confusion: TN=868 FP=122 FN=4 TP=29</p>
+<h3>Metrics — test (threshold 0.573)</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>accuracy</td><td>0.8749</td></tr>
+<tr><td>precision</td><td>0.1854</td></tr>
+<tr><td>recall</td><td>0.8485</td></tr>
+<tr><td>f1</td><td>0.3043</td></tr>
+<tr><td>roc_auc</td><td>0.9385</td></tr>
+<tr><td>pr_auc</td><td>0.3229</td></tr>
+<tr><td>balanced_accuracy</td><td>0.8621</td></tr>
+<tr><td>mcc</td><td>0.3608</td></tr>
+<tr><td>cohen_kappa</td><td>0.2655</td></tr>
+<tr><td>log_loss</td><td>0.3384</td></tr>
+<tr><td>brier_score</td><td>0.1090</td></tr>
+</table>
+<p>Confusion: TN=867 FP=123 FN=5 TP=28</p>
+<h2>Leaderboard (test)</h2>
+<table>
+<tr><th>rank</th><th>model</th><th>embedding_dim</th><th>threshold</th><th>n_parameters</th><th>best_epoch</th><th>train_seconds</th><th>roc_auc</th><th>f1</th><th>recall</th><th>precision</th><th>pr_auc</th><th>accuracy</th><th>balanced_accuracy</th><th>mcc</th><th></th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th>---</th><th></th><th>1</th><th>transformer</th><th>64</th><th>0.5726</th><th>21376</th><th>3</th><th>16.8700</th><th>0.9385</th><th>0.3043</th><th>0.8485</th><th>0.1854</th><th>0.3229</th><th>0.8749</th><th>0.8621</th><th>0.3608</th><th></th><th>2</th><th>residual</th><th>64</th><th>0.7155</th><th>420672</th><th>26</th><th>13.9600</th><th>0.9376</th><th>0.3521</th><th>0.7576</th><th>0.2294</th><th>0.3553</th><th>0.9101</th><th>0.8364</th><th>0.3852</th><th></th><th>3</th><th>mlp</th><th>64</th><th>0.6229</th><th>47808</th><th>26</th><th>11.8400</th><th>0.9337</th><th>0.3133</th><th>0.7879</th><th>0.1955</th><th>0.3010</th><th>0.8886</th><th>0.8399</th><th>0.3571</th></tr>
+</table>
+<h2>Best model</h2>
+<li>**Network**: transformer</li>
+<li>**Best epoch**: 3</li>
+<li>**Test ROC-AUC**: 0.9385</li>
+<li>**Threshold**: 0.573 (youden)</li>
+<h2>Figures</h2>
+<li>`reports/self_supervised/figures/loss_mlp.png`</li>
+<li>`reports/self_supervised/figures/lr_mlp.png`</li>
+<li>`reports/self_supervised/figures/projection_pca_mlp.png`</li>
+<li>`reports/self_supervised/figures/projection_tsne_mlp.png`</li>
+<li>`reports/self_supervised/figures/similarity_mlp.png`</li>
+<li>`reports/self_supervised/figures/embedding_dist_mlp.png`</li>
+<li>`reports/self_supervised/figures/loss_residual.png`</li>
+<li>`reports/self_supervised/figures/lr_residual.png`</li>
+<li>`reports/self_supervised/figures/projection_pca_residual.png`</li>
+<li>`reports/self_supervised/figures/projection_tsne_residual.png`</li>
+<li>`reports/self_supervised/figures/similarity_residual.png`</li>
+<li>`reports/self_supervised/figures/embedding_dist_residual.png`</li>
+<li>`reports/self_supervised/figures/loss_transformer.png`</li>
+<li>`reports/self_supervised/figures/lr_transformer.png`</li>
+<li>`reports/self_supervised/figures/projection_pca_transformer.png`</li>
+<li>`reports/self_supervised/figures/projection_tsne_transformer.png`</li>
+<li>`reports/self_supervised/figures/similarity_transformer.png`</li>
+<li>`reports/self_supervised/figures/embedding_dist_transformer.png`</li>
+<li>`reports/self_supervised/figures/comparison_roc_auc.png`</li>
+<li>`reports/self_supervised/figures/comparison_f1.png`</li>
+<li>`reports/self_supervised/figures/comparison_recall.png`</li>
+<li>`reports/self_supervised/figures/comparison_pr_auc.png`</li>
+<h2>Augmentation pipeline</h2>
+<table>
+<tr><th>Augmentation</th><th>Parameters</th></tr>
+<tr><td>feature_masking</td><td>`{&#x27;ratio&#x27;: 0.15}`</td></tr>
+<tr><td>gaussian_noise</td><td>`{&#x27;sigma&#x27;: 0.1}`</td></tr>
+</table>
+<h2>Contrastive loss</h2>
+<p>`{&#x27;name&#x27;: &#x27;nt_xent&#x27;, &#x27;temperature&#x27;: 0.5}`</p>
+<h2>Representations — mlp</h2>
+<table>
+<tr><th>Split</th><th>Path</th><th>Samples</th><th>Dim</th><th>Mean L2 norm</th></tr>
+<tr><td>train</td><td>`models/self_supervised/representations/mlp_train.parquet`</td><td>4773</td><td>64</td><td>6.346</td></tr>
+<tr><td>val</td><td>`models/self_supervised/representations/mlp_val.parquet`</td><td>1023</td><td>64</td><td>6.432</td></tr>
+<tr><td>test</td><td>`models/self_supervised/representations/mlp_test.parquet`</td><td>1023</td><td>64</td><td>6.534</td></tr>
+</table>
+<h3>KNN probe — mlp</h3>
+<table>
+<tr><th>Split</th><th>ROC-AUC</th><th>F1</th><th>Accuracy</th></tr>
+<tr><td>val</td><td>0.8788</td><td>0.1951</td><td>0.9677</td></tr>
+<tr><td>test</td><td>0.8530</td><td>0.2128</td><td>0.9638</td></tr>
+</table>
+<h2>Representations — residual</h2>
+<table>
+<tr><th>Split</th><th>Path</th><th>Samples</th><th>Dim</th><th>Mean L2 norm</th></tr>
+<tr><td>train</td><td>`models/self_supervised/representations/residual_train.parquet`</td><td>4773</td><td>64</td><td>6.501</td></tr>
+<tr><td>val</td><td>`models/self_supervised/representations/residual_val.parquet`</td><td>1023</td><td>64</td><td>6.511</td></tr>
+<tr><td>test</td><td>`models/self_supervised/representations/residual_test.parquet`</td><td>1023</td><td>64</td><td>6.595</td></tr>
+</table>
+<h3>KNN probe — residual</h3>
+<table>
+<tr><th>Split</th><th>ROC-AUC</th><th>F1</th><th>Accuracy</th></tr>
+<tr><td>val</td><td>0.8688</td><td>0.2439</td><td>0.9697</td></tr>
+<tr><td>test</td><td>0.8692</td><td>0.1667</td><td>0.9609</td></tr>
+</table>
+<h2>Representations — transformer</h2>
+<table>
+<tr><th>Split</th><th>Path</th><th>Samples</th><th>Dim</th><th>Mean L2 norm</th></tr>
+<tr><td>train</td><td>`models/self_supervised/representations/transformer_train.parquet`</td><td>4773</td><td>64</td><td>5.320</td></tr>
+<tr><td>val</td><td>`models/self_supervised/representations/transformer_val.parquet`</td><td>1023</td><td>64</td><td>5.334</td></tr>
+<tr><td>test</td><td>`models/self_supervised/representations/transformer_test.parquet`</td><td>1023</td><td>64</td><td>5.315</td></tr>
+</table>
+<h3>KNN probe — transformer</h3>
+<table>
+<tr><th>Split</th><th>ROC-AUC</th><th>F1</th><th>Accuracy</th></tr>
+<tr><td>val</td><td>0.8485</td><td>0.1951</td><td>0.9677</td></tr>
+<tr><td>test</td><td>0.8723</td><td>0.2128</td><td>0.9638</td></tr>
+</table></body></html>
