@@ -17,6 +17,7 @@ are stubbed for phase 2.
 | 8–12 Deep / Transformer / SSL | `models.py` (stubs)         | 🔜 phase 2 |
 | 13 Explainable AI       | `src/pipeline/explain.py`         | ✅ SHAP |
 | Output  Risk Score      | `src/pipeline/risk_score.py`      | ✅ 0–100 + Low/Med/High |
+| 16 Backend Deployment   | `src/api/`                        | ✅ FastAPI + Docker + CI |
 
 ## Setup
 
@@ -146,6 +147,47 @@ Tuned via the `data_validation:` block in `configs/ingestion.yaml`
 (thresholds, outlier settings, quality weights).
 
 **Tests:** `.venv/bin/python -m unittest discover -s tests -v`
+
+## Backend Deployment (FastAPI)
+
+Production REST API (`src/api/`) serving the best registered model
+(`extra_trees` v004, test ROC-AUC ≈ 0.94) from the existing Model Registry —
+no retraining at serve time. Full docs: [docs/API.md](docs/API.md),
+[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md), [docs/INSTALLATION.md](docs/INSTALLATION.md).
+
+```bash
+pip install -r requirements-api.txt          # serving-only deps
+python src/run_api.py                        # http://localhost:8000/docs
+```
+
+**Endpoints** (versioned under `/api/v1`): `GET /health`, `/version`,
+`/models`, `/metrics`; `POST /predict`, `/predict/batch`, `/validate`.
+Each prediction returns `prediction`, `probability`, `risk_score` (0–100),
+`risk_level`, `confidence_score`, `model_version`, `prediction_timestamp`.
+
+**Example**
+
+```bash
+curl -s -X POST localhost:8000/api/v1/predict \
+  -H 'Content-Type: application/json' \
+  -d '{"id":"co-1","features":{ /* all 22 engineered feature names -> values */ }}'
+```
+
+**Docker**
+
+```bash
+docker compose up --build        # or: docker build -t ews-api . && docker run -p 8000:8000 ews-api
+```
+
+**Environment variables** (`EWS_` prefix; all optional): `EWS_HOST`,
+`EWS_PORT`, `EWS_LOG_LEVEL`, `EWS_LOG_FILE`, `EWS_CORS_ORIGINS`,
+`EWS_MODELS_DIR`, `EWS_FEATURE_STORE_ROOT`, `EWS_MAX_BATCH_SIZE`,
+`EWS_RISK_SCORE_SCALE` — see [docs/INSTALLATION.md](docs/INSTALLATION.md).
+
+**CI/CD**: `.github/workflows/ci.yml` — deps → flake8 → pytest (`tests/test_api.py`)
+→ app-build verification → Docker build.
+
+**Tech**: FastAPI · Pydantic v2 · Uvicorn · scikit-learn · joblib · Docker · GitHub Actions.
 
 ## Roadmap (phase 2)
 
