@@ -26,9 +26,11 @@ def list_models(svc: ModelService = Depends(model_service)) -> ModelsResponse:
         model_version=e["model_version"],
         algorithm=e["algorithm"],
         artefact=e["artefact"],
+        family=e.get("family", "classical_ml"),
         metrics=e.get("metrics", {}).get("test", {}),
         training_timestamp=e.get("training_timestamp"),
-        is_best=e["model_version"] == best_version,
+        is_best=(e["model_version"] == best_version
+                 and e.get("family", "classical_ml") == "classical_ml"),
     ) for e in svc.registry_entries()]
     best_info = next((m for m in infos if m.is_best), None)
     return ModelsResponse(best_model=best_info, models=infos, count=len(infos))

@@ -48,6 +48,8 @@ if entries:
         m = e.get("metrics", {}) or {}
         rows.append({
             "Best": "⭐" if e.get("is_best") else "",
+            "Family": (e.get("family") or "classical_ml")
+                      .replace("_", " ").title(),
             "Version": e["model_version"],
             "Algorithm": e["algorithm"].replace("_", " ").title(),
             "ROC AUC": m.get("roc_auc"),
@@ -67,13 +69,14 @@ if entries:
 
     # metric comparison across models
     metric_cols = ["ROC AUC", "PR AUC", "F1", "Recall", "Precision"]
-    plot_df = reg_df.dropna(subset=metric_cols, how="all")
+    plot_df = reg_df.dropna(subset=metric_cols, how="all").copy()
+    plot_df["Model"] = plot_df["Algorithm"] + " (" + plot_df["Family"] + ")"
     if len(plot_df) > 1:
         with st.expander("Compare a metric across models"):
             metric = st.selectbox("Metric", metric_cols, index=0)
             import plotly.express as px
             fig = px.bar(plot_df.sort_values(metric, ascending=True),
-                         x=metric, y="Algorithm", orientation="h",
+                         x=metric, y="Model", orientation="h",
                          color_discrete_sequence=["#2a78d6"],
                          text=plot_df.sort_values(metric)[metric]
                               .map(lambda v: f"{v:.3f}"))

@@ -88,6 +88,9 @@ class ModelInfo(BaseModel):
     model_version: str
     algorithm: str
     artefact: str
+    family: str = Field("classical_ml", description="Model family / registry "
+                        "the entry was discovered in (classical_ml, "
+                        "deep_learning, transformers, self_supervised, ...)")
     metrics: Dict[str, Any] = {}
     training_timestamp: Optional[str] = None
     is_best: bool = False

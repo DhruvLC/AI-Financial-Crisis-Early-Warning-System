@@ -20,6 +20,49 @@ from .exceptions import (MissingArtifactError, ModelLoadingError,
 
 log = get_logger("api.model_loader")
 
+#: Registry family for the top-level ``models/registry.json``.
+CLASSICAL_FAMILY = "classical_ml"
+
+
+def _normalise_entry(entry: dict, family: str) -> dict:
+    """Map a registry entry of any model family onto the classical schema.
+
+    Non-classical registries (deep learning, transformers, self-supervised)
+    record ``network`` instead of ``algorithm`` and ``checkpoints`` instead of
+    a single ``artefact``; normalising here lets every downstream consumer
+    (routes, schemas, frontend) treat all families uniformly.
+    """
+    norm = dict(entry)
+    norm.setdefault("algorithm", entry.get("network", "unknown"))
+    if "artefact" not in norm:
+        checkpoints = entry.get("checkpoints", {}) or {}
+        norm["artefact"] = checkpoints.get("best") or checkpoints.get("last", "")
+    norm["family"] = family
+    return norm
+
+
+def discover_registries(models_dir: str) -> dict[str, str]:
+    """Find every ``registry.json`` under ``models_dir`` (one level deep).
+
+    Returns ``{family: registry_path}`` — the top-level registry is the
+    classical-ML family; each immediate subdirectory containing a
+    ``registry.json`` is its own family (deep_learning, transformers,
+    self_supervised, and any future addition).
+    """
+    registries: dict[str, str] = {}
+    top = os.path.join(models_dir, "registry.json")
+    if os.path.exists(top):
+        registries[CLASSICAL_FAMILY] = top
+    try:
+        subdirs = sorted(os.listdir(models_dir))
+    except OSError:
+        subdirs = []
+    for name in subdirs:
+        candidate = os.path.join(models_dir, name, "registry.json")
+        if os.path.isfile(candidate):
+            registries[name] = candidate
+    return registries
+
 
 class ModelService:
     """Holds the loaded best model + all metadata needed for inference."""
@@ -102,8 +145,23 @@ class ModelService:
         return self.descriptor.get("dataset_version")
 
     def registry_entries(self) -> list[dict]:
+        """All entries across every discovered registry, normalised.
+
+        The classical registry is read through :class:`ModelRegistry`; every
+        subdirectory registry (deep learning, transformers, self-supervised,
+        or any future family) is read directly from its ``registry.json``.
+        """
         try:
-            return self.registry.entries()
+            entries: list[dict] = []
+            for family, path in discover_registries(
+                    self.settings.models_dir).items():
+                if family == CLASSICAL_FAMILY:
+                    raw = self.registry.entries()
+                else:
+                    with open(path, encoding="utf-8") as f:
+                        raw = json.load(f).get("models", [])
+                entries.extend(_normalise_entry(e, family) for e in raw)
+            return entries
         except Exception as exc:  # noqa: BLE001
             raise RegistryError(f"cannot read model registry: {exc}")
 

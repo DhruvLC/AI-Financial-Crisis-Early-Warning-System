@@ -107,6 +107,11 @@ class TestRoutes(unittest.TestCase):
         self.assertGreater(body["count"], 0)
         self.assertIsNotNone(body["best_model"])
         self.assertTrue(body["best_model"]["is_best"])
+        families = {m["family"] for m in body["models"]}
+        self.assertIn("classical_ml", families)
+        for family in ("deep_learning", "transformers", "self_supervised"):
+            if os.path.exists(os.path.join("models", family, "registry.json")):
+                self.assertIn(family, families)
 
     def test_metrics(self):
         body = self.client.get(f"{PREFIX}/metrics").json()

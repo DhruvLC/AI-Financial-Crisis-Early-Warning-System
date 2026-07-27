@@ -1,0 +1,19 @@
+# Streamlit theme — Financial Crisis EWS enterprise design system.
+# Colors follow the validated reference palette (see components/theme.py).
+
+[theme]
+base = "light"
+primaryColor = "#2a78d6"
+backgroundColor = "#f9f9f7"
+secondaryBackgroundColor = "#fcfcfb"
+textColor = "#0b0b0b"
+font = "sans serif"
+
+[theme.sidebar]
+backgroundColor = "#fcfcfb"
+
+[browser]
+gatherUsageStats = false
+
+[server]
+maxUploadSize = 10
