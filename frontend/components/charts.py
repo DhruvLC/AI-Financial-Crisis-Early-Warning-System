@@ -96,9 +96,9 @@ def gauge(probability: float, threshold: float) -> go.Figure:
         gauge=dict(
             axis=dict(range=[0, 100], ticksuffix="%"),
             bar=dict(color=SEQ_BLUE, thickness=0.35),
-            steps=[dict(range=[0, 33], color="#0ca30c22"),
-                   dict(range=[33, 66], color="#fab21922"),
-                   dict(range=[66, 100], color="#d03b3b22")],
+            steps=[dict(range=[0, 33], color="rgba(12,163,12,0.13)"),
+                   dict(range=[33, 66], color="rgba(250,178,25,0.13)"),
+                   dict(range=[66, 100], color="rgba(208,59,59,0.13)")],
             threshold=dict(line=dict(color="#d03b3b", width=3),
                            thickness=0.9, value=threshold * 100),
         )))
