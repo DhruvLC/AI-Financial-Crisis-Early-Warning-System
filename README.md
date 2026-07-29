@@ -381,21 +381,20 @@ pytest
 
 # 📸 Screenshots
 
-Add screenshots after deployment.
+<img width="1465" height="766" alt="Screenshot 2026-07-29 at 8 00 40 PM" src="https://github.com/user-attachments/assets/c6d13c6a-1f34-40ac-9a45-33c14d9a7d48" />
+<img width="1468" height="700" alt="Screenshot 2026-07-29 at 8 02 02 PM" src="https://github.com/user-attachments/assets/fc1fdce8-b69d-4818-a295-07e4d333cf69" />
+<img width="1468" height="667" alt="Screenshot 2026-07-29 at 8 01 51 PM" src="https://github.com/user-attachments/assets/c9091783-fcff-44e1-970c-548b0708f647" />
+<img width="1468" height="667" alt="Screenshot 2026-07-29 at 8 01 51 PM" src="https://github.com/user-attachments/assets/86028caf-a191-4ed4-82ca-f6a796b3c588" />
+<img width="1468" height="667" alt="Screenshot 2026-07-29 at 8 01 51 PM" src="https://github.com/user-attachments/assets/c0b9965d-c713-4a51-941b-7293d0e71025" />
+<img width="1468" height="760" alt="Screenshot 2026-07-29 at 7 58 31 PM" src="https://github.com/user-attachments/assets/fe47e1a9-4e19-426f-9587-bb95d11e15f2" />
+<img width="1468" height="760" alt="Screenshot 2026-07-29 at 7 58 31 PM" src="https://github.com/user-attachments/assets/d10a262a-7dc7-4ce9-97ad-21a959f81ab7" />
 
-Example:
 
-```
-Dashboard
 
-Single Prediction
 
-Batch Prediction
 
-Model Information
 
-API Status
-```
+
 
 ---
 
