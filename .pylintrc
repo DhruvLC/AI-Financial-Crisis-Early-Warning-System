@@ -1,0 +1,45 @@
+[MASTER]
+# Lint only production code; skip generated/derived artefacts.
+ignore=notebooks,reports,data,models,logs,assets
+ignore-patterns=.*_pb2\.py,.*\.ipynb_checkpoints.*
+# Make `src` and `frontend` importable exactly as they are at runtime.
+init-hook=import sys, os; sys.path.insert(0, os.path.join(os.getcwd(), "src")); sys.path.insert(0, os.path.join(os.getcwd(), "frontend"))
+jobs=0
+persistent=yes
+py-version=3.10
+# C extensions pylint cannot introspect statically.
+extension-pkg-allow-list=pydantic,numpy,torch
+
+[MESSAGES CONTROL]
+# Only rules genuinely inappropriate for this project — useful checks stay on.
+disable=
+    missing-module-docstring,      # top-level scripts / Streamlit pages
+    missing-function-docstring,    # small UI helpers; public APIs are documented
+    missing-class-docstring,
+    too-few-public-methods,        # pydantic models / dataclasses
+    too-many-arguments,            # ML training signatures
+    too-many-positional-arguments,
+    too-many-locals,               # ML pipelines and EDA routines
+    too-many-instance-attributes,  # model/config containers
+    too-many-statements,           # pipeline orchestration functions
+    duplicate-code,                # similar per-model boilerplate is intentional
+    invalid-name,                  # df, X, y, ax — standard DS/ML naming
+    logging-fstring-interpolation, # f-string logging is accepted style here
+    fixme
+
+[FORMAT]
+max-line-length=100
+
+[DESIGN]
+max-branches=15
+max-returns=8
+
+[REPORTS]
+score=yes
+
+[TYPECHECK]
+# Members dynamically generated at runtime.
+generated-members=torch.*,numpy.*,cm\..*,plt\.cm\..*
+# lightgbm / catboost / umap are intentionally-optional back-ends guarded by
+# try/except or lazy imports, and are not installed in CI.
+ignored-modules=streamlit.runtime,lightgbm,catboost,umap
