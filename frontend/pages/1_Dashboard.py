@@ -6,14 +6,16 @@ import streamlit as st
 from components.cards import nav_card, status_badge
 from components.charts import model_metrics_bar
 from components.sidebar import render_sidebar, setup_page
+from components.theme import hero, section
 from services.api_client import (APIError, cached_health, cached_models,
                                  get_client, get_feature_schema)
 
 setup_page("Dashboard", "📊")
 render_sidebar()
 
-st.title("📊 Dashboard")
-st.caption("AI Financial Crisis Early Warning System — live overview")
+hero("Dashboard",
+     "AI Financial Crisis Early Warning System — live system overview",
+     "📊")
 
 base_url = st.session_state.api_url
 health = cached_health(base_url)
@@ -36,7 +38,7 @@ if not online:
     st.stop()
 
 # ── service metrics ───────────────────────────────────────────────────────────
-st.subheader("Service metrics")
+section("Service metrics", "Live counters from the backend `/metrics` endpoint.")
 try:
     metrics, _ = get_client().metrics()
     m1, m2, m3, m4, m5 = st.columns(5)
@@ -49,7 +51,7 @@ except APIError as exc:
     st.warning(f"Service metrics unavailable: {exc}")
 
 # ── active model card ─────────────────────────────────────────────────────────
-st.subheader("Active model")
+section("Active model", "The deployed best model and its headline test metrics.")
 models = cached_models(base_url)
 best = (models or {}).get("best_model")
 if best:
@@ -70,7 +72,7 @@ else:
     st.info("Model registry information unavailable.")
 
 # ── quick navigation ──────────────────────────────────────────────────────────
-st.subheader("Quick actions")
+section("Quick actions", "Jump straight into the most common workflows.")
 n1, n2, n3 = st.columns(3)
 with n1:
     nav_card("pages/2_Single_Prediction.py", "Single Prediction",

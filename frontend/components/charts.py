@@ -78,9 +78,10 @@ def probability_histogram(df: pd.DataFrame,
 
 def risk_score_strip(df: pd.DataFrame) -> go.Figure:
     """Per-company risk scores (0-100), colored by risk level with labels."""
+    hover = [c for c in ("id", "probability") if c in df.columns]
     fig = px.strip(df, x="risk_score", y="risk_level", color="risk_level",
                    color_discrete_map=RISK_STATUS,
-                   hover_data=["id", "probability"],
+                   hover_data=hover or None,
                    category_orders={"risk_level": ["High", "Medium", "Low"]})
     fig.update_layout(showlegend=False, xaxis_title="Risk score (0–100)",
                       yaxis_title=None, xaxis_range=[-2, 102])

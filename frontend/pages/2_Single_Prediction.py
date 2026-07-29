@@ -6,14 +6,15 @@ import streamlit as st
 from components.cards import error_box, risk_banner
 from components.charts import gauge
 from components.sidebar import render_sidebar, setup_page
+from components.theme import chip, hero, section
 from services.api_client import APIError, get_client, get_feature_schema
 
 setup_page("Single Prediction", "🎯")
 render_sidebar()
 
-st.title("🎯 Single Prediction")
-st.caption("Enter the engineered feature values for one company and score "
-           "its financial-distress risk via the backend `/predict` endpoint.")
+hero("Single Prediction",
+     "Score one company's financial-distress risk from its engineered "
+     "feature values.", "🎯")
 
 features = get_feature_schema(st.session_state.api_url)
 if not features:
@@ -45,7 +46,7 @@ if submitted:
         st.stop()
 
     st.divider()
-    st.subheader("Prediction result")
+    section("Prediction result")
     risk_banner(result["risk_level"], result["probability"])
 
     left, right = st.columns([1, 1])
@@ -61,9 +62,24 @@ if submitted:
         b.metric("Risk score", f"{result['risk_score']:.1f} / 100")
         a.metric("Confidence", f"{result['confidence_score']:.3f}")
         b.metric("Threshold", f"{result['threshold']:.4f}")
-        st.caption(f"Model **{result['model_version']}** "
-                   f"({result['algorithm']}) · "
-                   f"{result['prediction_timestamp']}")
+
+    # ── decision recommendation ────────────────────────────────────────────
+    level = result["risk_level"]
+    kind = {"Low": "good", "Medium": "warn", "High": "crit"}.get(level, "info")
+    rec = {
+        "Low": "Risk within acceptable bounds — standard monitoring cadence.",
+        "Medium": "Elevated risk — recommend enhanced review and closer "
+                  "monitoring.",
+        "High": "Critical risk — escalate for immediate credit/risk review.",
+    }.get(level, "Review the prediction against your risk policy.")
+    with st.container(border=True):
+        st.markdown(f"**Recommendation** &nbsp; {chip(level + ' risk', kind)}",
+                    unsafe_allow_html=True)
+        st.write(rec)
+
+    st.caption(f"Model **{result['model_version']}** "
+               f"({result['algorithm']}) · scored at "
+               f"{result['prediction_timestamp']}")
 
     with st.expander("Raw API response"):
         st.json(result)

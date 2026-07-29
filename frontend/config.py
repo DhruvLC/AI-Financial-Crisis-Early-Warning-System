@@ -15,6 +15,7 @@ API_PREFIX = "/api/v1"
 APP_TITLE = "Financial Crisis Early Warning System"
 APP_ICON = "🏦"
 APP_TAGLINE = "AI-powered corporate financial-distress risk prediction"
+APP_VERSION = "2.0.0"
 
 REQUEST_TIMEOUT = 30  # seconds
 BATCH_PREVIEW_ROWS = 100

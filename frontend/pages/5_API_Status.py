@@ -6,14 +6,15 @@ import streamlit as st
 
 from components.cards import status_badge
 from components.sidebar import render_sidebar, setup_page
+from components.theme import hero, section
 from services.api_client import APIError, cached_health, get_client
 
 setup_page("API Status", "🩺")
 render_sidebar()
 
-st.title("🩺 API Status")
-st.caption("Live health, version, and endpoint diagnostics for the FastAPI "
-           "backend.")
+hero("API Status",
+     "Live health, version, and endpoint diagnostics for the FastAPI "
+     "backend.", "🩺")
 
 base_url = st.session_state.api_url
 client = get_client()
@@ -23,7 +24,7 @@ if st.button("↻ Re-run all probes"):
     st.rerun()
 
 # ── health ────────────────────────────────────────────────────────────────────
-st.subheader("Health")
+section("Health", "Core liveness check from `/health`.")
 health = cached_health(base_url)
 online = bool(health and health.get("status") == "ok")
 
@@ -47,7 +48,7 @@ with st.expander("Raw /health response"):
     st.json({k: v for k, v in health.items() if not k.startswith("_")})
 
 # ── version ───────────────────────────────────────────────────────────────────
-st.subheader("Version")
+section("Version", "Build and model versions from `/version`.")
 try:
     version, v_ms = client.version()
     v1, v2, v3, v4 = st.columns(4)
@@ -61,7 +62,7 @@ except APIError as exc:
     st.warning(f"/version unavailable: {exc}")
 
 # ── service metrics ───────────────────────────────────────────────────────────
-st.subheader("Service metrics")
+section("Service metrics", "Live counters from `/metrics`.")
 try:
     metrics, _ = client.metrics()
     m1, m2, m3, m4, m5 = st.columns(5)
@@ -76,7 +77,7 @@ except APIError as exc:
     st.warning(f"/metrics unavailable: {exc}")
 
 # ── endpoint probe table ──────────────────────────────────────────────────────
-st.subheader("Endpoint probes")
+section("Endpoint probes", "Round-trip latency for every read endpoint.")
 probes = [
     ("GET", "/health", lambda: client.health()),
     ("GET", "/version", lambda: client.version()),

@@ -10,15 +10,16 @@ from components.sidebar import render_sidebar, setup_page
 from components.tables import batch_summary_stats, predictions_table
 from components.uploader import csv_uploader
 from config import BATCH_PREVIEW_ROWS
+from components.theme import hero, section
 from services.api_client import APIError, get_client, get_feature_schema
 from services.utils import df_to_csv_bytes, df_to_instances, predictions_to_df
 
 setup_page("Batch Prediction", "📁")
 render_sidebar()
 
-st.title("📁 Batch Prediction")
-st.caption("Upload a CSV of companies (one row each) and score them via the "
-           "backend `/predict/batch` endpoint.")
+hero("Batch Prediction",
+     "Upload a CSV portfolio and score every company at once via "
+     "`/predict/batch`.", "📁")
 
 features = get_feature_schema(st.session_state.api_url)
 if not features:
@@ -46,7 +47,7 @@ if "batch_result" in st.session_state:
     results = predictions_to_df(response["predictions"])
 
     st.divider()
-    st.subheader("Results")
+    section("Results")
     st.caption(f"Model **{response['model_version']}** · "
                f"{response['count']:,} predictions in "
                f"{response['inference_ms']:.1f} ms")
@@ -60,7 +61,7 @@ if "batch_result" in st.session_state:
 
     predictions_table(results, max_rows=BATCH_PREVIEW_ROWS)
 
-    st.subheader("Visual summary")
+    section("Visual summary")
     threshold = float(results["threshold"].iloc[0]) \
         if "threshold" in results else None
     c1, c2 = st.columns(2)

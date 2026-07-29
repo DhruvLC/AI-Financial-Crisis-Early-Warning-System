@@ -4,13 +4,13 @@ from __future__ import annotations
 import streamlit as st
 
 from components.sidebar import render_sidebar, setup_page
+from components.theme import hero
 from config import APP_TAGLINE, APP_TITLE
 
 setup_page("About", "ℹ️")
 render_sidebar()
 
-st.title(f"ℹ️ About — {APP_TITLE}")
-st.caption(APP_TAGLINE)
+hero(f"About — {APP_TITLE}", APP_TAGLINE, "ℹ️")
 
 st.markdown(
     """

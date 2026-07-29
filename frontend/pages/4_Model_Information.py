@@ -6,14 +6,15 @@ import streamlit as st
 
 from components.charts import model_metrics_bar
 from components.sidebar import render_sidebar, setup_page
+from components.theme import hero, section
 from services.api_client import cached_models, get_feature_schema
 
 setup_page("Model Information", "🧠")
 render_sidebar()
 
-st.title("🧠 Model Information")
-st.caption("Model registry, active model metrics, and feature schema — "
-           "served by the backend `/models` endpoint.")
+hero("Model Information",
+     "Enterprise model registry, active-model metrics, and feature schema.",
+     "🧠")
 
 models = cached_models(st.session_state.api_url)
 if not models:
@@ -24,7 +25,7 @@ if not models:
 best = models.get("best_model")
 
 # ── active model ──────────────────────────────────────────────────────────────
-st.subheader("Active (best) model")
+section("Active (best) model", "The currently deployed model serving predictions.")
 if best:
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Algorithm", best["algorithm"].replace("_", " ").title())
@@ -40,7 +41,7 @@ else:
     st.info("No best model is registered.")
 
 # ── registry table ────────────────────────────────────────────────────────────
-st.subheader("Model registry")
+section("Model registry", "All registered models across every family.")
 entries = models.get("models", [])
 if entries:
     rows = []
@@ -89,7 +90,7 @@ else:
     st.info("The model registry is empty.")
 
 # ── feature schema ────────────────────────────────────────────────────────────
-st.subheader("Feature schema")
+section("Feature schema", "The engineered inputs the active model consumes.")
 features = get_feature_schema(st.session_state.api_url)
 if features:
     st.caption(f"The active model consumes **{len(features)} engineered "
